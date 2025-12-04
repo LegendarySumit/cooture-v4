@@ -1,6 +1,6 @@
 # Cooture v4
 
-A full-stack fashion e-commerce platform with JWT authentication.
+Cooture v4 is a full-stack web application that lets users generate ready-to-use website templates powered by AI. It combines a clean fashion-inspired interface with modern authentication so users can explore templates, save their profile, and build faster.
 
 ## 📁 Project Structure
 
