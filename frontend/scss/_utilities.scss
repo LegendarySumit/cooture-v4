@@ -1,0 +1,107 @@
+/* Utilities - Animations, Shadows, Helpers */
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Section scroll margin for nav offset */
+section {
+  scroll-margin-top: 100px;
+}
+
+/* Fade-Up Animation */
+.fade-up {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp .6s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Global Shadows */
+.custom-shadow {
+  box-shadow: 0 0 30px rgba(0, 0, 0, .12);
+}
+
+/* Premium soft card shadow */
+.soft-shadow {
+  box-shadow: 0 6px 26px rgba(0, 0, 0, .08);
+}
+
+/* Skeleton Loader */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,.05),
+    rgba(255,255,255,.15),
+    rgba(255,255,255,.05)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.2s linear infinite;
+  border-radius: .375rem;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Button Loading Spinner */
+.btn--loading {
+  position: relative;
+  pointer-events: none;
+  opacity: .85;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    width: 1rem;
+    height: 1rem;
+    transform: translateY(-50%);
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg) translateY(-50%); }
+}
+
+/* Toast Animations */
+.toast {
+  opacity: 0;
+  transform: translateX(25px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Responsive Tweaks */
+@media (max-width: 420px) {
+  .container {
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+
+  .display-5 {
+    font-size: 1.6rem;
+  }
+}

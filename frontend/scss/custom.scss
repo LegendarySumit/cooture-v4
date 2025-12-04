@@ -1,0 +1,22 @@
+/* Bootstrap Overrides */
+$primary: #5b72ff;
+$secondary: #6c757d;
+$success: #19c37d;
+$danger: #ff3b30;
+$warning: #ffc107;
+$info: #00b4d8;
+$light: #f8f9fa;
+$dark: #0f1720;
+
+$font-family-sans-serif: "Inter", "Poppins", sans-serif;
+$border-radius: .5rem;
+$border-radius-lg: .75rem;
+$enable-dark-mode: true;
+
+/* Import Bootstrap */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+/* Import Custom Modules */
+@import "utilities";
+@import "components";
+@import "sections";

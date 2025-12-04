@@ -1,0 +1,18 @@
+{
+  "name": "cooture-v2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "sass scss/custom.scss css/custom.css --style=compressed --no-source-map --quiet && npx http-server -p 3000",
+    "dev:sass": "sass --watch scss/custom.scss css/custom.css",
+    "build": "sass scss/custom.scss css/custom.css --style=compressed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.8",
+    "sass": "^1.94.2"
+  }
+}

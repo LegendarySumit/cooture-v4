@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cooture — Profile</title>
+
+    <!-- Your existing styles -->
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+
+    <!-- small local page styles to shape the dashboard -->
+    <style>
+        /* Sidebar */
+        .profile-sidebar {
+            background: var(--bs-body-bg);
+            border-right: 1px solid rgba(0,0,0,0.06);
+            min-height: 100vh;
+            padding: 1.25rem;
+        }
+        .profile-sidebar .nav-link {
+            color: var(--bs-body-color);
+            padding: 0.6rem 0.75rem;
+            border-radius: 0.5rem;
+            display:flex;
+            align-items:center;
+            gap:.6rem;
+            font-size: 0.95rem;
+        }
+        .profile-sidebar .nav-link.active {
+            background: linear-gradient(90deg, rgba(59,87,255,0.12), rgba(59,87,255,0.06));
+            box-shadow: 0 6px 18px rgba(59,87,255,0.06);
+            color: var(--bs-primary);
+            font-weight:600;
+        }
+
+        /* Profile header card */
+        .profile-card {
+            border-radius: 12px;
+            padding: 1.25rem;
+            box-shadow: 0 6px 24px rgba(16,24,40,0.05);
+            background: var(--bs-body-bg);
+        }
+
+        .profile-avatar {
+            width:88px;
+            height:88px;
+            border-radius:12px;
+            object-fit:cover;
+            box-shadow: 0 6px 18px rgba(11,19,50,0.06);
+        }
+
+        /* Stats */
+        .stat-card {
+            border-radius:10px;
+            padding:1rem;
+            min-height:90px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            gap:.3rem;
+        }
+
+        /* Activity list */
+        .activity-item {
+            padding: .9rem;
+            border-radius:10px;
+            display:flex;
+            gap:.9rem;
+            align-items:start;
+        }
+
+        /* Tabs */
+        .profile-tabs .nav-link {
+            padding: .75rem 1rem;
+            border-radius: 10px;
+            color:var(--bs-body-color);
+            font-size: 0.95rem;
+        }
+        .profile-tabs .nav-link.active {
+            background: var(--bs-body-tertiary);
+            font-weight:600;
+            color:var(--bs-primary);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 991px) {
+            .profile-sidebar { 
+                min-height: auto; 
+                border-right: none; 
+                border-bottom: 1px solid rgba(0,0,0,0.06);
+                padding: 1rem;
+            }
+            
+            .profile-sidebar .nav-link {
+                font-size: 0.9rem;
+                padding: 0.5rem 0.6rem;
+            }
+            
+            main {
+                padding: 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .profile-avatar {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .stat-card {
+                min-height: 80px;
+                padding: 0.75rem;
+            }
+            
+            .profile-tabs .nav-link {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.85rem;
+            }
+            
+            main {
+                padding: 1rem !important;
+            }
+        }
+        
+        @media (max-width: 575px) {
+            .profile-sidebar {
+                padding: 0.75rem;
+            }
+            
+            .profile-avatar {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .stat-card {
+                min-height: 70px;
+                padding: 0.6rem;
+            }
+            
+            .stat-card .h4 {
+                font-size: 1.25rem;
+            }
+            
+            .stat-card .small {
+                font-size: 0.75rem;
+            }
+            
+            main {
+                padding: 0.75rem !important;
+            }
+            
+            h3 {
+                font-size: 1.5rem;
+            }
+            
+            .profile-tabs {
+                overflow-x: auto;
+                flex-wrap: nowrap !important;
+            }
+            
+            .profile-tabs .nav-link {
+                white-space: nowrap;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        .theme-toggle-btn {
+    width: 40px;
+    height: 38px;
+    border: 1px solid rgb(160, 160, 160);
+    background: var(--bs-body-bg);
+    border-radius: 8px; /* rounded rectangle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle-btn i {
+    font-size: 20px;
+    color: rgb(110, 110, 110);
+    transition: color 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+    background: var(--bs-secondary-bg);
+    border-color: rgb(130, 130, 130);
+}
+
+/* Dark mode look */
+[data-bs-theme="dark"] .theme-toggle-btn {
+    background: #1f1f1f;
+    border-color: #555;
+}
+
+[data-bs-theme="dark"] .theme-toggle-btn i {
+    color: #ddd;
+}
+
+[data-bs-theme="dark"] .theme-toggle-btn:hover {
+    background: #2a2a2a;
+}
+[data-bs-theme="dark"] .btn-outline-dark {
+    border-color: #ffd86b !important;
+    color: #ffd86b !important;
+}
+
+/* Hover effect in dark mode */
+[data-bs-theme="dark"] .btn-outline-dark:hover {
+    background-color: #ffd86b !important;
+    color: #000 !important;
+    border-color: #ffd86b !important;
+}
+    </style>
+</head>
+<body>
+
+<!-- Reuse existing top bar from index if you want, but keep a compact header here -->
+<nav id="mainNav" class="navbar navbar-expand-lg sticky-top shadow-sm">
+        <div class="container-fluid py-2 px-3 px-lg-4">
+            <a class="navbar-brand fw-bold fs-4 fs-lg-3 text-primary" href="index.html">Cooture</a>
+
+            <div class="d-flex align-items-center gap-2">
+                <div class="d-flex gap-2 flex-wrap">
+                    <a class="btn btn-outline-primary btn-sm d-none d-sm-inline-flex fw-semibold rounded-3" href="index.html">
+                        <i class="bi bi-house me-1 d-none d-md-inline"></i>
+                        <span class="d-none d-md-inline">Back to </span>Home
+                    </a>
+                    <a class="btn btn-outline-primary btn-sm d-inline-flex d-sm-none fw-semibold rounded-3" href="index.html">
+                        <i class="bi bi-house"></i>
+                    </a>
+                    <button onclick="logout()" class="btn btn-dark btn-sm fw-semibold rounded-3">
+                        <i class="bi bi-box-arrow-right me-1 d-none d-md-inline"></i>
+                        Logout
+                    </button>
+                </div>
+                
+                <button id="themeToggle" class="theme-toggle-btn" type="button" title="Toggle theme">
+                    <i id="themeIcon" class="bi bi-moon-fill"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+<div class="container-fluid">
+    <div class="row g-0">
+
+        <!-- SIDEBAR -->
+        <aside class="col-12 col-lg-3 col-xl-2 profile-sidebar">
+            <div class="text-center mb-4">
+                <img id="sidebarAvatar"
+                     src="https://api.dicebear.com/6.x/identicon/svg?seed=cooture"
+                     alt="avatar"
+                     class="profile-avatar mb-2">
+            
+                <div id="sidebarName"
+                     class="fw-bold text-break d-none d-lg-block"
+                     style="max-width: 160px; margin: 0 auto;">
+                </div>
+            
+                <div id="sidebarEmail"
+                     class="text-muted small text-break d-none d-lg-block"
+                     style="max-width: 160px; margin: 0 auto;">
+                </div>
+            </div>
+            
+
+            <nav class="nav flex-column">
+                <a class="nav-link active" data-target="overview" href="#overview"><i class="bi bi-person-circle"></i> Overview</a>
+                <a class="nav-link" data-target="templates" href="#templates"><i class="bi bi-grid-1x2"></i> My Templates</a>
+                <a class="nav-link" data-target="stats" href="#stats"><i class="bi bi-bar-chart"></i> Usage Stats</a>
+                <a class="nav-link" data-target="activity" href="#activity"><i class="bi bi-list-task"></i> Activity</a>
+                <a class="nav-link" data-target="billing" href="#billing"><i class="bi bi-receipt"></i> Billing</a>
+                <hr>
+                <div class="small text-muted mb-2">Manage</div>
+                <a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="col-12 col-lg-9 col-xl-10 p-3 p-md-4">
+            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3 gap-2">
+                <div>
+                    <h3 class="mb-1">Profile</h3>
+                    <small class="text-muted">Manage your account, view templates & usage.</small>
+                </div>
+            </div>
+
+            <div class="row g-3 mb-3">
+                <!-- Profile Summary -->
+                <div class="col-12 col-xl-5">
+                    <div class="profile-card">
+                        <div class="d-flex flex-column flex-sm-row gap-3 align-items-center align-items-sm-start mb-3">
+                            <img id="mainAvatar" src="https://api.dicebear.com/6.x/identicon/svg?seed=cooture" alt="avatar" class="profile-avatar">
+                            <div class="text-center text-sm-start w-100">
+                                <h5 id="displayName" class="mb-0 text-break">User</h5>
+                                <small id="displayEmail" class="text-muted text-break d-block">email@example.com</small>
+                                <div class="mt-2 small text-muted">Member since <span id="displayCreated">—</span></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <h6 class="mb-2">About</h6>
+                            <p id="aboutText" class="text-muted small mb-0">
+                                This is your Cooture account. Use this dashboard to manage templates, check usage & billing, and view activity.
+                            </p>
+                        </div>
+
+                        <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
+                            <a class="btn btn-primary w-100" href="#templates">Create Template</a>
+                            <a class="btn btn-outline-secondary w-100" href="#billing">Billing</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="col-12 col-xl-7">
+                    <div class="row g-2 g-md-3">
+                        <div class="col-6 col-md-3">
+                            <div class="stat-card bg-body-tertiary text-center">
+                                <div class="small text-muted">Templates</div>
+                                <div id="statTemplates" class="h4 fw-bold">12</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-card bg-body-tertiary text-center">
+                                <div class="small text-muted">Generations</div>
+                                <div id="statGenerations" class="h4 fw-bold">74</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-card bg-body-tertiary text-center">
+                                <div class="small text-muted">Projects</div>
+                                <div id="statProjects" class="h4 fw-bold">8</div>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-3">
+                            <div class="stat-card bg-body-tertiary text-center">
+                                <div class="small text-muted">Usage</div>
+                                <div id="statUsage" class="h4 fw-bold">42%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h6 class="mb-0">Subscription</h6>
+                            <small class="text-muted">Pro • Auto-renew</small>
+                        </div>
+                        <div class="progress" style="height:10px;">
+                            <div class="progress-bar" role="progressbar" style="width:42%" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <ul class="nav nav-pills profile-tabs mb-3" id="profileTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="overview-tab" data-bs-toggle="pill" data-bs-target="#tabOverview" type="button" role="tab">Overview</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="templates-tab" data-bs-toggle="pill" data-bs-target="#tabTemplates" type="button" role="tab">Templates</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="activity-tab" data-bs-toggle="pill" data-bs-target="#tabActivity" type="button" role="tab">Activity</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="billing-tab" data-bs-toggle="pill" data-bs-target="#tabBilling" type="button" role="tab">Billing</button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- OVERVIEW -->
+                <div class="tab-pane fade show active" id="tabOverview" role="tabpanel">
+                    <div class="row g-3">
+                        <div class="col-12 col-lg-8">
+                            <div class="card p-3">
+                                <h6 class="mb-3">Account details</h6>
+                                <div id="accountDetails" class="row">
+                                    <div class="col-6">
+                                        <div class="small text-muted">Email</div>
+                                        <div id="detailEmail" class="fw-semibold">—</div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="small text-muted">User ID</div>
+                                        <div id="detailId" class="fw-semibold">—</div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <div class="small text-muted">Member since</div>
+                                        <div id="detailCreated" class="fw-semibold">—</div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <div class="small text-muted">Plan</div>
+                                        <div id="detailPlan" class="fw-semibold">Pro</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card p-3 mt-3">
+                                <h6 class="mb-3">Recent templates</h6>
+                                <div id="recentTemplates" class="list-group list-group-flush">
+                                    <!-- JS populates -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-4">
+                            <div class="card p-3">
+                                <h6 class="mb-3">Quick actions</h6>
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-primary" href="#templates">Create new template</a>
+                                    <a class="btn btn-outline-dark" href="#billing">Upgrade plan</a>
+                                    <a class="btn btn-outline-dark" href="#activity">View activity</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TEMPLATES -->
+                <div class="tab-pane fade" id="tabTemplates" role="tabpanel">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="card p-3">
+                                <h6 class="mb-3">My templates</h6>
+                                <div id="templatesGrid" class="row g-3">
+                                    <!-- JS will insert template cards -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ACTIVITY -->
+                <div class="tab-pane fade" id="tabActivity" role="tabpanel">
+                    <div class="card p-3">
+                        <h6 class="mb-3">Recent activity</h6>
+                        <div id="activityList" class="list-group list-group-flush">
+                            <!-- JS populates -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BILLING -->
+                <div class="tab-pane fade" id="tabBilling" role="tabpanel">
+                    <div class="card p-3">
+                        <h6 class="mb-3">Billing & subscription</h6>
+                        <div class="small text-muted mb-2">Invoice history</div>
+                        <div id="billingHistory" class="list-group">
+                            <!-- Dummy billing items -->
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-semibold">Pro — Monthly</div>
+                                    <div class="small text-muted">Invoice #1023 — May 12, 2025</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="fw-semibold">$29.00</div>
+                                    <div class="small text-muted">Paid</div>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between align-items-center">
+                                <div>
+                                    <div class="fw-semibold">Pro — Monthly</div>
+                                    <div class="small text-muted">Invoice #0987 — Apr 12, 2025</div>
+                                </div>
+                                <div class="text-end">
+                                    <div class="fw-semibold">$29.00</div>
+                                    <div class="small text-muted">Paid</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+</div>
+
+<!-- Toast container (theme-aware) -->
+<div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index:3000; margin-top:75px;"></div>
+
+<!-- Scripts: bootstrap then your custom.js (keeps logic intact) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/custom.js?v=2"></script>
+
+
+<!-- Page specific script: populates UI but DOES NOT replace your auth functions -->
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    // Redirect if not logged in (uses your existing function)
+    if (typeof isLoggedIn !== 'function' || !isLoggedIn()) {
+        // preserve UX: if not logged in -> send to login
+        window.location.href = "login.html";
+        return;
+    }
+
+    // Elements to fill
+    const displayEmail = document.getElementById("displayEmail");
+    const displayName = document.getElementById("displayName");
+    const displayCreated = document.getElementById("displayCreated");
+    const detailEmail = document.getElementById("detailEmail");
+    const detailId = document.getElementById("detailId");
+    const detailCreated = document.getElementById("detailCreated");
+    const sidebarEmail = document.getElementById("sidebarEmail");
+    const sidebarName = document.getElementById("sidebarName");
+    const mainAvatar = document.getElementById("mainAvatar");
+    const sidebarAvatar = document.getElementById("sidebarAvatar");
+
+    // Default fallback data
+    const fallbackUser = {
+        email: "unknown@example.com",
+        id: "—",
+        createdAt: new Date().toISOString()
+    };
+
+    try {
+        const res = await fetch("http://localhost:5000/auth/me", {
+            headers: { "Authorization": "Bearer " + (typeof getToken === "function" ? getToken() : "") }
+        });
+
+        // unauthorized or error -> show message in userInfo
+        const data = await res.json();
+
+        if (!res.ok) {
+            // show inline toast and fallback display
+            if (window.ToastManager && typeof ToastManager.show === "function") {
+                ToastManager.show({ message: data.message || "Unable to load profile.", type: "danger" });
+            }
+            // populate fallback values
+            populateProfile(fallbackUser);
+            return;
+        }
+
+        // Successful -> populate fields
+        populateProfile(data);
+
+    } catch (err) {
+        // network error
+        if (window.ToastManager && typeof ToastManager.show === "function") {
+            ToastManager.show({ message: "Network error loading profile.", type: "danger" });
+        }
+        populateProfile(fallbackUser);
+    }
+
+    // Fill rest of dashboard with dummy content (non-invasive)
+    function populateProfile(user) {
+        const email = user.email || fallbackUser.email;
+        const id = user.id || user._id || fallbackUser.id;
+        const created = user.createdAt ? new Date(user.createdAt) : new Date();
+
+        displayEmail.textContent = email;
+        sidebarEmail.textContent = email;
+        displayName.textContent = (email.split('@')[0] || "User").replace(/[0-9]/g, '').replace(/[-._]/g,' ') || "User";
+        displayCreated.textContent = created.toLocaleDateString();
+        detailEmail.textContent = email;
+        detailId.textContent = id;
+        detailCreated.textContent = created.toLocaleDateString();
+
+        // small avatar generation using initials fallback (you already have dicebear seed)
+        const seed = email.replace(/[^a-zA-Z0-9]/g, '');
+        const avatarUrl = `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(seed || 'cooture')}`;
+        mainAvatar.src = avatarUrl;
+        sidebarAvatar.src = avatarUrl;
+
+        // Populate recent templates (dummy)
+        const recentTemplates = [
+            { title: "SaaS Landing", date: "2025-11-12", desc: "Hero, pricing and auth flow." },
+            { title: "Portfolio Grid", date: "2025-09-22", desc: "Gallery + case study layout." },
+            { title: "Agency One-pager", date: "2025-08-04", desc: "Hero, services, testimonials." }
+        ];
+        const templatesEl = document.getElementById("recentTemplates");
+        templatesEl.innerHTML = recentTemplates.map(t => `
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <div class="fw-semibold">${t.title}</div>
+                        <div class="small text-muted">${t.desc}</div>
+                    </div>
+                    <div class="small text-muted">${t.date}</div>
+                </div>
+            </div>
+        `).join("");
+
+        // Populate templates grid (small cards)
+        const templatesGrid = document.getElementById("templatesGrid");
+        templatesGrid.innerHTML = recentTemplates.map((t, i) => `
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card p-3 h-100">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <div class="fw-semibold">${t.title}</div>
+                        <small class="text-muted">${t.date}</small>
+                    </div>
+                    <div class="small text-muted mb-3">${t.desc}</div>
+                    <div class="mt-auto d-flex gap-2">
+                        <a class="btn btn-outline-primary btn-sm" href="#">Preview</a>
+                        <a class="btn btn-outline-secondary btn-sm" href="#">Edit</a>
+                    </div>
+                </div>
+            </div>
+        `).join("");
+
+        // Populate activity list (dummy)
+        const activityList = document.getElementById("activityList");
+        const activities = [
+            { user: displayName.textContent, action: "Generated template 'SaaS Landing'", time: "2 hours ago" },
+            { user: "System", action: "Billing charged $29.00", time: "3 days ago" },
+            { user: displayName.textContent, action: "Previewed 'Portfolio Grid'", time: "1 week ago" }
+        ];
+        activityList.innerHTML = activities.map(a => `
+            <div class="list-group-item activity-item bg-body-tertiary">
+                <div>
+                    <div class="fw-semibold">${a.action}</div>
+                    <div class="small text-muted">${a.time}</div>
+                </div>
+            </div>
+        `).join("");
+    }
+
+    // Make sidebar links change active state (client-side)
+    document.querySelectorAll('.profile-sidebar .nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            document.querySelectorAll('.profile-sidebar .nav-link').forEach(l => l.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+
+            // small UX: switch to tab if it matches a data-target
+            const target = e.currentTarget.dataset.target;
+            if (target) {
+                const tabBtn = document.querySelector(`#profileTabs button[data-bs-target="#tab${capitalize(target)}"]`);
+                if (tabBtn) tabBtn.click();
+            }
+        });
+    });
+
+    function capitalize(s) {
+        if (!s) return "";
+        return s[0].toUpperCase() + s.slice(1);
+    }
+});
+</script>
+</body>
+</html>
