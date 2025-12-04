@@ -63,7 +63,67 @@ const API_BASE =
     
 
     /* ------------------------------------------------------------
-       3) Dashboard Offcanvas (Mobile nav)
+       3) Sticky Navbar State
+    ------------------------------------------------------------ */
+    const mainNav = document.getElementById("mainNav");
+    if (mainNav) {
+        const updateNavState = () => {
+            const shouldStick = window.scrollY > 12;
+            mainNav.classList.toggle("is-stuck", shouldStick);
+        };
+
+        const syncNavHeight = () => {
+            root.style.setProperty("--nav-height", `${mainNav.offsetHeight}px`);
+        };
+
+        document.body.classList.add("has-fixed-nav");
+        syncNavHeight();
+        updateNavState();
+
+        window.addEventListener("resize", () => window.requestAnimationFrame(syncNavHeight));
+        window.addEventListener(
+            "scroll",
+            () => window.requestAnimationFrame(updateNavState),
+            { passive: true }
+        );
+    }
+
+    /* ------------------------------------------------------------
+       4) Scroll-to-top button
+    ------------------------------------------------------------ */
+    let scrollTopBtn = document.getElementById("scrollTopBtn");
+    if (!scrollTopBtn) {
+        scrollTopBtn = document.createElement("button");
+        scrollTopBtn.id = "scrollTopBtn";
+        scrollTopBtn.type = "button";
+        scrollTopBtn.className = "scroll-top-btn";
+        scrollTopBtn.setAttribute("aria-label", "Back to top");
+        scrollTopBtn.innerHTML = '<i class="bi bi-arrow-up-short fs-3"></i>';
+        document.body.appendChild(scrollTopBtn);
+    }
+
+    const updateScrollTopBtn = () => {
+        const viewportTrigger = window.innerHeight * 0.45;
+        const absoluteTrigger = 280;
+        const threshold = Math.min(viewportTrigger, absoluteTrigger);
+        const shouldShow = window.scrollY > threshold;
+        scrollTopBtn.classList.toggle("is-visible", shouldShow);
+    };
+
+    scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    updateScrollTopBtn();
+
+    window.addEventListener(
+        "scroll",
+        () => window.requestAnimationFrame(updateScrollTopBtn),
+        { passive: true }
+    );
+
+    /* ------------------------------------------------------------
+       5) Dashboard Offcanvas (Mobile nav)
     ------------------------------------------------------------ */
     const offcanvasElement = document.getElementById("dashboardOffcanvas");
     const offcanvasTrigger = document.getElementById("offcanvasToggle");
@@ -125,8 +185,8 @@ window.ToastManager = {
     },
 };
 
-    /* ------------------------------------------------------------
-       5) Button Loading State Utility
+     /* ------------------------------------------------------------
+         6) Button Loading State Utility
     ------------------------------------------------------------ */
     window.setBtnLoading = function (button, state = true) {
         if (!button) return;
