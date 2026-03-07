@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Contact — Cooture</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/custom.css?v=7">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body { background: #0f1117; color: #e2e8f0; }
+        .page-hero { padding: 5rem 0 3rem; text-align: center; }
+        .page-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; }
+        .contact-card { background: #161b27; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 2.5rem; }
+        .form-control, .form-select {
+            background: #1e2436;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #e2e8f0;
+            border-radius: 10px;
+        }
+        .form-control:focus, .form-select:focus {
+            background: #1e2436;
+            border-color: #5b72ff;
+            color: #e2e8f0;
+            box-shadow: 0 0 0 3px rgba(91,114,255,0.15);
+        }
+        .form-label { font-size: 0.85rem; color: rgba(255,255,255,0.6); margin-bottom: 0.4rem; }
+        .info-row { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .info-row:last-child { border-bottom: none; }
+        .info-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; }
+        #successMsg { display: none; }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm" style="background:#161b27; border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div class="container py-2">
+            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color:#818cf8;">Cooture</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="btn btn-sm btn-outline-secondary">← Home</a>
+                <a href="login.html" class="btn btn-sm btn-outline-primary">Login</a>
+                <a href="signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="badge mb-3 px-3 py-2" style="background:rgba(91,114,255,0.15); color:#818cf8; border:1px solid rgba(91,114,255,0.25); border-radius:20px; font-size:0.8rem;">Get in touch</span>
+            <h1 class="mb-3">We'd love to <span style="background:linear-gradient(135deg,#5b72ff,#a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">hear from you</span></h1>
+            <p class="lead opacity-75 mx-auto" style="max-width:480px;">Have a question, idea, or just want to say hi? Drop us a message and we'll get back to you within 24 hours.</p>
+        </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section class="py-3 pb-5">
+        <div class="container">
+            <div class="row g-4 justify-content-center">
+
+                <!-- FORM -->
+                <div class="col-12 col-lg-7">
+                    <div class="contact-card">
+                        <h5 class="fw-bold mb-4">Send a message</h5>
+
+                        <!-- Success -->
+                        <div id="successMsg" class="text-center py-4">
+                            <div style="width:60px;height:60px;border-radius:50%;background:rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+                                <i class="bi bi-check-lg" style="font-size:1.6rem; color:#22c55e;"></i>
+                            </div>
+                            <h5 class="fw-bold text-white mb-2">Message sent!</h5>
+                            <p class="opacity-60 mb-3">We'll get back to you within 24 hours.</p>
+                            <button class="btn btn-outline-primary btn-sm px-4" onclick="resetForm()" style="border-radius:8px;">Send another</button>
+                        </div>
+
+                        <form id="contactForm" onsubmit="handleSubmit(event)">
+                            <div class="row g-3 mb-3">
+                                <div class="col-12 col-sm-6">
+                                    <label class="form-label">Name *</label>
+                                    <input type="text" class="form-control" placeholder="Your name" required>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" class="form-control" placeholder="you@example.com" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Subject</label>
+                                <select class="form-select">
+                                    <option value="">Select a topic…</option>
+                                    <option>General inquiry</option>
+                                    <option>Bug report</option>
+                                    <option>Feature request</option>
+                                    <option>Billing question</option>
+                                    <option>Partnership</option>
+                                    <option>Job application</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Message *</label>
+                                <textarea class="form-control" rows="5" placeholder="Tell us what's on your mind…" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold" style="border-radius:10px; background:linear-gradient(135deg,#5b72ff,#a78bfa); border:none;">
+                                <i class="bi bi-send me-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- INFO -->
+                <div class="col-12 col-lg-4">
+                    <div class="contact-card h-100">
+                        <h5 class="fw-bold mb-3">Contact info</h5>
+
+                        <div class="info-row">
+                            <div class="info-icon" style="background:rgba(91,114,255,0.15); color:#818cf8;"><i class="bi bi-envelope-fill"></i></div>
+                            <div>
+                                <div class="fw-semibold small mb-0">Email</div>
+                                <div class="opacity-50 small">hello@cooture.dev</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon" style="background:rgba(167,139,250,0.15); color:#a78bfa;"><i class="bi bi-twitter-x"></i></div>
+                            <div>
+                                <div class="fw-semibold small mb-0">Twitter / X</div>
+                                <div class="opacity-50 small">@CootureHQ</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon" style="background:rgba(34,197,94,0.12); color:#22c55e;"><i class="bi bi-clock-fill"></i></div>
+                            <div>
+                                <div class="fw-semibold small mb-0">Response time</div>
+                                <div class="opacity-50 small">Within 24 hours</div>
+                            </div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-icon" style="background:rgba(251,146,60,0.12); color:#fb923c;"><i class="bi bi-geo-alt-fill"></i></div>
+                            <div>
+                                <div class="fw-semibold small mb-0">Based in</div>
+                                <div class="opacity-50 small">Remote-first, India 🇮🇳</div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 p-3" style="background:rgba(91,114,255,0.08); border-radius:10px; border:1px solid rgba(91,114,255,0.2);">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>
+                                <span class="small fw-semibold">All systems operational</span>
+                            </div>
+                            <div class="opacity-50" style="font-size:0.78rem;">Check status.cooture.dev for updates.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-light py-5" style="background:#0d0d12;border-top:1px solid rgba(255,255,255,0.07);">
+        <div class="container">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-4">
+                    <span class="fw-bold fs-5 text-white d-block mb-2">Cooture</span>
+                    <p style="color:rgba(255,255,255,0.4);font-size:0.875rem;max-width:260px;line-height:1.7;" class="mb-4">AI-powered website template generator for developers and creators.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-github"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 offset-md-2">
+                    <p class="footer-heading">Product</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="index.html#templates">Templates</a></li>
+                        <li><a class="footer-link" href="index.html#features">Features</a></li>
+                        <li><a class="footer-link" href="index.html#pricing">Pricing</a></li>
+                        <li><a class="footer-link" href="blog.html#updates">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Company</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="about.html">About</a></li>
+                        <li><a class="footer-link" href="careers.html">Careers</a></li>
+                        <li><a class="footer-link" href="contact.html">Contact</a></li>
+                        <li><a class="footer-link" href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Legal</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="legal.html#privacy">Privacy</a></li>
+                        <li><a class="footer-link" href="legal.html#terms">Terms</a></li>
+                        <li><a class="footer-link" href="legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.07);" class="pt-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+                <span style="color:rgba(255,255,255,0.25);font-size:0.82rem;">© 2026 Cooture. All rights reserved.</span>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>
+                    <span style="color:rgba(255,255,255,0.25);font-size:0.8rem;">All systems operational</span>
+                </div>
+            </div>
+        </div>
+        <style>
+            .footer-heading { color:rgba(255,255,255,0.25); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+            .footer-link { color:rgba(255,255,255,0.45); font-size:0.875rem; text-decoration:none; transition:color .2s; }
+            .footer-link:hover { color:#c4b5fd; }
+            .footer-icon { color:rgba(255,255,255,0.4); font-size:1.05rem; text-decoration:none; transition:color .2s; }
+            .footer-icon:hover { color:#c4b5fd; }
+        </style>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function handleSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+        }
+        function resetForm() {
+            document.getElementById('contactForm').reset();
+            document.getElementById('contactForm').style.display = 'block';
+            document.getElementById('successMsg').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Careers — Cooture</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/custom.css?v=7">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body { background: #0f1117; color: #e2e8f0; }
+        .page-hero { padding: 5rem 0 3rem; text-align: center; }
+        .page-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; }
+        .section-card { background: #161b27; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 2rem; }
+        .job-card { background: #1e2436; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s; }
+        .job-card:hover { border-color: rgba(91,114,255,0.4); }
+        .job-tag { font-size: 0.72rem; border-radius: 20px; padding: 0.2rem 0.65rem; font-weight: 600; }
+        .perk-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm" style="background:#161b27; border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div class="container py-2">
+            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color:#818cf8;">Cooture</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="btn btn-sm btn-outline-secondary">← Home</a>
+                <a href="login.html" class="btn btn-sm btn-outline-primary">Login</a>
+                <a href="signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="badge mb-3 px-3 py-2" style="background:rgba(91,114,255,0.15); color:#818cf8; border:1px solid rgba(91,114,255,0.25); border-radius:20px; font-size:0.8rem;">We're hiring</span>
+            <h1 class="mb-3">Build the future of UI<br><span style="background:linear-gradient(135deg,#5b72ff,#a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">with us</span></h1>
+            <p class="lead opacity-75 mx-auto" style="max-width:520px;">We're a small, remote-first team on a mission to make beautiful web design accessible to everyone. We move fast, ship often, and care deeply about craft.</p>
+        </div>
+    </section>
+
+    <!-- PERKS -->
+    <section class="py-4">
+        <div class="container">
+            <div class="section-card mb-4">
+                <h4 class="fw-bold mb-4 text-center">Why Cooture?</h4>
+                <div class="row g-3">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="perk-icon" style="background:rgba(91,114,255,0.15); color:#818cf8;"><i class="bi bi-globe"></i></div>
+                            <div>
+                                <div class="fw-semibold mb-1">Remote-first</div>
+                                <div class="opacity-50 small">Work from anywhere in the world.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="perk-icon" style="background:rgba(167,139,250,0.15); color:#a78bfa;"><i class="bi bi-graph-up-arrow"></i></div>
+                            <div>
+                                <div class="fw-semibold mb-1">Equity</div>
+                                <div class="opacity-50 small">Own a piece of what you build.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="perk-icon" style="background:rgba(34,197,94,0.12); color:#22c55e;"><i class="bi bi-heart-fill"></i></div>
+                            <div>
+                                <div class="fw-semibold mb-1">Health benefits</div>
+                                <div class="opacity-50 small">Full medical, dental & vision.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="d-flex gap-3 align-items-start">
+                            <div class="perk-icon" style="background:rgba(251,146,60,0.12); color:#fb923c;"><i class="bi bi-book-fill"></i></div>
+                            <div>
+                                <div class="fw-semibold mb-1">Learning budget</div>
+                                <div class="opacity-50 small">$1,500/yr for courses & books.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JOB LISTINGS -->
+    <section class="py-3">
+        <div class="container">
+            <h4 class="fw-bold mb-4">Open Roles</h4>
+            <div class="d-flex flex-column gap-3">
+
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div>
+                            <h5 class="fw-semibold mb-1">Senior Full-Stack Engineer</h5>
+                            <div class="opacity-60 small mb-2">Engineering · Remote</div>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <span class="job-tag" style="background:rgba(91,114,255,0.15); color:#818cf8;">Node.js</span>
+                                <span class="job-tag" style="background:rgba(167,139,250,0.15); color:#a78bfa;">React</span>
+                                <span class="job-tag" style="background:rgba(34,197,94,0.12); color:#22c55e;">Full-time</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary btn-sm px-4" style="border-radius:8px;">Apply</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div>
+                            <h5 class="fw-semibold mb-1">AI/ML Engineer</h5>
+                            <div class="opacity-60 small mb-2">AI Research · Remote</div>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <span class="job-tag" style="background:rgba(91,114,255,0.15); color:#818cf8;">Python</span>
+                                <span class="job-tag" style="background:rgba(167,139,250,0.15); color:#a78bfa;">LLMs</span>
+                                <span class="job-tag" style="background:rgba(34,197,94,0.12); color:#22c55e;">Full-time</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary btn-sm px-4" style="border-radius:8px;">Apply</a>
+                    </div>
+                </div>
+
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                        <div>
+                            <h5 class="fw-semibold mb-1">Product Designer</h5>
+                            <div class="opacity-60 small mb-2">Design · Remote</div>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <span class="job-tag" style="background:rgba(91,114,255,0.15); color:#818cf8;">Figma</span>
+                                <span class="job-tag" style="background:rgba(167,139,250,0.15); color:#a78bfa;">UI/UX</span>
+                                <span class="job-tag" style="background:rgba(251,146,60,0.12); color:#fb923c;">Part-time</span>
+                            </div>
+                        </div>
+                        <a href="contact.html" class="btn btn-primary btn-sm px-4" style="border-radius:8px;">Apply</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="section-card mt-4 text-center">
+                <p class="opacity-75 mb-2">Don't see your role? We're always looking for talented people.</p>
+                <a href="contact.html" class="btn btn-outline-primary px-4" style="border-radius:10px;">Send us your CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-light py-5" style="background:#0d0d12;border-top:1px solid rgba(255,255,255,0.07);">
+        <div class="container">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-4">
+                    <span class="fw-bold fs-5 text-white d-block mb-2">Cooture</span>
+                    <p style="color:rgba(255,255,255,0.4);font-size:0.875rem;max-width:260px;line-height:1.7;" class="mb-4">AI-powered website template generator for developers and creators.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-github"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 offset-md-2">
+                    <p class="footer-heading">Product</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="index.html#templates">Templates</a></li>
+                        <li><a class="footer-link" href="index.html#features">Features</a></li>
+                        <li><a class="footer-link" href="index.html#pricing">Pricing</a></li>
+                        <li><a class="footer-link" href="blog.html#updates">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Company</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="about.html">About</a></li>
+                        <li><a class="footer-link" href="careers.html">Careers</a></li>
+                        <li><a class="footer-link" href="contact.html">Contact</a></li>
+                        <li><a class="footer-link" href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Legal</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="legal.html#privacy">Privacy</a></li>
+                        <li><a class="footer-link" href="legal.html#terms">Terms</a></li>
+                        <li><a class="footer-link" href="legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.07);" class="pt-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+                <span style="color:rgba(255,255,255,0.25);font-size:0.82rem;">© 2026 Cooture. All rights reserved.</span>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>
+                    <span style="color:rgba(255,255,255,0.25);font-size:0.8rem;">All systems operational</span>
+                </div>
+            </div>
+        </div>
+        <style>
+            .footer-heading { color:rgba(255,255,255,0.25); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+            .footer-link { color:rgba(255,255,255,0.45); font-size:0.875rem; text-decoration:none; transition:color .2s; }
+            .footer-link:hover { color:#c4b5fd; }
+            .footer-icon { color:rgba(255,255,255,0.4); font-size:1.05rem; text-decoration:none; transition:color .2s; }
+            .footer-icon:hover { color:#c4b5fd; }
+        </style>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -398,9 +398,15 @@ document.getElementById("toggleSignupPass")?.addEventListener("click", () =>
   const carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
   const prev = document.getElementById('templatesPrev');
   const next = document.getElementById('templatesNext');
+  const tmplDots = document.querySelectorAll('.tmpl-dot');
 
   prev?.addEventListener('click', () => carousel.prev());
   next?.addEventListener('click', () => carousel.next());
+
+  // Update active dot on slide change
+  carouselEl.addEventListener('slid.bs.carousel', e => {
+    tmplDots.forEach((d, i) => d.classList.toggle('active', i === e.to));
+  });
 
   // Optional: pause on focus of controls (accessibility nicety)
   [prev, next].forEach(btn => {
@@ -467,6 +473,28 @@ document.getElementById("toggleSignupPass")?.addEventListener("click", () =>
     randomBtn?.addEventListener("click", () => {
         const choice = presets[Math.floor(Math.random() * presets.length)];
         promptInput.value = choice;
+        updateCharCount();
+    });
+
+    /* CHAR COUNTER */
+    const charCountEl = document.getElementById("charCount");
+    function updateCharCount() {
+        if (charCountEl) charCountEl.textContent = `${promptInput.value.length} / 500`;
+    }
+    promptInput?.addEventListener("input", updateCharCount);
+
+    /* CHIP BUTTONS */
+    document.querySelectorAll(".chip-btn").forEach(chip => {
+        chip.addEventListener("click", () => {
+            promptInput.value = chip.dataset.prompt;
+            updateCharCount();
+            promptInput.focus();
+        });
+    });
+
+    /* CTRL+ENTER SHORTCUT */
+    promptInput?.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === "Enter") generateBtn?.click();
     });
 
     /* ------------------------------------------------------------
@@ -570,3 +598,22 @@ window.updateNavbar = function () {
 };
 
 document.addEventListener("DOMContentLoaded", updateNavbar);
+
+/* ─── FAQ Accordion ──────────────────────────────────────────── */
+function toggleFaq(btn) {
+    const item = btn.closest(".faq-item");
+    const isOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach(el => el.classList.remove("open"));
+    if (!isOpen) item.classList.add("open");
+}
+
+/* ─── FAQ nav-active badge sync ──────────────────────────────── */
+document.addEventListener("DOMContentLoaded", () => {
+    const faqLink = document.querySelector('#mainNav a[href="#faq"]');
+    const faqSection = document.getElementById("faq");
+    if (faqLink && faqSection) {
+        new MutationObserver(() => {
+            faqSection.classList.toggle("faq-nav-active", faqLink.classList.contains("active"));
+        }).observe(faqLink, { attributes: true, attributeFilter: ["class"] });
+    }
+});

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Legal — Cooture</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/custom.css?v=7">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body { background: #0f1117; color: #e2e8f0; }
+        .page-hero { padding: 4rem 0 2rem; text-align: center; }
+        .page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; }
+        .legal-nav { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+        .legal-nav a { padding: 0.45rem 1.1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); transition: all 0.2s; }
+        .legal-nav a:hover, .legal-nav a.active { background: rgba(91,114,255,0.15); color: #818cf8; border-color: rgba(91,114,255,0.3); }
+        .legal-section { background: #161b27; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 2.5rem; margin-bottom: 2rem; scroll-margin-top: 80px; }
+        .legal-section h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .legal-date { font-size: 0.78rem; color: rgba(255,255,255,0.3); margin-bottom: 1.5rem; }
+        .legal-section h5 { font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem; color: rgba(255,255,255,0.85); }
+        .legal-section p, .legal-section li { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.8; }
+        .legal-section ul { padding-left: 1.25rem; }
+        .back-top { position: fixed; bottom: 2rem; right: 2rem; width: 40px; height: 40px; border-radius: 50%; background: #5b72ff; color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; opacity: 0; transition: opacity 0.3s; z-index: 100; }
+        .back-top.visible { opacity: 1; }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm" style="background:#161b27; border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div class="container py-2">
+            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color:#818cf8;">Cooture</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="btn btn-sm btn-outline-secondary">← Home</a>
+                <a href="login.html" class="btn btn-sm btn-outline-primary">Login</a>
+                <a href="signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="mb-2">Legal <span style="background:linear-gradient(135deg,#5b72ff,#a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">Documents</span></h1>
+            <p class="opacity-60 mb-4">Our policies, terms, and data practices — all in one place.</p>
+            <nav class="legal-nav">
+                <a href="#privacy" class="active">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#cookies">Cookie Policy</a>
+            </nav>
+        </div>
+    </section>
+
+    <div class="container pb-5">
+
+        <!-- PRIVACY -->
+        <div id="privacy" class="legal-section">
+            <h2><i class="bi bi-shield-lock me-2" style="color:#818cf8;"></i>Privacy Policy</h2>
+            <div class="legal-date">Last updated: March 1, 2026</div>
+
+            <p>This Privacy Policy describes how Cooture ("we", "us", or "our") collects, uses, and shares information about you when you use our services.</p>
+
+            <h5>1. Information we collect</h5>
+            <ul>
+                <li><strong>Account information:</strong> When you sign up, we collect your name, email address, and authentication credentials.</li>
+                <li><strong>Usage data:</strong> We collect data about how you use Cooture — templates generated, features accessed, and session duration.</li>
+                <li><strong>Device information:</strong> Browser type, operating system, IP address, and timezone.</li>
+                <li><strong>Payment information:</strong> Processed by our payment provider (Stripe). We never store raw card numbers.</li>
+            </ul>
+
+            <h5>2. How we use your information</h5>
+            <ul>
+                <li>To provide, maintain, and improve our services.</li>
+                <li>To process transactions and send billing notifications.</li>
+                <li>To send product updates and security alerts (you can opt out anytime).</li>
+                <li>To detect and prevent fraud and abuse.</li>
+            </ul>
+
+            <h5>3. Data sharing</h5>
+            <p>We do not sell your personal data. We share data only with:</p>
+            <ul>
+                <li>Service providers who assist us in operating Cooture (e.g. Firebase, Stripe, Vercel).</li>
+                <li>Law enforcement when legally required.</li>
+            </ul>
+
+            <h5>4. Data retention</h5>
+            <p>We retain your account data for as long as your account is active. You can request deletion at any time by contacting us at <a href="contact.html" style="color:#818cf8;">hello@cooture.dev</a>.</p>
+
+            <h5>5. Your rights</h5>
+            <p>Depending on your location, you may have rights to access, correct, delete, or export your data. Contact us to exercise these rights.</p>
+
+            <h5>6. Contact</h5>
+            <p>Questions about privacy? Email us at <a href="contact.html" style="color:#818cf8;">hello@cooture.dev</a>.</p>
+        </div>
+
+        <!-- TERMS -->
+        <div id="terms" class="legal-section">
+            <h2><i class="bi bi-file-earmark-text me-2" style="color:#a78bfa;"></i>Terms of Service</h2>
+            <div class="legal-date">Last updated: March 1, 2026</div>
+
+            <p>By accessing or using Cooture, you agree to be bound by these Terms of Service. Please read them carefully.</p>
+
+            <h5>1. Acceptance of terms</h5>
+            <p>By creating an account or using our services, you confirm that you are at least 16 years old and agree to these terms.</p>
+
+            <h5>2. Your account</h5>
+            <ul>
+                <li>You are responsible for maintaining the security of your account credentials.</li>
+                <li>You must not share your account with others.</li>
+                <li>You must notify us immediately of any unauthorized access.</li>
+            </ul>
+
+            <h5>3. Acceptable use</h5>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Use Cooture to generate content that is illegal, harmful, or violates third-party rights.</li>
+                <li>Attempt to reverse engineer, scrape, or abuse our API.</li>
+                <li>Resell or sublicense access to Cooture without written permission.</li>
+                <li>Use automated scripts to make excessive requests.</li>
+            </ul>
+
+            <h5>4. Intellectual property</h5>
+            <p>Templates you generate belong to you. Cooture retains rights to its platform, AI models, and underlying technology.</p>
+
+            <h5>5. Billing & refunds</h5>
+            <p>Paid plans are billed monthly or annually. You may cancel at any time; your access continues until the end of the current billing period. We offer refunds within 7 days of first purchase if you are unsatisfied.</p>
+
+            <h5>6. Termination</h5>
+            <p>We reserve the right to suspend or terminate accounts that violate these terms, with or without notice.</p>
+
+            <h5>7. Limitation of liability</h5>
+            <p>Cooture is provided "as is". We are not liable for indirect, incidental, or consequential damages arising from your use of the platform.</p>
+
+            <h5>8. Changes to terms</h5>
+            <p>We may update these terms from time to time. We'll notify you by email or in-app notice for material changes.</p>
+        </div>
+
+        <!-- COOKIES -->
+        <div id="cookies" class="legal-section">
+            <h2><i class="bi bi-cookie me-2" style="color:#fb923c;"></i>Cookie Policy</h2>
+            <div class="legal-date">Last updated: March 1, 2026</div>
+
+            <p>This Cookie Policy explains how Cooture uses cookies and similar tracking technologies.</p>
+
+            <h5>1. What are cookies?</h5>
+            <p>Cookies are small text files stored on your device by your browser. They help websites remember your preferences and track usage patterns.</p>
+
+            <h5>2. Cookies we use</h5>
+            <ul>
+                <li><strong>Essential cookies:</strong> Required for authentication, session management, and security. Cannot be disabled.</li>
+                <li><strong>Analytics cookies:</strong> Help us understand how users interact with Cooture (e.g. which features are most used). You can opt out.</li>
+                <li><strong>Preference cookies:</strong> Remember your theme choice (light/dark), language, and other settings.</li>
+            </ul>
+
+            <h5>3. Third-party cookies</h5>
+            <p>We may use third-party services (such as Google Analytics or Firebase) that set their own cookies. We do not control these cookies.</p>
+
+            <h5>4. Managing cookies</h5>
+            <p>You can control cookies through your browser settings. Note that disabling essential cookies may prevent Cooture from functioning correctly.</p>
+
+            <h5>5. Contact</h5>
+            <p>Questions? Email <a href="contact.html" style="color:#818cf8;">hello@cooture.dev</a>.</p>
+        </div>
+
+    </div>
+
+    <!-- BACK TO TOP -->
+    <a href="#" class="back-top" id="backTop" title="Back to top"><i class="bi bi-chevron-up"></i></a>
+
+    <!-- FOOTER -->
+    <footer class="text-light py-5" style="background:#0d0d12;border-top:1px solid rgba(255,255,255,0.07);">
+        <div class="container">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-4">
+                    <span class="fw-bold fs-5 text-white d-block mb-2">Cooture</span>
+                    <p style="color:rgba(255,255,255,0.4);font-size:0.875rem;max-width:260px;line-height:1.7;" class="mb-4">AI-powered website template generator for developers and creators.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-github"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 offset-md-2">
+                    <p class="footer-heading">Product</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="index.html#templates">Templates</a></li>
+                        <li><a class="footer-link" href="index.html#features">Features</a></li>
+                        <li><a class="footer-link" href="index.html#pricing">Pricing</a></li>
+                        <li><a class="footer-link" href="blog.html#updates">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Company</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="about.html">About</a></li>
+                        <li><a class="footer-link" href="careers.html">Careers</a></li>
+                        <li><a class="footer-link" href="contact.html">Contact</a></li>
+                        <li><a class="footer-link" href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Legal</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="legal.html#privacy">Privacy</a></li>
+                        <li><a class="footer-link" href="legal.html#terms">Terms</a></li>
+                        <li><a class="footer-link" href="legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.07);" class="pt-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+                <span style="color:rgba(255,255,255,0.25);font-size:0.82rem;">© 2026 Cooture. All rights reserved.</span>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>
+                    <span style="color:rgba(255,255,255,0.25);font-size:0.8rem;">All systems operational</span>
+                </div>
+            </div>
+        </div>
+        <style>
+            .footer-heading { color:rgba(255,255,255,0.25); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+            .footer-link { color:rgba(255,255,255,0.45); font-size:0.875rem; text-decoration:none; transition:color .2s; }
+            .footer-link:hover { color:#c4b5fd; }
+            .footer-icon { color:rgba(255,255,255,0.4); font-size:1.05rem; text-decoration:none; transition:color .2s; }
+            .footer-icon:hover { color:#c4b5fd; }
+        </style>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Highlight active legal nav link on scroll
+        const sections = ['privacy','terms','cookies'];
+        const navLinks = document.querySelectorAll('.legal-nav a');
+        window.addEventListener('scroll', () => {
+            let current = 'privacy';
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el && window.scrollY >= el.offsetTop - 120) current = id;
+            });
+            navLinks.forEach(a => {
+                a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+            });
+            document.getElementById('backTop').classList.toggle('visible', window.scrollY > 300);
+        });
+        // Scroll to section from URL hash on load
+        window.addEventListener('DOMContentLoaded', () => {
+            if (location.hash) {
+                setTimeout(() => {
+                    const el = document.querySelector(location.hash);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        });
+    </script>
+</body>
+</html>

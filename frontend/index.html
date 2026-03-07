@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Cooture — AI Website Template Generator</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <!-- Compiled CSS -->
     <link rel="stylesheet" href="css/custom.css?v=7">
@@ -82,32 +83,73 @@
 
 
     <!-- ============================================================
-         HERO (V1 layout + V2 concept)
+         HERO
     ============================================================ -->
-    <section id="hero" class="py-5 py-md-7 bg-primary bg-opacity-10">
+    <section id="hero">
         <div class="container">
             <div class="row align-items-center">
 
-                <div class="col-lg-6 mb-5 mb-lg-0">
-                    <h1 class="fw-bold display-5 display-md-4 mb-3 text-dark">
-                        Generate Beautiful Websites <br class="d-none d-md-block"> <span class="text-primary">in Seconds.</span>
+                <!-- LEFT -->
+                <div class="col-lg-6 mb-4 mb-lg-0">
+
+                    <!-- Badge -->
+                    <div class="hero-badge d-inline-flex align-items-center gap-2 mb-3">
+                        <span class="hero-badge-dot"></span>
+                        Powered by Gemini AI
+                    </div>
+
+                    <h1 class="fw-bold mb-3">
+                        Generate Beautiful Websites <br class="d-none d-md-block">
+                        <span class="hero-accent">in Seconds.</span>
                     </h1>
 
-                    <p class="fs-5 fs-md-4 text-secondary">
-                        Cooture transforms simple prompts into polished, responsive, production-ready website templates.
+                    <p class="hero-sub mb-3">
+                        Cooture transforms simple prompts into polished, responsive,
+                        production-ready website templates.
                         Perfect for freelancers, founders, and developers.
                     </p>
 
-                    <div class="d-flex flex-wrap gap-3 mt-4 justify-content-center justify-content-lg-start">
-                        <a href="#templates" class="btn btn-primary btn-lg px-4 fw-semibold">Explore Templates</a>
-                        <a href="#pricing" class="btn btn-outline-dark btn-lg px-4 fw-semibold">Pricing</a>
+                    <!-- Use-case chips -->
+                    <div class="hero-chips d-flex flex-wrap gap-2 mb-4 justify-content-center justify-content-lg-start">
+                        <span class="hero-chip"><i class="bi bi-shop"></i> Landing Pages</span>
+                        <span class="hero-chip"><i class="bi bi-briefcase"></i> Portfolios</span>
+                        <span class="hero-chip"><i class="bi bi-cart3"></i> E-commerce</span>
+                        <span class="hero-chip"><i class="bi bi-bar-chart-line"></i> Dashboards</span>
+                        <span class="hero-chip"><i class="bi bi-newspaper"></i> Blogs</span>
                     </div>
+
+                    <div class="d-flex flex-wrap gap-3 mb-4 justify-content-center justify-content-lg-start">
+                        <a href="#generator" class="btn btn-primary btn-lg px-4 fw-semibold">
+                            <i class="bi bi-stars me-2"></i>Generate Free
+                        </a>
+                        <a href="#templates" class="btn btn-outline-dark btn-lg px-4 fw-semibold">View Templates</a>
+                    </div>
+
+                    <!-- Trust stats -->
+                    <div class="hero-stats d-flex flex-wrap gap-4 justify-content-center justify-content-lg-start">
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">10k+</span>
+                            <span class="hero-stat-label">Templates Generated</span>
+                        </div>
+                        <div class="hero-stat-divider d-none d-sm-block"></div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">2k+</span>
+                            <span class="hero-stat-label">Developers</span>
+                        </div>
+                        <div class="hero-stat-divider d-none d-sm-block"></div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-num">&lt;10s</span>
+                            <span class="hero-stat-label">Avg. Generation</span>
+                        </div>
+                    </div>
+
                 </div>
 
+                <!-- RIGHT -->
                 <div class="col-lg-6">
-                    <div class="ratio ratio-16x9 ratio-md-4x3 rounded shadow custom-shadow overflow-hidden">
+                    <div class="hero-img-wrap">
                         <img src="https://cdn.dribbble.com/userupload/44786923/file/e050b9f931497c00838143c212a3f49e.png?resize=1504x1128&vertical=center"
-                            class="w-100 h-100 object-fit-cover" alt="Template Preview">
+                            class="hero-img" alt="Template Preview">
                     </div>
                 </div>
 
@@ -115,25 +157,56 @@
         </div>
     </section>
 
-    <section id="generator" class="py-6 bg-body-tertiary">
-        <div class="container">
+    <section id="generator" class="py-6">
+        <div class="container position-relative">
 
-            <div class="text-center mb-5">
-                <h2 class="fw-bold display-6">AI Template Generator</h2>
-                <p class="text-muted fs-5">
+                <div class="text-center mb-5 position-relative">
+                <span class="generator-badge d-inline-flex align-items-center gap-2 mb-3">
+                    <span class="generator-badge-dot"></span>
+                    Powered by Gemini AI
+                </span>
+                <h2 class="fw-bold display-6 generator-title">
+                    <span class="generator-title-accent">AI</span> Template Generator
+                </h2>
+                <p class="text-muted fs-5 mt-2">
                     Describe the layout you want — Cooture converts your idea into clean, responsive HTML/CSS.
                 </p>
             </div>
 
-            <div class="generator-card shadow-sm rounded-4 p-4 p-md-5 mx-auto">
+            <div class="generator-card p-4 p-md-5 mx-auto position-relative">
 
-                <label for="promptInput" class="fw-semibold mb-2">Template Description</label>
-                <textarea id="promptInput" rows="4" class="form-control generator-textarea mb-4"
-                    placeholder="Example: A modern SaaS landing page with hero, pricing, features and a dark footer."></textarea>
+                <div class="d-flex align-items-center gap-2 mb-2">
+                    <span class="generator-label-icon"><i class="bi bi-stars"></i></span>
+                    <label for="promptInput" class="fw-semibold mb-0">Template Description</label>
+                </div>
 
-                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-sm-start">
-                    <button id="generateBtn" class="btn btn-primary px-4 fw-semibold">Generate Template</button>
-                    <button id="randomTemplateBtn" class="btn btn-outline-dark px-4 fw-semibold">Random Prompt</button>
+                <div class="generator-textarea-wrapper mb-3">
+                    <textarea id="promptInput" rows="4" class="form-control generator-textarea"
+                        placeholder="Example: A modern SaaS landing page with hero, pricing, features and a dark footer."
+                        maxlength="500"></textarea>
+                    <span id="charCount" class="generator-charcount">0 / 500</span>
+                </div>
+
+                <!-- Quick prompt chips -->
+                <div class="generator-chips d-flex flex-wrap gap-2 mb-4">
+                    <button class="chip-btn" data-prompt="A clean SaaS homepage with hero, features, pricing, and CTA.">SaaS Landing</button>
+                    <button class="chip-btn" data-prompt="A minimal developer portfolio with projects and about section.">Dev Portfolio</button>
+                    <button class="chip-btn" data-prompt="An e-commerce homepage with product grid and cart UI.">E-commerce</button>
+                    <button class="chip-btn" data-prompt="A restaurant website with menu, gallery and reservation form.">Restaurant</button>
+                </div>
+
+                <div class="d-flex flex-wrap gap-3 align-items-center justify-content-between">
+                    <div class="d-flex flex-wrap gap-3">
+                        <button id="generateBtn" class="btn btn-primary px-4 fw-semibold">
+                            <i class="bi bi-stars me-2"></i>Generate Template
+                        </button>
+                        <button id="randomTemplateBtn" class="btn btn-outline-dark px-4 fw-semibold">
+                            <i class="bi bi-shuffle me-2"></i>Random Prompt
+                        </button>
+                    </div>
+                    <span class="generator-hint d-none d-sm-inline">
+                        <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to generate
+                    </span>
                 </div>
 
                 <div id="outputBox" class="generator-output mt-4 d-none position-relative">
@@ -151,12 +224,15 @@
     </section>
 
 
-    <section id="templates" class="bg-body-tertiary py-6">
+    <section id="templates">
         <div class="container">
 
             <div class="text-center mb-5">
-                <h2 class="fw-bold display-6">Premium AI-Generated Templates</h2>
-                <p class="text-muted fs-5">Choose from professionally crafted layouts generated by Cooture AI.</p>
+                <span class="tmpl-section-badge mb-3 d-inline-flex align-items-center gap-2">
+                    <i class="bi bi-layout-three-columns"></i> 9 Curated Layouts
+                </span>
+                <h2 class="tmpl-section-title fw-bold mt-2 mb-3">Premium AI-Generated <span class="tmpl-title-accent">Templates</span></h2>
+                <p class="tmpl-section-sub mx-auto">Choose from professionally crafted layouts generated by Cooture AI — ready to customize and deploy.</p>
             </div>
 
             <!-- Carousel (3 cards per slide, 3 slides -> 9 cards) -->
@@ -169,7 +245,8 @@
                         <div class="row g-4 justify-content-center">
                             <!-- Card A1 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill saas">SaaS</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <video
                                             src="https://cdn.dribbble.com/userupload/18682523/file/original-56757f5f7e56736add8972d49f8389ca.mp4"
@@ -177,41 +254,41 @@
                                             loop></video>
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Modern SaaS Homepage</h5>
+                                        <h5 class="fw-bold mb-1">Modern SaaS Homepage</h5>
                                         <p class="text-muted small mb-3">Hero, pricing, auth flows and analytics UI.</p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Card A2 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill portfolio">Portfolio</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://cdn.prod.website-files.com/6243c3bb3b5a1852803d0c7f/66b2518ce51e806a7b246e9f_66b24dd82f3fb1539aedb0b7_polymer.jpeg"
                                             class="w-100 h-100 object-fit-cover" alt="Developer workspace">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Developer Portfolio</h5>
-                                        <p class="text-muted small mb-3">Projects, case studies and a clean resume
-                                            section.</p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <h5 class="fw-bold mb-1">Developer Portfolio</h5>
+                                        <p class="text-muted small mb-3">Projects, case studies and a clean resume section.</p>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Card A3 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill design">Design</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://elements-resized.envatousercontent.com/elements-cover-images/a790e4ba-923e-456a-89a7-282ccdff64e0?w=2038&cf_fit=scale-down&q=85&format=auto&s=9b2272a29475e6e2a028f2364c6149fce79a69a6905aa81df43e486bc7f40c57"
                                             class="w-100 h-100 object-fit-cover" alt="Product design desk">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Design Studio</h5>
-                                        <p class="text-muted small mb-3">Showcase, services, and client testimonials.
-                                        </p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <h5 class="fw-bold mb-1">Design Studio</h5>
+                                        <p class="text-muted small mb-3">Showcase, services, and client testimonials.</p>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
@@ -223,48 +300,48 @@
                         <div class="row g-4 justify-content-center">
                             <!-- Card B1 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill marketing">Marketing</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://cdn.prod.website-files.com/6243c3bb3b5a1852803d0c7f/6778121df4ed480053a5da8b_67781171ff1e9c487d1ff3bb_recess-drinks.jpeg"
                                             class="w-100 h-100 object-fit-cover" alt="Marketing team">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Marketing Landing</h5>
-                                        <p class="text-muted small mb-3">Lead magnets, funnels and conversion-first
-                                            CTAs.</p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <h5 class="fw-bold mb-1">Marketing Landing</h5>
+                                        <p class="text-muted small mb-3">Lead magnets, funnels and conversion-first CTAs.</p>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Card B2 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill ecommerce">E-commerce</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://10web.io/blog/wp-content/uploads/sites/2/2024/10/wparker.jpg"
                                             class="w-100 h-100 object-fit-cover" alt="Ecommerce product">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">E-commerce Catalog</h5>
-                                        <p class="text-muted small mb-3">Product grid, filters and tidy checkout flow.
-                                        </p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <h5 class="fw-bold mb-1">E-commerce Catalog</h5>
+                                        <p class="text-muted small mb-3">Product grid, filters and tidy checkout flow.</p>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Card B3 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill startup">Startup</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://cdn.prod.website-files.com/63fc977c14aaea404dce4439/66bc727cd94a9bd1b018667a_658c219de70d24c7131cc919_img14.webp"
                                             class="w-100 h-100 object-fit-cover" alt="Startup meeting">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Startup Landing</h5>
-                                        <p class="text-muted small mb-3">Investor-ready hero, metrics and team sections.
-                                        </p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <h5 class="fw-bold mb-1">Startup Landing</h5>
+                                        <p class="text-muted small mb-3">Investor-ready hero, metrics and team sections.</p>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
@@ -276,189 +353,164 @@
                         <div class="row g-4 justify-content-center">
                             <!-- Card C1 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill agency">Agency</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://tint.creativemarket.com/hZOquOpDLLpGszEZU1Sc-QrHJkHdI2BRNo8UrXvuNOY/width:1200/height:800/gravity:nowe/rt:fill-down/el:1/czM6Ly9maWxlcy5jcmVhdGl2ZW1hcmtldC5jb20vaW1hZ2VzL3NjcmVlbnNob3RzL3Byb2R1Y3RzLzQ5MTIvNDkxMjgvNDkxMjgwMTkvZW52YXRvLXByZXZpZXctNy1vLnBuZw?1697164736"
                                             class="w-100 h-100 object-fit-cover" alt="Agency workspace">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Agency Showcase</h5>
+                                        <h5 class="fw-bold mb-1">Agency Showcase</h5>
                                         <p class="text-muted small mb-3">Service pages, case studies, and team bios.</p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Card C2 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill course">Course</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://landingi.com/wp-content/uploads/2023/02/jobprepped-language-courses-template-960x476-1-optimized.webp"
                                             class="w-100 h-100 object-fit-cover" alt="Course platform">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Course Platform</h5>
-                                        <p class="text-muted small mb-3">Curriculum, pricing tiers and student
-                                            dashboard.</p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <h5 class="fw-bold mb-1">Course Platform</h5>
+                                        <p class="text-muted small mb-3">Curriculum, pricing tiers and student dashboard.</p>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Card C3 -->
                             <div class="col-12 col-md-6 col-lg-4">
-                                <div class="card template-premium-card border-0 shadow-sm h-100">
+                                <div class="card template-premium-card border-0 h-100">
+                                    <span class="tmpl-tag-pill business">Business</span>
                                     <div class="ratio ratio-4x3 rounded-top overflow-hidden">
                                         <img src="https://graphicsfamily.com/wp-content/uploads/edd/2022/09/Modern-Landing-Page-Design-Template-scaled.jpg"
                                             class="w-100 h-100 object-fit-cover" alt="Business meeting">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="fw-semibold mb-2">Business Landing Page</h5>
-                                        <p class="text-muted small mb-3">Lead capture, clear CTAs, and pricing blocks.
-                                        </p>
-                                        <a class="btn btn-outline-primary btn-sm">Preview</a>
+                                        <h5 class="fw-bold mb-1">Business Landing Page</h5>
+                                        <p class="text-muted small mb-3">Lead capture, clear CTAs, and pricing blocks.</p>
+                                        <a class="btn tmpl-preview-btn btn-sm"><i class="bi bi-eye me-1"></i>Preview</a>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
-                <!-- Centered dark controls -->
-                <div class="carousel-controls d-flex justify-content-center align-items-center mt-5">
-                    <button class="btn btn-dark btn-sm me-2" id="templatesPrev" aria-label="Previous slide">
-                        <i class="bi bi-chevron-left"></i>
+                <!-- Controls with dot indicators -->
+                <div class="carousel-controls d-flex justify-content-center align-items-center gap-3 mt-5">
+                    <button class="tmpl-ctrl-btn" id="templatesPrev" aria-label="Previous slide">
+                        <i class="bi bi-arrow-left"></i>
                     </button>
-
-                    <button class="btn btn-dark btn-sm ms-2" id="templatesNext" aria-label="Next slide">
-                        <i class="bi bi-chevron-right"></i>
+                    <div class="tmpl-dots">
+                        <span class="tmpl-dot active"></span>
+                        <span class="tmpl-dot"></span>
+                        <span class="tmpl-dot"></span>
+                    </div>
+                    <button class="tmpl-ctrl-btn" id="templatesNext" aria-label="Next slide">
+                        <i class="bi bi-arrow-right"></i>
                     </button>
                 </div>
+            </div>
 
-
+            <div class="text-center mt-4">
+                <a href="#generator" class="tmpl-browse-btn">Generate a Custom Template <i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
     </section>
 
 
-    <section id="features" class="py-5 bg-body-tertiary">
+    <section id="features">
         <div class="container">
 
             <div class="text-center mb-5">
-                <h2 class="fw-bold display-6">Why teams choose Cooture</h2>
-                <p class="text-muted fs-5">A faster, smarter way to build production-grade UI without the drag.</p>
+                <span class="feat-badge mb-3 d-inline-flex align-items-center gap-2">
+                    <i class="bi bi-award"></i> Built Different
+                </span>
+                <h2 class="feat-title fw-bold mt-2 mb-3">Why teams choose <span class="feat-title-accent">Cooture</span></h2>
+                <p class="feat-sub mx-auto">A faster, smarter way to build production-grade UI without the drag.</p>
             </div>
 
             <div class="row g-4">
 
                 <!-- Feature 1 -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-sm feature-card h-100">
-                        <div class="card-body d-flex gap-3">
-                            <div class="feature-icon bg-primary bg-opacity-10 text-primary">
-                                <i class="bi bi-stars"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-semibold">AI-Generated Templates</h5>
-                                <p class="text-muted mb-0">
-                                    Turn simple prompts into polished landing pages, dashboards, and auth flows —
-                                    instantly.
-                                </p>
-                            </div>
+                    <div class="feat-card h-100">
+                        <div class="feat-icon-wrap" style="--feat-clr: 91,114,255">
+                            <i class="bi bi-stars"></i>
                         </div>
+                        <h5 class="feat-card-title">AI-Generated Templates</h5>
+                        <p class="feat-card-text">Turn simple prompts into polished landing pages, dashboards, and auth flows — instantly.</p>
+                        <span class="feat-card-tag">AI · Prompts</span>
                     </div>
                 </div>
 
                 <!-- Feature 2 -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-sm feature-card h-100">
-                        <div class="card-body d-flex gap-3">
-                            <div class="feature-icon bg-success bg-opacity-10 text-success">
-                                <i class="bi bi-lightning-charge"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-semibold">Production-Ready Code</h5>
-                                <p class="text-muted mb-0">
-                                    Clean SCSS architecture, semantic HTML, and frameworks-friendly markup built for
-                                    real products.
-                                </p>
-                            </div>
+                    <div class="feat-card h-100">
+                        <div class="feat-icon-wrap" style="--feat-clr: 16,185,129">
+                            <i class="bi bi-lightning-charge"></i>
                         </div>
+                        <h5 class="feat-card-title">Production-Ready Code</h5>
+                        <p class="feat-card-text">Clean SCSS architecture, semantic HTML, and frameworks-friendly markup built for real products.</p>
+                        <span class="feat-card-tag">SCSS · Semantic</span>
                     </div>
                 </div>
 
                 <!-- Feature 3 -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-sm feature-card h-100">
-                        <div class="card-body d-flex gap-3">
-                            <div class="feature-icon bg-warning bg-opacity-10 text-warning">
-                                <i class="bi bi-sliders"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-semibold">Fully Customizable</h5>
-                                <p class="text-muted mb-0">
-                                    Every template exports with editable variables, tokens, and SCSS — no vendor
-                                    lock-in, ever.
-                                </p>
-                            </div>
+                    <div class="feat-card h-100">
+                        <div class="feat-icon-wrap" style="--feat-clr: 245,158,11">
+                            <i class="bi bi-sliders"></i>
                         </div>
+                        <h5 class="feat-card-title">Fully Customizable</h5>
+                        <p class="feat-card-text">Every template exports with editable variables, tokens, and SCSS — no vendor lock-in, ever.</p>
+                        <span class="feat-card-tag">Tokens · SCSS</span>
                     </div>
                 </div>
 
                 <!-- Feature 4 -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-sm feature-card h-100">
-                        <div class="card-body d-flex gap-3">
-                            <div class="feature-icon bg-info bg-opacity-10 text-info">
-                                <i class="bi bi-phone"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-semibold">Mobile-First Design</h5>
-                                <p class="text-muted mb-0">
-                                    Responsive layouts that work flawlessly across all devices — from mobile to 4K displays.
-                                </p>
-                            </div>
+                    <div class="feat-card h-100">
+                        <div class="feat-icon-wrap" style="--feat-clr: 6,182,212">
+                            <i class="bi bi-phone"></i>
                         </div>
+                        <h5 class="feat-card-title">Mobile-First Design</h5>
+                        <p class="feat-card-text">Responsive layouts that work flawlessly across all devices — from mobile to 4K displays.</p>
+                        <span class="feat-card-tag">Responsive · 4K</span>
                     </div>
                 </div>
 
                 <!-- Feature 5 -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-sm feature-card h-100">
-                        <div class="card-body d-flex gap-3">
-                            <div class="feature-icon bg-danger bg-opacity-10 text-danger">
-                                <i class="bi bi-shield-check"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-semibold">Secure & Reliable</h5>
-                                <p class="text-muted mb-0">
-                                    Built with security best practices and tested code that you can trust in production.
-                                </p>
-                            </div>
+                    <div class="feat-card h-100">
+                        <div class="feat-icon-wrap" style="--feat-clr: 239,68,68">
+                            <i class="bi bi-shield-check"></i>
                         </div>
+                        <h5 class="feat-card-title">Secure & Reliable</h5>
+                        <p class="feat-card-text">Built with security best practices and tested code that you can trust in production.</p>
+                        <span class="feat-card-tag">OWASP · Tested</span>
                     </div>
                 </div>
 
                 <!-- Feature 6 -->
                 <div class="col-md-6 col-lg-4">
-                    <div class="card border-0 shadow-sm feature-card h-100">
-                        <div class="card-body d-flex gap-3">
-                            <div class="feature-icon bg-primary bg-opacity-10 text-primary">
-                                <i class="bi bi-rocket-takeoff"></i>
-                            </div>
-                            <div>
-                                <h5 class="fw-semibold">Fast Performance</h5>
-                                <p class="text-muted mb-0">
-                                    Optimized code and lightweight assets ensure blazing-fast load times for your users.
-                                </p>
-                            </div>
+                    <div class="feat-card h-100">
+                        <div class="feat-icon-wrap" style="--feat-clr: 139,92,246">
+                            <i class="bi bi-rocket-takeoff"></i>
                         </div>
+                        <h5 class="feat-card-title">Fast Performance</h5>
+                        <p class="feat-card-text">Optimized code and lightweight assets ensure blazing-fast load times for your users.</p>
+                        <span class="feat-card-tag">Lighthouse · 100</span>
                     </div>
                 </div>
 
             </div>
-
         </div>
     </section>
 
@@ -499,7 +551,7 @@
                             </ul>
                         </div>
 
-                        <button class="btn btn-outline-light w-100 py-2 mt-auto">Start free</button>
+                        <button class="btn btn-outline-light w-100 py-2 mt-auto pricing-select-btn" data-plan="Basic" data-price="$0/mo">Start free</button>
 
                     </div>
                 </div>
@@ -526,7 +578,7 @@
                                 access</li>
                         </ul>
 
-                        <button class="btn btn-outline-light w-100 py-2">Upgrade to Pro</button>
+                        <button class="btn btn-outline-light w-100 py-2 pricing-select-btn" data-plan="Pro" data-price="$29/mo">Upgrade to Pro</button>
                     </div>
                 </div>
 
@@ -548,7 +600,7 @@
                                 engineer</li>
                         </ul>
 
-                        <button class="btn btn-outline-light w-100 py-2">Contact sales</button>
+                        <button class="btn btn-outline-light w-100 py-2 pricing-select-btn" data-plan="Enterprise" data-price="$99/mo">Contact sales</button>
                     </div>
                 </div>
 
@@ -558,211 +610,193 @@
 
 
 
-    <section id="faq" class="py-5 bg-body-tertiary">
-        <div class="container d-flex justify-content-center">
+    <!-- FAQ -->
+    <section id="faq" class="py-5 overflow-hidden">
+        <div class="container py-3">
 
-            <div class="faq-wrapper" style="max-width: 720px; width: 100%;">
-
-                <div class="text-center mb-5">
-                    <h2 class="fw-bold display-6">Frequently Asked Questions</h2>
-                    <p class="text-muted fs-5">Answers to the questions most users ask before they start building.</p>
-                </div>
-
-                <div class="accordion accordion-clean" id="faqAcc">
-
-                    <!-- Q1 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="q1">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#a1">
-                                How does Cooture generate templates so quickly?
-                            </button>
-                        </h2>
-                        <div id="a1" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-                            <div class="accordion-body">
-                                Cooture uses predefined layout heuristics, responsive grid logic, and SCSS token systems
-                                to convert your prompts into structured, production-grade UI in seconds.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q2 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="q2">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#a2">
-                                Can I use the generated templates for client projects?
-                            </button>
-                        </h2>
-                        <div id="a2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-                            <div class="accordion-body">
-                                Yes — everything generated by Cooture is licensed for full commercial use.
-                                Ideal for freelancers, agencies, and indie developers delivering client-ready UI fast.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q3 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="q3">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#a3">
-                                Do the templates support dark mode out of the box?
-                            </button>
-                        </h2>
-                        <div id="a3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-                            <div class="accordion-body">
-                                Yes. Cooture includes a fully integrated CSS variable-based dark mode system,
-                                enabling instant theme switching with smooth transitions and no extra configuration.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q4 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="q4">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#a4">
-                                How editable is the generated code?
-                            </button>
-                        </h2>
-                        <div id="a4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-                            <div class="accordion-body">
-                                Every output is pure HTML + SCSS with clean architecture — no proprietary classes,
-                                no locked components — making it easy to customize, restyle, or extend.
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Q5 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="q5">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#a5">
-                                Does Cooture work with React, Next.js, or other frameworks?
-                            </button>
-                        </h2>
-                        <div id="a5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-                            <div class="accordion-body">
-                                Yes. The generated markup is framework-agnostic and drops cleanly into React, Next.js,
-                                Vue,
-                                Svelte, Astro, or any component-based architecture without breaking styling.
-                            </div>
-                    </div>
-                </div>
-
+            <!-- Section Header -->
+            <div class="text-center mb-5">
+                <span class="faq-badge mb-3 d-inline-flex align-items-center gap-2">
+                    <i class="bi bi-patch-question"></i> Need Help?
+                </span>
+                <h2 class="faq-title fw-bold mt-2 mb-3">Frequently Asked <span class="faq-title-accent">Questions</span></h2>
+                <p class="faq-sub mx-auto">Everything you need to know before you start building with Cooture.</p>
             </div>
 
+            <!-- FAQ accordion -->
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    <div class="d-flex flex-column gap-3" id="faqAcc">
+
+                        <div class="faq-item">
+                            <button class="faq-btn" onclick="toggleFaq(this)">
+                                <span class="d-flex align-items-center gap-3">
+                                    <span class="faq-num">01</span>
+                                    How does Cooture generate templates so quickly?
+                                </span>
+                                <i class="bi bi-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p class="faq-answer">Cooture uses predefined layout heuristics, responsive grid logic, and SCSS token systems to convert your prompts into structured, production-grade UI in seconds.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" onclick="toggleFaq(this)">
+                                <span class="d-flex align-items-center gap-3">
+                                    <span class="faq-num">02</span>
+                                    Can I use the generated templates for client projects?
+                                </span>
+                                <i class="bi bi-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p class="faq-answer">Yes — everything generated by Cooture is licensed for full commercial use. Ideal for freelancers, agencies, and indie developers delivering client-ready UI fast.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" onclick="toggleFaq(this)">
+                                <span class="d-flex align-items-center gap-3">
+                                    <span class="faq-num">03</span>
+                                    Do the templates support dark mode out of the box?
+                                </span>
+                                <i class="bi bi-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p class="faq-answer">Yes. Cooture includes a fully integrated CSS variable-based dark mode system, enabling instant theme switching with smooth transitions and no extra configuration.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" onclick="toggleFaq(this)">
+                                <span class="d-flex align-items-center gap-3">
+                                    <span class="faq-num">04</span>
+                                    How editable is the generated code?
+                                </span>
+                                <i class="bi bi-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p class="faq-answer">Every output is pure HTML + SCSS with clean architecture — no proprietary classes, no locked components — making it easy to customize, restyle, or extend.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-btn" onclick="toggleFaq(this)">
+                                <span class="d-flex align-items-center gap-3">
+                                    <span class="faq-num">05</span>
+                                    Does Cooture work with React, Next.js, or other frameworks?
+                                </span>
+                                <i class="bi bi-chevron-down faq-chevron"></i>
+                            </button>
+                            <div class="faq-body">
+                                <p class="faq-answer">Yes. The generated markup is framework-agnostic and drops cleanly into React, Next.js, Vue, Svelte, Astro, or any component-based architecture without breaking styling.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- TESTIMONIALS -->
-    <section id="testimonials" class="py-5 bg-body-tertiary">
+    <section id="testimonials" class="py-5">
         <div class="container">
 
             <div class="text-center mb-5">
-                <h2 class="h1 fw-bold">Trusted by creators worldwide</h2>
-                <p class="text-muted fs-5">Teams use Cooture to speed up UI creation.</p>
+                <span class="testi-badge mb-3 d-inline-flex align-items-center gap-2">
+                    <i class="bi bi-star-fill"></i> Real Reviews
+                </span>
+                <h2 class="testi-title fw-bold mt-2 mb-3">Trusted by creators <span class="testi-title-accent">worldwide</span></h2>
+                <p class="testi-sub mx-auto">Teams use Cooture to speed up UI creation and ship better products, faster.</p>
             </div>
 
             <div class="row g-4">
-
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
-                        <p class="text-muted fst-italic mb-4">“It feels like having a junior designer who works at
-                            light speed.”</p>
-                        <div class="d-flex gap-3 align-items-center">
-                            <img src="https://randomuser.me/api/portraits/men/18.jpg" class="rounded-circle"
-                                style="width:56px;height:56px;object-fit:cover;">
+                    <div class="testi-card h-100" style="--testi-clr:91,114,255">
+                        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testi-quote">&ldquo;It feels like having a junior designer who works at light speed.&rdquo;</p>
+                        <div class="testi-author">
+                            <img src="https://randomuser.me/api/portraits/men/18.jpg" class="testi-avatar" alt="Liam Carter">
                             <div>
-                                <h6 class="fw-bold mb-0">Liam Carter</h6>
-                                <small class="text-muted">Founder, Hyperlane</small>
+                                <h6 class="testi-name">Liam Carter</h6>
+                                <small class="testi-role">Founder, Hyperlane</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
-                        <p class="text-muted fst-italic mb-4">“Cooture templates save me hours on each project.”</p>
-                        <div class="d-flex gap-3 align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/22.jpg" class="rounded-circle"
-                                style="width:56px;height:56px;object-fit:cover;">
+                    <div class="testi-card h-100" style="--testi-clr:139,92,246">
+                        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testi-quote">&ldquo;Cooture templates save me hours on each project. Absolutely love it.&rdquo;</p>
+                        <div class="testi-author">
+                            <img src="https://randomuser.me/api/portraits/women/22.jpg" class="testi-avatar" alt="Sophia Mendes">
                             <div>
-                                <h6 class="fw-bold mb-0">Sophia Mendes</h6>
-                                <small class="text-muted">Freelance Web Designer</small>
+                                <h6 class="testi-name">Sophia Mendes</h6>
+                                <small class="testi-role">Freelance Web Designer</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
-                        <p class="text-muted fst-italic mb-4">"The structure is clean. Perfect for production apps."</p>
-                        <div class="d-flex gap-3 align-items-center">
-                            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="rounded-circle"
-                                style="width:56px;height:56px;object-fit:cover;">
+                    <div class="testi-card h-100" style="--testi-clr:20,184,166">
+                        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testi-quote">&ldquo;The structure is clean. Perfect for production apps.&rdquo;</p>
+                        <div class="testi-author">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" class="testi-avatar" alt="Daniel Brooks">
                             <div>
-                                <h6 class="fw-bold mb-0">Daniel Brooks</h6>
-                                <small class="text-muted">Lead Engineer</small>
+                                <h6 class="testi-name">Daniel Brooks</h6>
+                                <small class="testi-role">Lead Engineer</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Second Row of Testimonials -->
-            <div class="row g-4 mt-3">
-
+            <div class="row g-4 mt-0">
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
-                        <p class="text-muted fst-italic mb-4">"Amazing tool that boosted our team's productivity significantly."</p>
-                        <div class="d-flex gap-3 align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle"
-                                style="width:56px;height:56px;object-fit:cover;">
+                    <div class="testi-card h-100" style="--testi-clr:245,158,11">
+                        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testi-quote">&ldquo;Amazing tool that boosted our team&rsquo;s productivity significantly.&rdquo;</p>
+                        <div class="testi-author">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="testi-avatar" alt="Emma Wilson">
                             <div>
-                                <h6 class="fw-bold mb-0">Emma Wilson</h6>
-                                <small class="text-muted">Product Manager</small>
+                                <h6 class="testi-name">Emma Wilson</h6>
+                                <small class="testi-role">Product Manager</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
-                        <p class="text-muted fst-italic mb-4">"Best investment for rapid prototyping. Highly recommended!"</p>
-                        <div class="d-flex gap-3 align-items-center">
-                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle"
-                                style="width:56px;height:56px;object-fit:cover;">
+                    <div class="testi-card h-100" style="--testi-clr:244,63,94">
+                        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testi-quote">&ldquo;Best investment for rapid prototyping. Highly recommended!&rdquo;</p>
+                        <div class="testi-author">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="testi-avatar" alt="Marcus Chen">
                             <div>
-                                <h6 class="fw-bold mb-0">Marcus Chen</h6>
-                                <small class="text-muted">Startup Founder</small>
+                                <h6 class="testi-name">Marcus Chen</h6>
+                                <small class="testi-role">Startup Founder</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-4">
-                    <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
-                        <p class="text-muted fst-italic mb-4">"Cooture transformed how we approach web development projects."</p>
-                        <div class="d-flex gap-3 align-items-center">
-                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle"
-                                style="width:56px;height:56px;object-fit:cover;">
+                    <div class="testi-card h-100" style="--testi-clr:6,182,212">
+                        <div class="testi-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <p class="testi-quote">&ldquo;Cooture transformed how we approach web development projects.&rdquo;</p>
+                        <div class="testi-author">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="testi-avatar" alt="Sarah Martinez">
                             <div>
-                                <h6 class="fw-bold mb-0">Sarah Martinez</h6>
-                                <small class="text-muted">UX Designer</small>
+                                <h6 class="testi-name">Sarah Martinez</h6>
+                                <small class="testi-role">UX Designer</small>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
     </section>
-
-
     <section id="cta" class="py-5 py-md-6 bg-primary text-light position-relative overflow-hidden">
         <div class="container">
             <div class="row align-items-center justify-content-between">
@@ -788,55 +822,98 @@
 
 
     <!-- FOOTER -->
-    <footer class="bg-dark text-light py-5 mt-0">
+    <footer class="text-light py-5" style="background:#0d0d12;border-top:1px solid rgba(255,255,255,0.07);">
         <div class="container">
 
-            <div class="row g-4 justify-content-center">
+            <!-- Top row: Brand + Links -->
+            <div class="row g-4 align-items-start mb-5">
 
-                <div class="col-12 col-sm-6 col-md-4 text-center text-sm-start">
-                    <h4 class="fw-bold mb-3">Cooture</h4>
-                    <p class="opacity-75">AI Website Template Generator for developers, freelancers, and creators.</p>
-                </div>
-
-                <div class="col-6 col-sm-3 col-md-2 text-center text-sm-start">
-                    <h6 class="fw-semibold mb-3">Product</h6>
-                    <ul class="list-unstyled opacity-75 d-flex flex-column gap-2">
-                        <li><a class="text-light text-decoration-none" href="#templates">Templates</a></li>
-                        <li><a class="text-light text-decoration-none" href="#features">Features</a></li>
-                        <li><a class="text-light text-decoration-none" href="#pricing">Pricing</a></li>
-                        <li><a class="text-light text-decoration-none" href="#">Updates</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-6 col-sm-3 col-md-2 text-center text-sm-start">
-                    <h6 class="fw-semibold mb-3">Company</h6>
-                    <ul class="list-unstyled opacity-75 d-flex flex-column gap-2">
-                        <li><a class="text-light text-decoration-none" href="#">About</a></li>
-                        <li><a class="text-light text-decoration-none" href="#">Careers</a></li>
-                        <li><a class="text-light text-decoration-none" href="#">Contact</a></li>
-                        <li><a class="text-light text-decoration-none" href="#">Blog</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-4 text-center text-md-start">
-                    <h6 class="fw-semibold mb-3">Stay Connected</h6>
-                    <p class="opacity-75">Follow us for updates and new template packs.</p>
-                    <div class="d-flex gap-3 fs-4 justify-content-center justify-content-md-start">
-                        <a class="text-light opacity-75" href="https://twitter.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter"></i></a>
-                        <a class="text-light opacity-75" href="https://instagram.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a>
-                        <a class="text-light opacity-75" href="https://github.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-github"></i></a>
-                        <a class="text-light opacity-75" href="https://youtube.com" target="_blank" rel="noopener noreferrer"><i class="bi bi-youtube"></i></a>
+                <!-- Brand -->
+                <div class="col-12 col-md-4">
+                    <span class="fw-bold fs-5 text-white d-block mb-2">Cooture</span>
+                    <p style="color:rgba(255,255,255,0.4);font-size:0.875rem;max-width:260px;line-height:1.7;" class="mb-4">
+                        AI-powered website template generator for developers and creators.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-github"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
 
+                <!-- Links -->
+                <div class="col-6 col-sm-4 col-md-2 offset-md-2">
+                    <p class="footer-heading">Product</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="#templates">Templates</a></li>
+                        <li><a class="footer-link" href="#features">Features</a></li>
+                        <li><a class="footer-link" href="#pricing">Pricing</a></li>
+                        <li><a class="footer-link" href="blog.html#updates">Updates</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Company</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="about.html">About</a></li>
+                        <li><a class="footer-link" href="careers.html">Careers</a></li>
+                        <li><a class="footer-link" href="contact.html">Contact</a></li>
+                        <li><a class="footer-link" href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Legal</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="legal.html#privacy">Privacy</a></li>
+                        <li><a class="footer-link" href="legal.html#terms">Terms</a></li>
+                        <li><a class="footer-link" href="legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+
             </div>
 
-            <div class="border-top border-secondary mt-4 pt-3 text-center opacity-50">
-                © 2025 Cooture. All rights reserved.
+            <!-- Bottom bar -->
+            <div style="border-top:1px solid rgba(255,255,255,0.07);" class="pt-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+                <span style="color:rgba(255,255,255,0.25);font-size:0.82rem;">© 2026 Cooture. All rights reserved.</span>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>
+                    <span style="color:rgba(255,255,255,0.25);font-size:0.8rem;">All systems operational</span>
+                </div>
             </div>
 
         </div>
+
+        <style>
+            .footer-heading { color:rgba(255,255,255,0.25); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+            .footer-link { color:rgba(255,255,255,0.45); font-size:0.875rem; text-decoration:none; transition:color .2s; }
+            .footer-link:hover { color:#c4b5fd; }
+            .footer-icon { color:rgba(255,255,255,0.4); font-size:1.05rem; text-decoration:none; transition:color .2s; }
+            .footer-icon:hover { color:#c4b5fd; }
+        </style>
     </footer>
+
+
+    <!-- PRICING CONFIRMATION MODAL -->
+    <div class="modal fade" id="pricingConfirmModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background:#1a1f2e; border:1px solid rgba(91,114,255,0.3); border-radius:16px;">
+          <div class="modal-body text-center" style="padding:2.5rem 2rem;">
+            <div style="width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+              <i class="bi bi-check-lg" style="font-size:1.8rem;color:#22c55e;"></i>
+            </div>
+            <h5 class="fw-bold text-white mb-1">You're all set!</h5>
+            <p class="mb-1" style="color:#8b9bb4;font-size:0.9rem;">You selected the <strong class="text-white" id="pricingConfirmName"></strong> plan.</p>
+            <p class="mb-4" style="color:#8b9bb4;font-size:0.85rem;">Billed at <span class="text-white fw-semibold" id="pricingConfirmPrice"></span> — we'll get you started right away!</p>
+            <div class="d-flex gap-2 justify-content-center">
+              <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal" style="border-radius:10px; background:linear-gradient(135deg,#5b72ff,#a78bfa); border:none;">Continue</button>
+              <a href="profile.html" class="btn px-4" style="border-radius:10px; border:1px solid rgba(255,255,255,0.15); color:#fff;">Go to Profile</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Toast Container -->
     <div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 3000; margin-top: 75px;">
@@ -849,6 +926,18 @@
 
     <script>
 
+
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.pricing-select-btn');
+            if (!btn) return;
+            if (!isLoggedIn()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            document.getElementById('pricingConfirmName').textContent = btn.dataset.plan;
+            document.getElementById('pricingConfirmPrice').textContent = btn.dataset.price;
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('pricingConfirmModal')).show();
+        });
 
         window.addEventListener("DOMContentLoaded", () => {
             const token = localStorage.getItem("cooture_token");

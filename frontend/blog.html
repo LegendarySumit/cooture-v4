@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Blog — Cooture</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/custom.css?v=7">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body { background: #0f1117; color: #e2e8f0; }
+        .page-hero { padding: 5rem 0 3rem; text-align: center; }
+        .page-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; }
+        .blog-card { background: #161b27; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; cursor: pointer; }
+        .blog-card:hover { border-color: rgba(91,114,255,0.4); transform: translateY(-3px); }
+        .blog-thumb { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .blog-body { padding: 1.25rem; }
+        .blog-tag { font-size: 0.7rem; border-radius: 20px; padding: 0.2rem 0.65rem; font-weight: 600; }
+        .blog-title { font-weight: 700; font-size: 1rem; line-height: 1.4; margin: 0.5rem 0; }
+        .blog-excerpt { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+        .blog-meta { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-top: 0.75rem; }
+        .newsletter-card { background: linear-gradient(135deg, rgba(91,114,255,0.12), rgba(167,139,250,0.08)); border: 1px solid rgba(91,114,255,0.25); border-radius: 16px; padding: 2.5rem; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm" style="background:#161b27; border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div class="container py-2">
+            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color:#818cf8;">Cooture</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="btn btn-sm btn-outline-secondary">← Home</a>
+                <a href="login.html" class="btn btn-sm btn-outline-primary">Login</a>
+                <a href="signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="badge mb-3 px-3 py-2" style="background:rgba(91,114,255,0.15); color:#818cf8; border:1px solid rgba(91,114,255,0.25); border-radius:20px; font-size:0.8rem;">Blog</span>
+            <h1 class="mb-3">Thoughts on <span style="background:linear-gradient(135deg,#5b72ff,#a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">design & AI</span></h1>
+            <p class="lead opacity-75 mx-auto" style="max-width:480px;">Tutorials, product updates, and deep dives from the Cooture team.</p>
+        </div>
+    </section>
+
+    <!-- POSTS -->
+    <section class="pb-5">
+        <div class="container">
+            <div class="row g-4">
+
+                <div class="col-12 col-md-4">
+                    <div class="blog-card h-100">
+                        <img class="blog-thumb" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&q=80" alt="Post">
+                        <div class="blog-body">
+                            <span class="blog-tag" style="background:rgba(91,114,255,0.15); color:#818cf8;">Tutorial</span>
+                            <div class="blog-title">How to generate a SaaS landing page with Cooture in 60 seconds</div>
+                            <div class="blog-excerpt">Walk through our prompt system, component tokens, and export workflow step by step.</div>
+                            <div class="blog-meta"><i class="bi bi-calendar3 me-1"></i>Mar 1, 2026 · 5 min read</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="blog-card h-100">
+                        <img class="blog-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&q=80" alt="Post">
+                        <div class="blog-body">
+                            <span class="blog-tag" style="background:rgba(167,139,250,0.15); color:#a78bfa;">Design</span>
+                            <div class="blog-title">Why good design tokens are the secret weapon of scalable UIs</div>
+                            <div class="blog-excerpt">SCSS variables, semantic naming, and how Cooture's token system makes dark mode effortless.</div>
+                            <div class="blog-meta"><i class="bi bi-calendar3 me-1"></i>Feb 18, 2026 · 7 min read</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="blog-card h-100">
+                        <img class="blog-thumb" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=600&q=80" alt="Post">
+                        <div class="blog-body">
+                            <span class="blog-tag" style="background:rgba(34,197,94,0.12); color:#22c55e;">Product</span>
+                            <div class="blog-title">Cooture v4 is here — what's new and what's next</div>
+                            <div class="blog-excerpt">Profile dashboards, billing, AI generation history, and the roadmap for Q2 2026.</div>
+                            <div class="blog-meta"><i class="bi bi-calendar3 me-1"></i>Feb 5, 2026 · 4 min read</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="blog-card h-100">
+                        <img class="blog-thumb" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&q=80" alt="Post">
+                        <div class="blog-body">
+                            <span class="blog-tag" style="background:rgba(251,146,60,0.12); color:#fb923c;">Engineering</span>
+                            <div class="blog-title">Building a real-time template preview with vanilla JS and Bootstrap 5</div>
+                            <div class="blog-excerpt">How we built the modal-based preview system and why we chose delegated event listeners.</div>
+                            <div class="blog-meta"><i class="bi bi-calendar3 me-1"></i>Jan 22, 2026 · 8 min read</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="blog-card h-100">
+                        <img class="blog-thumb" src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&q=80" alt="Post">
+                        <div class="blog-body">
+                            <span class="blog-tag" style="background:rgba(91,114,255,0.15); color:#818cf8;">Tutorial</span>
+                            <div class="blog-title">Integrating Cooture templates into a Next.js app</div>
+                            <div class="blog-excerpt">Export, convert to JSX, and drop Cooture-generated components straight into your React project.</div>
+                            <div class="blog-meta"><i class="bi bi-calendar3 me-1"></i>Jan 10, 2026 · 6 min read</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <div class="blog-card h-100">
+                        <img class="blog-thumb" src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80" alt="Post">
+                        <div class="blog-body">
+                            <span class="blog-tag" style="background:rgba(167,139,250,0.15); color:#a78bfa;">AI</span>
+                            <div class="blog-title">The prompt engineering behind Cooture's template engine</div>
+                            <div class="blog-excerpt">A behind-the-scenes look at how we structure prompts to get consistent, production-quality HTML.</div>
+                            <div class="blog-meta"><i class="bi bi-calendar3 me-1"></i>Dec 29, 2025 · 10 min read</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NEWSLETTER -->
+            <div class="newsletter-card mt-5">
+                <h4 class="fw-bold mb-2">Stay in the loop</h4>
+                <p class="opacity-60 mb-4">Get new posts and product updates straight to your inbox. No spam, ever.</p>
+                <div class="d-flex gap-2 justify-content-center flex-wrap">
+                    <input type="email" class="form-control" placeholder="you@example.com" style="max-width:280px; background:#1e2436; border:1px solid rgba(255,255,255,0.1); color:#e2e8f0; border-radius:10px;">
+                    <button class="btn btn-primary px-4 fw-semibold" style="border-radius:10px; background:linear-gradient(135deg,#5b72ff,#a78bfa); border:none;">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-light py-5" style="background:#0d0d12;border-top:1px solid rgba(255,255,255,0.07);">
+        <div class="container">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-4">
+                    <span class="fw-bold fs-5 text-white d-block mb-2">Cooture</span>
+                    <p style="color:rgba(255,255,255,0.4);font-size:0.875rem;max-width:260px;line-height:1.7;" class="mb-4">AI-powered website template generator for developers and creators.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-github"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 offset-md-2">
+                    <p class="footer-heading">Product</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="index.html#templates">Templates</a></li>
+                        <li><a class="footer-link" href="index.html#features">Features</a></li>
+                        <li><a class="footer-link" href="index.html#pricing">Pricing</a></li>
+                        <li><a class="footer-link" href="blog.html#updates">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Company</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="about.html">About</a></li>
+                        <li><a class="footer-link" href="careers.html">Careers</a></li>
+                        <li><a class="footer-link" href="contact.html">Contact</a></li>
+                        <li><a class="footer-link" href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Legal</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="legal.html#privacy">Privacy</a></li>
+                        <li><a class="footer-link" href="legal.html#terms">Terms</a></li>
+                        <li><a class="footer-link" href="legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.07);" class="pt-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+                <span style="color:rgba(255,255,255,0.25);font-size:0.82rem;">© 2026 Cooture. All rights reserved.</span>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>
+                    <span style="color:rgba(255,255,255,0.25);font-size:0.8rem;">All systems operational</span>
+                </div>
+            </div>
+        </div>
+        <style>
+            .footer-heading { color:rgba(255,255,255,0.25); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+            .footer-link { color:rgba(255,255,255,0.45); font-size:0.875rem; text-decoration:none; transition:color .2s; }
+            .footer-link:hover { color:#c4b5fd; }
+            .footer-icon { color:rgba(255,255,255,0.4); font-size:1.05rem; text-decoration:none; transition:color .2s; }
+            .footer-icon:hover { color:#c4b5fd; }
+        </style>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

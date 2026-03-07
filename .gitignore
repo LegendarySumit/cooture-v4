@@ -5,6 +5,9 @@ package-lock.json
 # Environment variables
 .env
 
+# Firebase service account (contains private key — never commit)
+backend/firebase-service-account.json
+
 # Build files
 dist/
 build/

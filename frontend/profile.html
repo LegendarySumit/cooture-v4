@@ -1,648 +1,994 @@
-<!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+﻿<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Cooture — Profile</title>
-
-    <!-- Your existing styles -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="css/custom.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
-
-    <!-- small local page styles to shape the dashboard -->
     <style>
-        /* Sidebar */
-        .profile-sidebar {
-            background: var(--bs-body-bg);
-            border-right: 1px solid rgba(0,0,0,0.06);
-            min-height: 100vh;
-            padding: 1.25rem;
+        :root {
+            --accent: #5b72ff;
+            --accent-2: #a78bfa;
+            --accent-glow: rgba(91,114,255,0.18);
+            --sidebar-w: 260px;
+            --card-radius: 16px;
         }
-        .profile-sidebar .nav-link {
-            color: var(--bs-body-color);
-            padding: 0.6rem 0.75rem;
-            border-radius: 0.5rem;
-            display:flex;
-            align-items:center;
-            gap:.6rem;
+        [data-bs-theme="dark"] {
+            --surface: #0f1117;
+            --surface-2: #161b27;
+            --surface-3: #1e2436;
+            --border: rgba(255,255,255,0.07);
+            --text-muted-custom: rgba(255,255,255,0.45);
+        }
+        [data-bs-theme="light"] {
+            --surface: #f5f6fa;
+            --surface-2: #ffffff;
+            --surface-3: #eef0f8;
+            --border: rgba(0,0,0,0.07);
+            --text-muted-custom: rgba(0,0,0,0.45);
+        }
+
+        * { box-sizing: border-box; }
+        body { background: var(--surface); min-height: 100vh; }
+
+        /* ── TOPNAV ── */
+        #mainNav {
+            background: var(--surface-2) !important;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(12px);
+            box-shadow: none !important;
+        }
+
+        /* ── LAYOUT ── */
+        .page-wrapper { display: flex; min-height: calc(100vh - 58px); }
+
+        /* ── SIDEBAR ── */
+        .sidebar {
+            width: var(--sidebar-w);
+            min-width: var(--sidebar-w);
+            background: var(--surface-2);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1rem;
+            min-height: 100%;
+            transition: width 0.2s;
+        }
+
+        .sidebar-avatar-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.5rem 0 1.5rem;
+        }
+        .avatar-ring {
+            width: 76px;
+            height: 76px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            border-radius: 50%;
+            padding: 3px;
+            margin-bottom: 0.75rem;
+        }
+        .avatar-ring img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--surface-2);
+        }
+        .sidebar-name {
+            font-weight: 700;
             font-size: 0.95rem;
+            word-break: break-word;
         }
-        .profile-sidebar .nav-link.active {
-            background: linear-gradient(90deg, rgba(59,87,255,0.12), rgba(59,87,255,0.06));
-            box-shadow: 0 6px 18px rgba(59,87,255,0.06);
-            color: var(--bs-primary);
-            font-weight:600;
+        .sidebar-email {
+            font-size: 0.78rem;
+            color: var(--text-muted-custom);
+            word-break: break-word;
         }
-
-        /* Profile header card */
-        .profile-card {
-            border-radius: 12px;
-            padding: 1.25rem;
-            box-shadow: 0 6px 24px rgba(16,24,40,0.05);
-            background: var(--bs-body-bg);
-        }
-
-        .profile-avatar {
-            width:88px;
-            height:88px;
-            border-radius:12px;
-            object-fit:cover;
-            box-shadow: 0 6px 18px rgba(11,19,50,0.06);
+        .sidebar-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            margin-top: 0.4rem;
+            background: linear-gradient(90deg, rgba(91,114,255,0.2), rgba(167,139,250,0.2));
+            color: var(--accent);
+            border: 1px solid rgba(91,114,255,0.25);
         }
 
-        /* Stats */
-        .stat-card {
-            border-radius:10px;
-            padding:1rem;
-            min-height:90px;
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            gap:.3rem;
-        }
-
-        /* Activity list */
-        .activity-item {
-            padding: .9rem;
-            border-radius:10px;
-            display:flex;
-            gap:.9rem;
-            align-items:start;
-        }
-
-        /* Tabs */
-        .profile-tabs .nav-link {
-            padding: .75rem 1rem;
+        .sidebar-nav { flex: 1; }
+        .sidebar-nav .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.6rem 0.9rem;
             border-radius: 10px;
-            color:var(--bs-body-color);
-            font-size: 0.95rem;
+            color: var(--text-muted-custom);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.18s;
+            margin-bottom: 2px;
         }
-        .profile-tabs .nav-link.active {
-            background: var(--bs-body-tertiary);
-            font-weight:600;
-            color:var(--bs-primary);
+        .sidebar-nav .nav-link i { font-size: 1rem; min-width: 18px; }
+        .sidebar-nav .nav-link:hover {
+            background: var(--accent-glow);
+            color: var(--accent);
+        }
+        .sidebar-nav .nav-link.active {
+            background: linear-gradient(90deg, rgba(91,114,255,0.18), rgba(167,139,250,0.08));
+            color: var(--accent);
+            font-weight: 600;
+            box-shadow: inset 3px 0 0 var(--accent);
+        }
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 0.75rem 0.5rem;
+        }
+        .sidebar-section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-muted-custom);
+            padding: 0.4rem 0.9rem;
         }
 
-        /* Responsive adjustments */
+        /* ── MAIN ── */
+        .main-content {
+            flex: 1;
+            padding: 2rem 2rem;
+            overflow-x: hidden;
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            margin-bottom: 1.75rem;
+        }
+        .page-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin: 0;
+        }
+        .page-header p { color: var(--text-muted-custom); font-size: 0.88rem; margin: 0.2rem 0 0; }
+
+        /* ── PROFILE CARD ── */
+        .profile-hero {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        }
+        .profile-hero-avatar {
+            width: 72px;
+            height: 72px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 2px solid rgba(91,114,255,0.3);
+            box-shadow: 0 8px 24px rgba(91,114,255,0.2);
+        }
+        .profile-hero-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .profile-hero-email {
+            font-size: 0.82rem;
+            color: var(--text-muted-custom);
+        }
+        .profile-hero-since {
+            font-size: 0.8rem;
+            color: var(--text-muted-custom);
+            margin-top: 0.25rem;
+        }
+        .profile-hero-about {
+            font-size: 0.85rem;
+            color: var(--text-muted-custom);
+            border-top: 1px solid var(--border);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            line-height: 1.6;
+        }
+        .profile-hero-actions { margin-top: 1.25rem; }
+
+        /* ── STAT CARDS ── */
+        .stat-card {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--card-radius);
+            padding: 1.25rem 1rem;
+            text-align: center;
+            transition: transform 0.18s, box-shadow 0.18s;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(91,114,255,0.12);
+        }
+        .stat-card .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.6rem;
+            font-size: 1.05rem;
+        }
+        .stat-card .stat-value {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+        .stat-card .stat-label {
+            font-size: 0.76rem;
+            color: var(--text-muted-custom);
+            margin-top: 0.25rem;
+            font-weight: 500;
+        }
+
+        /* ── SUBSCRIPTION CARD ── */
+        .sub-card {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--card-radius);
+            padding: 1.25rem 1.5rem;
+            margin-top: 0.75rem;
+        }
+        .sub-card .progress {
+            height: 6px;
+            border-radius: 99px;
+            background: var(--surface-3);
+            margin-top: 0.6rem;
+        }
+        .sub-card .progress-bar {
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        }
+
+        /* ── CONTENT CARDS ── */
+        .content-card {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--card-radius);
+            padding: 1.5rem;
+        }
+        .content-card-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted-custom);
+            margin-bottom: 1rem;
+        }
+
+        /* ── TABS ── */
+        .profile-tabs {
+            border-bottom: 1px solid var(--border);
+            gap: 0.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .profile-tabs .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 0.55rem 1.1rem;
+            border-radius: 8px 8px 0 0;
+            color: var(--text-muted-custom);
+            border: none;
+            background: transparent;
+            transition: all 0.18s;
+        }
+        .profile-tabs .nav-link:hover { color: var(--accent); background: var(--accent-glow); }
+        .profile-tabs .nav-link.active {
+            color: var(--accent);
+            font-weight: 700;
+            background: transparent;
+            border-bottom: 2px solid var(--accent);
+            border-radius: 0;
+        }
+
+        /* ── ACCOUNT DETAIL ROWS ── */
+        .detail-row {
+            display: flex;
+            flex-direction: column;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .detail-row:last-child { border-bottom: none; }
+        .detail-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted-custom);
+            margin-bottom: 0.2rem;
+        }
+        .detail-value {
+            font-size: 0.92rem;
+            font-weight: 600;
+            word-break: break-all;
+        }
+
+        /* ── TEMPLATE CARDS ── */
+        .template-card {
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.1rem;
+            transition: all 0.18s;
+        }
+        .template-card:hover {
+            border-color: rgba(91,114,255,0.4);
+            box-shadow: 0 6px 20px rgba(91,114,255,0.1);
+            transform: translateY(-1px);
+        }
+        .template-card-title { font-size: 0.92rem; font-weight: 700; }
+        .template-card-desc { font-size: 0.8rem; color: var(--text-muted-custom); margin: 0.3rem 0 0.9rem; }
+        .template-card-date { font-size: 0.75rem; color: var(--text-muted-custom); }
+        .template-thumb {
+            width: 100%; aspect-ratio: 16/9;
+            object-fit: cover; border-radius: 8px;
+            margin-bottom: 0.85rem;
+            border: 1px solid var(--border);
+        }
+        /* Preview Modal */
+        #previewModal .modal-content {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+        #previewModal .modal-header {
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.25rem 0.75rem;
+        }
+        #previewModal .btn-close { filter: invert(1) grayscale(1); }
+        #previewModal img {
+            width: 100%; border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        /* ── ACTIVITY ITEMS ── */
+        .activity-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+            padding: 0.85rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-dot {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        .activity-title { font-size: 0.88rem; font-weight: 600; }
+        .activity-time { font-size: 0.77rem; color: var(--text-muted-custom); margin-top: 0.1rem; }
+
+        /* ── BILLING ── */
+        .invoice-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            margin-bottom: 0.6rem;
+            transition: border-color 0.18s;
+        }
+        .invoice-row:hover { border-color: rgba(91,114,255,0.35); }
+        .invoice-title { font-size: 0.92rem; font-weight: 600; }
+        .invoice-meta { font-size: 0.77rem; color: var(--text-muted-custom); margin-top: 0.1rem; }
+        .invoice-amount { font-size: 0.95rem; font-weight: 700; }
+        .badge-paid {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 20px;
+            background: rgba(34,197,94,0.15);
+            color: #22c55e;
+            border: 1px solid rgba(34,197,94,0.25);
+        }
+
+        /* ── PLAN CARDS ── */
+        .plan-card {
+            background: var(--surface-3);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1.5rem 1.25rem;
+            text-align: center;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .plan-card:hover { border-color: rgba(91,114,255,0.45); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(91,114,255,0.1); }
+        .plan-card.current-plan { border-color: #5b72ff; box-shadow: 0 0 0 1px #5b72ff; }
+        .plan-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .plan-price { font-size: 2rem; font-weight: 800; margin: 0.5rem 0; }
+        .plan-price span { font-size: 0.85rem; font-weight: 400; color: #8b9bb4; }
+        .plan-features { list-style: none; padding: 0; margin: 1rem 0 1.25rem; text-align: left; font-size: 0.82rem; }
+        .plan-features li { padding: 0.3rem 0; color: #8b9bb4; }
+        .plan-features li i { color: #22c55e; margin-right: 0.4rem; }
+        .plan-badge-current {
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            background: #5b72ff; color: #fff; font-size: 0.7rem; font-weight: 700;
+            padding: 0.2rem 0.75rem; border-radius: 20px; white-space: nowrap;
+        }
+
+        /* ── QUICK ACTIONS ── */
+        .quick-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: var(--surface-3);
+            color: inherit;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.18s;
+            width: 100%;
+        }
+        .quick-action-btn:hover {
+            border-color: rgba(91,114,255,0.4);
+            background: var(--accent-glow);
+            color: var(--accent);
+        }
+        .quick-action-btn i {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        /* ── CHECKLIST ── */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.55rem 0;
+            font-size: 0.875rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .checklist-item:last-child { border-bottom: none; }
+        .checklist-item .check-icon {
+            width: 22px; height: 22px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem;
+            flex-shrink: 0;
+        }
+        .check-done  { background: rgba(34,197,94,0.18); color: #22c55e; }
+        .check-todo  { background: var(--surface-3); color: var(--muted); border: 1px solid var(--border); }
+        .checklist-item.done-item span { text-decoration: line-through; opacity: 0.5; }
+
+        /* ── TIP CARD ── */
+        .tip-card {
+            border-radius: 12px;
+            padding: 1rem 1.1rem;
+            background: linear-gradient(135deg, rgba(91,114,255,0.12), rgba(167,139,250,0.08));
+            border: 1px solid rgba(91,114,255,0.2);
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--muted);
+        }
+        .tip-card strong { color: var(--accent); }
+
+        /* ── THEME TOGGLE ── */
+        .theme-toggle-btn {
+            width: 38px; height: 38px;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; padding: 0;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .theme-toggle-btn i { font-size: 1rem; color: var(--text-muted-custom); }
+        .theme-toggle-btn:hover { background: var(--accent-glow); border-color: rgba(91,114,255,0.4); }
+
+        /* ── RESPONSIVE ── */
         @media (max-width: 991px) {
-            .profile-sidebar { 
-                min-height: auto; 
-                border-right: none; 
-                border-bottom: 1px solid rgba(0,0,0,0.06);
+            .sidebar {
+                width: 100%;
+                min-width: 100%;
+                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
                 padding: 1rem;
             }
-            
-            .profile-sidebar .nav-link {
-                font-size: 0.9rem;
-                padding: 0.5rem 0.6rem;
-            }
-            
-            main {
-                padding: 1.5rem !important;
-            }
+            .page-wrapper { flex-direction: column; }
+            .sidebar-avatar-wrap { flex-direction: row; text-align: left; align-items: center; gap: 1rem; padding-bottom: 1rem; }
+            .sidebar-nav { display: flex; flex-direction: row; gap: 0.25rem; flex-wrap: wrap; }
+            .sidebar-nav .nav-link { box-shadow: none !important; padding: 0.45rem 0.75rem; font-size: 0.82rem; }
+            .sidebar-divider, .sidebar-section-label, .sidebar-nav .logout-link { display: none; }
+            .main-content { padding: 1.25rem; }
         }
-        
-        @media (max-width: 767px) {
-            .profile-avatar {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .stat-card {
-                min-height: 80px;
-                padding: 0.75rem;
-            }
-            
-            .profile-tabs .nav-link {
-                padding: 0.6rem 0.8rem;
-                font-size: 0.85rem;
-            }
-            
-            main {
-                padding: 1rem !important;
-            }
-        }
-        
         @media (max-width: 575px) {
-            .profile-sidebar {
-                padding: 0.75rem;
-            }
-            
-            .profile-avatar {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .stat-card {
-                min-height: 70px;
-                padding: 0.6rem;
-            }
-            
-            .stat-card .h4 {
-                font-size: 1.25rem;
-            }
-            
-            .stat-card .small {
-                font-size: 0.75rem;
-            }
-            
-            main {
-                padding: 0.75rem !important;
-            }
-            
-            h3 {
-                font-size: 1.5rem;
-            }
-            
-            .profile-tabs {
-                overflow-x: auto;
-                flex-wrap: nowrap !important;
-            }
-            
-            .profile-tabs .nav-link {
-                white-space: nowrap;
-                padding: 0.5rem 0.75rem;
-                font-size: 0.8rem;
-            }
+            .main-content { padding: 1rem; }
+            .profile-hero { padding: 1.1rem; }
         }
-
-        .theme-toggle-btn {
-    width: 40px;
-    height: 38px;
-    border: 1px solid rgb(160, 160, 160);
-    background: var(--bs-body-bg);
-    border-radius: 8px; /* rounded rectangle */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    padding: 0;
-    transition: background 0.2s ease, border-color 0.2s ease;
-}
-
-.theme-toggle-btn i {
-    font-size: 20px;
-    color: rgb(110, 110, 110);
-    transition: color 0.2s ease;
-}
-
-.theme-toggle-btn:hover {
-    background: var(--bs-secondary-bg);
-    border-color: rgb(130, 130, 130);
-}
-
-/* Dark mode look */
-[data-bs-theme="dark"] .theme-toggle-btn {
-    background: #1f1f1f;
-    border-color: #555;
-}
-
-[data-bs-theme="dark"] .theme-toggle-btn i {
-    color: #ddd;
-}
-
-[data-bs-theme="dark"] .theme-toggle-btn:hover {
-    background: #2a2a2a;
-}
-[data-bs-theme="dark"] .btn-outline-dark {
-    border-color: #ffd86b !important;
-    color: #ffd86b !important;
-}
-
-/* Hover effect in dark mode */
-[data-bs-theme="dark"] .btn-outline-dark:hover {
-    background-color: #ffd86b !important;
-    color: #000 !important;
-    border-color: #ffd86b !important;
-}
     </style>
 </head>
 <body>
 
-<!-- Reuse existing top bar from index if you want, but keep a compact header here -->
-<nav id="mainNav" class="navbar navbar-expand-lg sticky-top shadow-sm">
-        <div class="container-fluid py-2 px-3 px-lg-4">
-            <a class="navbar-brand fw-bold fs-4 fs-lg-3 text-primary" href="index.html">Cooture</a>
+<!-- TOPNAV -->
+<nav id="mainNav" class="navbar sticky-top">
+    <div class="container-fluid py-2 px-3 px-lg-4">
+        <a class="navbar-brand fw-bold fs-5 text-primary" href="index.html">Cooture</a>
+        <div class="d-flex align-items-center gap-2">
+            <a href="index.html" class="btn btn-sm fw-semibold rounded-3" style="border:1px solid var(--border); background:var(--surface-3); color:inherit; font-size:0.85rem;">
+                <i class="bi bi-house me-1"></i><span class="d-none d-sm-inline">Back to</span> Home
+            </a>
+            <button onclick="logout()" class="btn btn-sm fw-semibold rounded-3" style="background:linear-gradient(135deg,#5b72ff,#a78bfa); color:#fff; border:none; font-size:0.85rem;">
+                <i class="bi bi-box-arrow-right me-1"></i>Logout
+            </button>
+            <button id="themeToggle" class="theme-toggle-btn" type="button" title="Toggle theme">
+                <i id="themeIcon" class="bi bi-moon-fill"></i>
+            </button>
+        </div>
+    </div>
+</nav>
 
-            <div class="d-flex align-items-center gap-2">
-                <div class="d-flex gap-2 flex-wrap">
-                    <a class="btn btn-outline-primary btn-sm d-none d-sm-inline-flex fw-semibold rounded-3" href="index.html">
-                        <i class="bi bi-house me-1 d-none d-md-inline"></i>
-                        <span class="d-none d-md-inline">Back to </span>Home
-                    </a>
-                    <a class="btn btn-outline-primary btn-sm d-inline-flex d-sm-none fw-semibold rounded-3" href="index.html">
-                        <i class="bi bi-house"></i>
-                    </a>
-                    <button onclick="logout()" class="btn btn-dark btn-sm fw-semibold rounded-3">
-                        <i class="bi bi-box-arrow-right me-1 d-none d-md-inline"></i>
-                        Logout
-                    </button>
-                </div>
-                
-                <button id="themeToggle" class="theme-toggle-btn" type="button" title="Toggle theme">
-                    <i id="themeIcon" class="bi bi-moon-fill"></i>
-                </button>
+<div class="page-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-avatar-wrap">
+            <div class="avatar-ring">
+                <img id="sidebarAvatar" src="https://api.dicebear.com/6.x/identicon/svg?seed=cooture" alt="avatar">
+            </div>
+            <div>
+                <div id="sidebarName" class="sidebar-name">User</div>
+                <div id="sidebarEmail" class="sidebar-email">email@example.com</div>
+                <div class="sidebar-badge"><i class="bi bi-patch-check-fill"></i> Pro</div>
             </div>
         </div>
-    </nav>
 
-<div class="container-fluid">
-    <div class="row g-0">
+        <nav class="sidebar-nav nav flex-column">
+            <a class="nav-link active" data-target="overview" href="#overview"><i class="bi bi-person-circle"></i> Overview</a>
+            <a class="nav-link" data-target="templates" href="#templates"><i class="bi bi-grid-1x2"></i> My Templates</a>
+            <a class="nav-link" data-target="stats" href="#stats"><i class="bi bi-bar-chart"></i> Usage Stats</a>
+            <a class="nav-link" data-target="activity" href="#activity"><i class="bi bi-list-task"></i> Activity</a>
+            <a class="nav-link" data-target="billing" href="#billing"><i class="bi bi-receipt"></i> Billing</a>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-section-label">Account</div>
+            <a class="nav-link logout-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </nav>
+    </aside>
 
-        <!-- SIDEBAR -->
-        <aside class="col-12 col-lg-3 col-xl-2 profile-sidebar">
-            <div class="text-center mb-4">
-                <img id="sidebarAvatar"
-                     src="https://api.dicebear.com/6.x/identicon/svg?seed=cooture"
-                     alt="avatar"
-                     class="profile-avatar mb-2">
-            
-                <div id="sidebarName"
-                     class="fw-bold text-break d-none d-lg-block"
-                     style="max-width: 160px; margin: 0 auto;">
-                </div>
-            
-                <div id="sidebarEmail"
-                     class="text-muted small text-break d-none d-lg-block"
-                     style="max-width: 160px; margin: 0 auto;">
-                </div>
-            </div>
-            
+    <!-- MAIN -->
+    <main class="main-content">
 
-            <nav class="nav flex-column">
-                <a class="nav-link active" data-target="overview" href="#overview"><i class="bi bi-person-circle"></i> Overview</a>
-                <a class="nav-link" data-target="templates" href="#templates"><i class="bi bi-grid-1x2"></i> My Templates</a>
-                <a class="nav-link" data-target="stats" href="#stats"><i class="bi bi-bar-chart"></i> Usage Stats</a>
-                <a class="nav-link" data-target="activity" href="#activity"><i class="bi bi-list-task"></i> Activity</a>
-                <a class="nav-link" data-target="billing" href="#billing"><i class="bi bi-receipt"></i> Billing</a>
-                <hr>
-                <div class="small text-muted mb-2">Manage</div>
-                <a class="nav-link" href="#" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a>
-            </nav>
-        </aside>
+        <!-- Page header -->
+        <div class="page-header">
+            <h2>Profile</h2>
+            <p>Manage your account, view templates &amp; usage.</p>
+        </div>
 
-        <!-- MAIN CONTENT -->
-        <main class="col-12 col-lg-9 col-xl-10 p-3 p-md-4">
-            <div class="d-flex flex-column flex-sm-row justify-content-between align-items-start mb-3 gap-2">
-                <div>
-                    <h3 class="mb-1">Profile</h3>
-                    <small class="text-muted">Manage your account, view templates & usage.</small>
-                </div>
-            </div>
+        <!-- Top row: profile hero + stats -->
+        <div class="row g-3 mb-3">
 
-            <div class="row g-3 mb-3">
-                <!-- Profile Summary -->
-                <div class="col-12 col-xl-5">
-                    <div class="profile-card">
-                        <div class="d-flex flex-column flex-sm-row gap-3 align-items-center align-items-sm-start mb-3">
-                            <img id="mainAvatar" src="https://api.dicebear.com/6.x/identicon/svg?seed=cooture" alt="avatar" class="profile-avatar">
-                            <div class="text-center text-sm-start w-100">
-                                <h5 id="displayName" class="mb-0 text-break">User</h5>
-                                <small id="displayEmail" class="text-muted text-break d-block">email@example.com</small>
-                                <div class="mt-2 small text-muted">Member since <span id="displayCreated">—</span></div>
-                            </div>
-                        </div>
-
-                        <div class="mt-3">
-                            <h6 class="mb-2">About</h6>
-                            <p id="aboutText" class="text-muted small mb-0">
-                                This is your Cooture account. Use this dashboard to manage templates, check usage & billing, and view activity.
-                            </p>
-                        </div>
-
-                        <div class="mt-4 d-flex flex-column flex-sm-row gap-2">
-                            <a class="btn btn-primary w-100" href="#templates">Create Template</a>
-                            <a class="btn btn-outline-secondary w-100" href="#billing">Billing</a>
+            <!-- Profile hero card -->
+            <div class="col-12 col-xl-4">
+                <div class="profile-hero h-100">
+                    <div class="d-flex gap-3 align-items-center">
+                        <img id="mainAvatar" src="https://api.dicebear.com/6.x/identicon/svg?seed=cooture" alt="avatar" class="profile-hero-avatar">
+                        <div>
+                            <div id="displayName" class="profile-hero-name">User</div>
+                            <div id="displayEmail" class="profile-hero-email">email@example.com</div>
+                            <div id="displayCreated" class="profile-hero-since"><i class="bi bi-calendar3 me-1"></i>Member since —</div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Quick Stats -->
-                <div class="col-12 col-xl-7">
-                    <div class="row g-2 g-md-3">
-                        <div class="col-6 col-md-3">
-                            <div class="stat-card bg-body-tertiary text-center">
-                                <div class="small text-muted">Templates</div>
-                                <div id="statTemplates" class="h4 fw-bold">12</div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-card bg-body-tertiary text-center">
-                                <div class="small text-muted">Generations</div>
-                                <div id="statGenerations" class="h4 fw-bold">74</div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-card bg-body-tertiary text-center">
-                                <div class="small text-muted">Projects</div>
-                                <div id="statProjects" class="h4 fw-bold">8</div>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="stat-card bg-body-tertiary text-center">
-                                <div class="small text-muted">Usage</div>
-                                <div id="statUsage" class="h4 fw-bold">42%</div>
-                            </div>
-                        </div>
+                    <div id="aboutText" class="profile-hero-about">
+                        This is your Cooture account. Use this dashboard to manage templates, check usage &amp; billing, and view activity.
                     </div>
-
-                    <div class="mt-3">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <h6 class="mb-0">Subscription</h6>
-                            <small class="text-muted">Pro • Auto-renew</small>
-                        </div>
-                        <div class="progress" style="height:10px;">
-                            <div class="progress-bar" role="progressbar" style="width:42%" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
+                    <div class="profile-hero-actions d-flex gap-2">
+                        <a href="#templates" class="btn btn-primary btn-sm fw-semibold flex-fill" style="background:linear-gradient(135deg,#5b72ff,#a78bfa); border:none;">
+                            <i class="bi bi-plus-lg me-1"></i>Create Template
+                        </a>
+                        <a href="#billing" class="btn btn-sm fw-semibold" style="border:1px solid var(--border); background:var(--surface-3); color:inherit;">
+                            <i class="bi bi-receipt me-1"></i>Billing
+                        </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Tabs -->
-            <ul class="nav nav-pills profile-tabs mb-3" id="profileTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="overview-tab" data-bs-toggle="pill" data-bs-target="#tabOverview" type="button" role="tab">Overview</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="templates-tab" data-bs-toggle="pill" data-bs-target="#tabTemplates" type="button" role="tab">Templates</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="activity-tab" data-bs-toggle="pill" data-bs-target="#tabActivity" type="button" role="tab">Activity</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="billing-tab" data-bs-toggle="pill" data-bs-target="#tabBilling" type="button" role="tab">Billing</button>
-                </li>
-            </ul>
-
-            <div class="tab-content">
-                <!-- OVERVIEW -->
-                <div class="tab-pane fade show active" id="tabOverview" role="tabpanel">
-                    <div class="row g-3">
-                        <div class="col-12 col-lg-8">
-                            <div class="card p-3">
-                                <h6 class="mb-3">Account details</h6>
-                                <div id="accountDetails" class="row">
-                                    <div class="col-6">
-                                        <div class="small text-muted">Email</div>
-                                        <div id="detailEmail" class="fw-semibold">—</div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="small text-muted">User ID</div>
-                                        <div id="detailId" class="fw-semibold">—</div>
-                                    </div>
-                                    <div class="col-6 mt-3">
-                                        <div class="small text-muted">Member since</div>
-                                        <div id="detailCreated" class="fw-semibold">—</div>
-                                    </div>
-                                    <div class="col-6 mt-3">
-                                        <div class="small text-muted">Plan</div>
-                                        <div id="detailPlan" class="fw-semibold">Pro</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card p-3 mt-3">
-                                <h6 class="mb-3">Recent templates</h6>
-                                <div id="recentTemplates" class="list-group list-group-flush">
-                                    <!-- JS populates -->
-                                </div>
-                            </div>
+            <!-- Stats + subscription -->
+            <div class="col-12 col-xl-8">
+                <div class="row g-3 mb-2">
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background:rgba(91,114,255,0.15); color:#5b72ff;"><i class="bi bi-grid-1x2"></i></div>
+                            <div id="statTemplates" class="stat-value">12</div>
+                            <div class="stat-label">Templates</div>
                         </div>
-
-                        <div class="col-12 col-lg-4">
-                            <div class="card p-3">
-                                <h6 class="mb-3">Quick actions</h6>
-                                <div class="d-grid gap-2">
-                                    <a class="btn btn-primary" href="#templates">Create new template</a>
-                                    <a class="btn btn-outline-dark" href="#billing">Upgrade plan</a>
-                                    <a class="btn btn-outline-dark" href="#activity">View activity</a>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background:rgba(167,139,250,0.15); color:#a78bfa;"><i class="bi bi-lightning-charge"></i></div>
+                            <div id="statGenerations" class="stat-value">74</div>
+                            <div class="stat-label">Generations</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background:rgba(34,197,94,0.12); color:#22c55e;"><i class="bi bi-folder2-open"></i></div>
+                            <div id="statProjects" class="stat-value">8</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="stat-card">
+                            <div class="stat-icon" style="background:rgba(251,146,60,0.12); color:#fb923c;"><i class="bi bi-speedometer2"></i></div>
+                            <div id="statUsage" class="stat-value">42%</div>
+                            <div class="stat-label">Usage</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- TEMPLATES -->
-                <div class="tab-pane fade" id="tabTemplates" role="tabpanel">
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <div class="card p-3">
-                                <h6 class="mb-3">My templates</h6>
-                                <div id="templatesGrid" class="row g-3">
-                                    <!-- JS will insert template cards -->
+                <div class="sub-card">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="fw-700" style="font-weight:700; font-size:0.95rem;">Subscription</div>
+                            <div style="font-size:0.8rem; color:var(--text-muted-custom);">42% of monthly quota used</div>
+                        </div>
+                        <div style="text-align:right;">
+                            <div class="sidebar-badge" style="margin-top:0;">Pro <i class="bi bi-arrow-repeat ms-1"></i></div>
+                            <div style="font-size:0.75rem; color:var(--text-muted-custom); margin-top:0.25rem;">Auto-renew on</div>
+                        </div>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width:42%" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <ul class="nav profile-tabs" id="profileTabs" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tabOverview" type="button">Overview</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabTemplates" type="button">Templates</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabActivity" type="button">Activity</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tabBilling" type="button">Billing</button></li>
+        </ul>
+
+        <div class="tab-content">
+
+            <!-- OVERVIEW -->
+            <div class="tab-pane fade show active" id="tabOverview" role="tabpanel">
+                <div class="row g-3 align-items-stretch">
+                    <div class="col-12 col-lg-8">
+                        <div class="content-card h-100">
+                            <div class="content-card-title">Recent Templates</div>
+                            <div id="recentTemplates">
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:rgba(91,114,255,0.12); color:#5b72ff;"><i class="bi bi-file-earmark-code"></i></div>
+                                    <div class="flex-grow-1">
+                                        <div class="activity-title">SaaS Landing</div>
+                                        <div class="activity-time">Hero, pricing and auth flow.</div>
+                                    </div>
+                                    <div class="activity-time">Nov 12, 2025</div>
                                 </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:rgba(167,139,250,0.12); color:#a78bfa;"><i class="bi bi-file-earmark-code"></i></div>
+                                    <div class="flex-grow-1">
+                                        <div class="activity-title">Portfolio Grid</div>
+                                        <div class="activity-time">Gallery + case study layout.</div>
+                                    </div>
+                                    <div class="activity-time">Sep 22, 2025</div>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-dot" style="background:rgba(34,197,94,0.12); color:#22c55e;"><i class="bi bi-file-earmark-code"></i></div>
+                                    <div class="flex-grow-1">
+                                        <div class="activity-title">Agency One-pager</div>
+                                        <div class="activity-time">Hero, services, testimonials.</div>
+                                    </div>
+                                    <div class="activity-time">Aug 4, 2025</div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- ACTIVITY -->
-                <div class="tab-pane fade" id="tabActivity" role="tabpanel">
-                    <div class="card p-3">
-                        <h6 class="mb-3">Recent activity</h6>
-                        <div id="activityList" class="list-group list-group-flush">
-                            <!-- JS populates -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BILLING -->
-                <div class="tab-pane fade" id="tabBilling" role="tabpanel">
-                    <div class="card p-3">
-                        <h6 class="mb-3">Billing & subscription</h6>
-                        <div class="small text-muted mb-2">Invoice history</div>
-                        <div id="billingHistory" class="list-group">
-                            <!-- Dummy billing items -->
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="fw-semibold">Pro — Monthly</div>
-                                    <div class="small text-muted">Invoice #1023 — May 12, 2025</div>
-                                </div>
-                                <div class="text-end">
-                                    <div class="fw-semibold">$29.00</div>
-                                    <div class="small text-muted">Paid</div>
-                                </div>
-                            </div>
-                            <div class="list-group-item d-flex justify-content-between align-items-center">
-                                <div>
-                                    <div class="fw-semibold">Pro — Monthly</div>
-                                    <div class="small text-muted">Invoice #0987 — Apr 12, 2025</div>
-                                </div>
-                                <div class="text-end">
-                                    <div class="fw-semibold">$29.00</div>
-                                    <div class="small text-muted">Paid</div>
-                                </div>
+                    <div class="col-12 col-lg-4">
+                        <div class="content-card h-100">
+                            <div class="content-card-title">Quick Actions</div>
+                            <div class="d-flex flex-column gap-2">
+                                <a href="#templates" class="quick-action-btn">
+                                    <i class="bi bi-plus-circle-fill" style="background:rgba(91,114,255,0.15); color:#5b72ff;"></i>
+                                    Create new template
+                                </a>
+                                <a href="#billing" class="quick-action-btn">
+                                    <i class="bi bi-arrow-up-circle-fill" style="background:rgba(167,139,250,0.15); color:#a78bfa;"></i>
+                                    Upgrade plan
+                                </a>
+                                <a href="#activity" class="quick-action-btn">
+                                    <i class="bi bi-clock-history" style="background:rgba(251,146,60,0.12); color:#fb923c;"></i>
+                                    View activity
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-        </main>
-    </div>
+            <!-- TEMPLATES -->
+            <div class="tab-pane fade" id="tabTemplates" role="tabpanel">
+                <div class="content-card">
+                    <div class="content-card-title">My Templates</div>
+                    <div id="templatesGrid" class="row g-3"></div>
+                </div>
+            </div>
+
+            <!-- ACTIVITY -->
+            <div class="tab-pane fade" id="tabActivity" role="tabpanel">
+                <div class="content-card">
+                    <div class="content-card-title">Recent Activity</div>
+                    <div id="activityList"></div>
+                </div>
+            </div>
+
+            <!-- BILLING -->
+            <div class="tab-pane fade" id="tabBilling" role="tabpanel">
+                <!-- Pricing Plans -->
+                <div class="content-card mb-3">
+                    <div class="content-card-title">Choose a Plan</div>
+                    <div class="row g-3 mt-1">
+                        <div class="col-12 col-md-4">
+                            <div class="plan-card">
+                                <div class="plan-name">Starter</div>
+                                <div class="plan-price">$0 <span>/ mo</span></div>
+                                <ul class="plan-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>5 templates</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Community support</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Basic exports</li>
+                                </ul>
+                                <button class="btn btn-sm w-100 plan-select-btn" style="border:1px solid rgba(91,114,255,0.4); color:#5b72ff; background:transparent; border-radius:8px;" data-plan="Starter" data-price="$0">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="plan-card current-plan">
+                                <div class="plan-badge-current">Current Plan</div>
+                                <div class="plan-name">Pro</div>
+                                <div class="plan-price">$29 <span>/ mo</span></div>
+                                <ul class="plan-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Unlimited templates</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Priority support</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>All export formats</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Analytics dashboard</li>
+                                </ul>
+                                <button class="btn btn-primary btn-sm w-100 plan-select-btn" style="border-radius:8px;" data-plan="Pro" data-price="$29/mo">Current Plan</button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="plan-card">
+                                <div class="plan-name">Enterprise</div>
+                                <div class="plan-price">$99 <span>/ mo</span></div>
+                                <ul class="plan-features">
+                                    <li><i class="bi bi-check-circle-fill"></i>Everything in Pro</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Dedicated manager</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>Custom integrations</li>
+                                    <li><i class="bi bi-check-circle-fill"></i>SLA guarantee</li>
+                                </ul>
+                                <button class="btn btn-sm w-100 plan-select-btn" style="border:1px solid rgba(167,139,250,0.4); color:#a78bfa; background:transparent; border-radius:8px;" data-plan="Enterprise" data-price="$99/mo">Upgrade</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Invoice history -->
+                <div class="content-card">
+                    <div class="content-card-title">Billing &amp; Subscription</div>
+                    <div id="billingHistory">
+                        <div class="invoice-row">
+                            <div><div class="invoice-title">Pro — Monthly</div><div class="invoice-meta">Invoice #1023 · May 12, 2025</div></div>
+                            <div class="text-end"><div class="invoice-amount">$29.00</div><span class="badge-paid mt-1 d-inline-block">Paid</span></div>
+                        </div>
+                        <div class="invoice-row">
+                            <div><div class="invoice-title">Pro — Monthly</div><div class="invoice-meta">Invoice #0987 · Apr 12, 2025</div></div>
+                            <div class="text-end"><div class="invoice-amount">$29.00</div><span class="badge-paid mt-1 d-inline-block">Paid</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
 </div>
 
-<!-- Toast container (theme-aware) -->
-<div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index:3000; margin-top:75px;"></div>
+<!-- Toast container -->
+<div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index:3000; margin-top:62px;"></div>
 
-<!-- Scripts: bootstrap then your custom.js (keeps logic intact) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/custom.js?v=2"></script>
 
-
-<!-- Page specific script: populates UI but DOES NOT replace your auth functions -->
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-    // Redirect if not logged in (uses your existing function)
     if (typeof isLoggedIn !== 'function' || !isLoggedIn()) {
-        // preserve UX: if not logged in -> send to login
         window.location.href = "login.html";
         return;
     }
 
-    // Elements to fill
-    const displayEmail = document.getElementById("displayEmail");
-    const displayName = document.getElementById("displayName");
-    const displayCreated = document.getElementById("displayCreated");
-    const detailEmail = document.getElementById("detailEmail");
-    const detailId = document.getElementById("detailId");
-    const detailCreated = document.getElementById("detailCreated");
-    const sidebarEmail = document.getElementById("sidebarEmail");
-    const sidebarName = document.getElementById("sidebarName");
-    const mainAvatar = document.getElementById("mainAvatar");
-    const sidebarAvatar = document.getElementById("sidebarAvatar");
-
-    // Default fallback data
-    const fallbackUser = {
-        email: "unknown@example.com",
-        id: "—",
-        createdAt: new Date().toISOString()
-    };
+    const fallbackUser = { email: "unknown@example.com", id: "—", createdAt: new Date().toISOString() };
 
     try {
         const res = await fetch("http://localhost:5000/auth/me", {
             headers: { "Authorization": "Bearer " + (typeof getToken === "function" ? getToken() : "") }
         });
-
-        // unauthorized or error -> show message in userInfo
         const data = await res.json();
-
         if (!res.ok) {
-            // show inline toast and fallback display
-            if (window.ToastManager && typeof ToastManager.show === "function") {
-                ToastManager.show({ message: data.message || "Unable to load profile.", type: "danger" });
-            }
-            // populate fallback values
+            if (window.ToastManager) ToastManager.show({ message: data.message || "Unable to load profile.", type: "danger" });
             populateProfile(fallbackUser);
             return;
         }
-
-        // Successful -> populate fields
         populateProfile(data);
-
     } catch (err) {
-        // network error
-        if (window.ToastManager && typeof ToastManager.show === "function") {
-            ToastManager.show({ message: "Network error loading profile.", type: "danger" });
-        }
+        if (window.ToastManager) ToastManager.show({ message: "Network error loading profile.", type: "danger" });
         populateProfile(fallbackUser);
     }
 
-    // Fill rest of dashboard with dummy content (non-invasive)
     function populateProfile(user) {
         const email = user.email || fallbackUser.email;
         const id = user.id || user._id || fallbackUser.id;
         const created = user.createdAt ? new Date(user.createdAt) : new Date();
+        const nameRaw = (user.name || email.split('@')[0] || "User").replace(/[0-9]/g,'').replace(/[-._]/g,' ').trim() || "User";
 
-        displayEmail.textContent = email;
-        sidebarEmail.textContent = email;
-        displayName.textContent = (email.split('@')[0] || "User").replace(/[0-9]/g, '').replace(/[-._]/g,' ') || "User";
-        displayCreated.textContent = created.toLocaleDateString();
-        detailEmail.textContent = email;
-        detailId.textContent = id;
-        detailCreated.textContent = created.toLocaleDateString();
+        document.getElementById("displayName").textContent = nameRaw;
+        document.getElementById("displayEmail").textContent = email;
+        document.getElementById("displayCreated").innerHTML = `<i class="bi bi-calendar3 me-1"></i>Member since ${created.toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}`;
+        document.getElementById("sidebarEmail").textContent = email;
+        document.getElementById("sidebarName").textContent = nameRaw;
 
-        // small avatar generation using initials fallback (you already have dicebear seed)
-        const seed = email.replace(/[^a-zA-Z0-9]/g, '');
-        const avatarUrl = `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(seed || 'cooture')}`;
-        mainAvatar.src = avatarUrl;
-        sidebarAvatar.src = avatarUrl;
+        const seed = email.replace(/[^a-zA-Z0-9]/g,'');
+        const avatarUrl = `https://api.dicebear.com/6.x/identicon/svg?seed=${encodeURIComponent(seed||'cooture')}`;
+        document.getElementById("mainAvatar").src = avatarUrl;
+        document.getElementById("sidebarAvatar").src = avatarUrl;
 
-        // Populate recent templates (dummy)
-        const recentTemplates = [
-            { title: "SaaS Landing", date: "2025-11-12", desc: "Hero, pricing and auth flow." },
-            { title: "Portfolio Grid", date: "2025-09-22", desc: "Gallery + case study layout." },
-            { title: "Agency One-pager", date: "2025-08-04", desc: "Hero, services, testimonials." }
+        const templates = [
+            { title: "SaaS Landing",    date: "Nov 12, 2025", desc: "Hero, pricing and auth flow.",              img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80" },
+            { title: "Portfolio Grid",  date: "Sep 22, 2025", desc: "Gallery + case study layout.",              img: "https://images.unsplash.com/photo-1545239351-cefa43af60f3?w=900&q=80" },
+            { title: "Agency One-pager",date: "Aug 4, 2025",  desc: "Hero, services and client testimonials.",  img: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=900&q=80" }
         ];
-        const templatesEl = document.getElementById("recentTemplates");
-        templatesEl.innerHTML = recentTemplates.map(t => `
-            <div class="list-group-item">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <div class="fw-semibold">${t.title}</div>
-                        <div class="small text-muted">${t.desc}</div>
-                    </div>
-                    <div class="small text-muted">${t.date}</div>
-                </div>
-            </div>
-        `).join("");
 
-        // Populate templates grid (small cards)
-        const templatesGrid = document.getElementById("templatesGrid");
-        templatesGrid.innerHTML = recentTemplates.map((t, i) => `
+        document.getElementById("recentTemplates").innerHTML = templates.map(t => `
+            <div class="activity-item">
+                <div class="activity-dot" style="background:rgba(91,114,255,0.12); color:#5b72ff;"><i class="bi bi-file-earmark-code"></i></div>
+                <div class="flex-grow-1">
+                    <div class="activity-title">${t.title}</div>
+                    <div class="activity-time">${t.desc}</div>
+                </div>
+                <div class="activity-time">${t.date}</div>
+            </div>`).join("");
+
+        document.getElementById("templatesGrid").innerHTML = templates.map(t => `
             <div class="col-12 col-md-6 col-lg-4">
-                <div class="card p-3 h-100">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="fw-semibold">${t.title}</div>
-                        <small class="text-muted">${t.date}</small>
+                <div class="template-card h-100 d-flex flex-column">
+                    <img class="template-thumb" src="${t.img}" alt="${t.title}">
+                    <div class="d-flex justify-content-between align-items-start mb-1">
+                        <div class="template-card-title">${t.title}</div>
+                        <span class="template-card-date">${t.date}</span>
                     </div>
-                    <div class="small text-muted mb-3">${t.desc}</div>
-                    <div class="mt-auto d-flex gap-2">
-                        <a class="btn btn-outline-primary btn-sm" href="#">Preview</a>
-                        <a class="btn btn-outline-secondary btn-sm" href="#">Edit</a>
+                    <div class="template-card-desc flex-grow-1">${t.desc}</div>
+                    <div class="d-flex gap-2 mt-auto">
+                        <button class="btn btn-primary btn-sm flex-fill preview-btn" style="font-size:0.8rem;"
+                            data-title="${t.title}" data-desc="${t.desc}" data-img="${t.img}">
+                            <i class="bi bi-eye me-1"></i>Preview
+                        </button>
+                        <a class="btn btn-sm flex-fill" href="#" style="font-size:0.8rem; border:1px solid var(--border); background:var(--surface-2); color:inherit;">Edit</a>
                     </div>
                 </div>
-            </div>
-        `).join("");
+            </div>`).join("");
 
-        // Populate activity list (dummy)
-        const activityList = document.getElementById("activityList");
         const activities = [
-            { user: displayName.textContent, action: "Generated template 'SaaS Landing'", time: "2 hours ago" },
-            { user: "System", action: "Billing charged $29.00", time: "3 days ago" },
-            { user: displayName.textContent, action: "Previewed 'Portfolio Grid'", time: "1 week ago" }
+            { icon: "bi-lightning-charge", color: "rgba(91,114,255,0.15)", iconColor: "#5b72ff", action: `Generated template 'SaaS Landing'`, time: "2 hours ago" },
+            { icon: "bi-credit-card", color: "rgba(34,197,94,0.12)", iconColor: "#22c55e", action: "Billing charged $29.00", time: "3 days ago" },
+            { icon: "bi-eye", color: "rgba(251,146,60,0.12)", iconColor: "#fb923c", action: `Previewed 'Portfolio Grid'`, time: "1 week ago" }
         ];
-        activityList.innerHTML = activities.map(a => `
-            <div class="list-group-item activity-item bg-body-tertiary">
+        document.getElementById("activityList").innerHTML = activities.map(a => `
+            <div class="activity-item">
+                <div class="activity-dot" style="background:${a.color}; color:${a.iconColor};"><i class="bi ${a.icon}"></i></div>
                 <div>
-                    <div class="fw-semibold">${a.action}</div>
-                    <div class="small text-muted">${a.time}</div>
+                    <div class="activity-title">${a.action}</div>
+                    <div class="activity-time">${a.time}</div>
                 </div>
-            </div>
-        `).join("");
+            </div>`).join("");
     }
 
-    // Make sidebar links change active state (client-side)
-    document.querySelectorAll('.profile-sidebar .nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            document.querySelectorAll('.profile-sidebar .nav-link').forEach(l => l.classList.remove('active'));
+    // Sidebar nav — sync with tabs
+    document.querySelectorAll('.sidebar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', e => {
+            document.querySelectorAll('.sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
             e.currentTarget.classList.add('active');
-
-            // small UX: switch to tab if it matches a data-target
             const target = e.currentTarget.dataset.target;
             if (target) {
-                const tabBtn = document.querySelector(`#profileTabs button[data-bs-target="#tab${capitalize(target)}"]`);
+                const tabBtn = document.querySelector(`#profileTabs button[data-bs-target="#tab${target[0].toUpperCase()+target.slice(1)}"]`);
                 if (tabBtn) tabBtn.click();
             }
         });
     });
+});
 
-    function capitalize(s) {
-        if (!s) return "";
-        return s[0].toUpperCase() + s.slice(1);
+// Preview modal
+document.addEventListener('click', function(e) {
+    // Plan select
+    const planBtn = e.target.closest('.plan-select-btn');
+    if (planBtn) {
+        const plan = planBtn.dataset.plan;
+        const price = planBtn.dataset.price;
+        document.getElementById('planConfirmName').textContent = plan;
+        document.getElementById('planConfirmPrice').textContent = price;
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('planConfirmModal')).show();
+        return;
     }
+    // Preview
+    const btn = e.target.closest('.preview-btn');
+    if (!btn) return;
+    document.getElementById('previewModalTitle').textContent = btn.dataset.title;
+    document.getElementById('previewModalImg').src = '';
+    document.getElementById('previewModalImg').src = btn.dataset.img;
+    document.getElementById('previewModalDesc').textContent = btn.dataset.desc;
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('previewModal')).show();
 });
 </script>
+
+<!-- PLAN CONFIRMATION MODAL -->
+<div class="modal fade" id="planConfirmModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background:#1a1f2e; border:1px solid rgba(91,114,255,0.3); border-radius:16px;">
+      <div class="modal-body text-center" style="padding:2.5rem 2rem;">
+        <div style="width:64px;height:64px;border-radius:50%;background:rgba(34,197,94,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+          <i class="bi bi-check-lg" style="font-size:1.8rem;color:#22c55e;"></i>
+        </div>
+        <h5 class="fw-bold text-white mb-1">Plan Updated!</h5>
+        <p class="mb-1" style="color:#8b9bb4;font-size:0.9rem;">You are now on the <strong class="text-white" id="planConfirmName"></strong> plan.</p>
+        <p class="mb-3" style="color:#8b9bb4;font-size:0.85rem;">Billed at <span class="text-white fw-semibold" id="planConfirmPrice"></span> — thank you!</p>
+        <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal" style="border-radius:10px;">Got it</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PREVIEW MODAL -->
+<div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="background:#1a1f2e; border:1px solid rgba(255,255,255,0.1); border-radius:16px;">
+            <div class="modal-header" style="border-bottom:1px solid rgba(255,255,255,0.08);">
+                <h6 class="modal-title fw-bold text-white" id="previewModalTitle"></h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-3">
+                <img id="previewModalImg" src="" alt="Template Preview" style="width:100%; border-radius:10px; display:block; border:1px solid rgba(255,255,255,0.08);">
+                <p id="previewModalDesc" class="mt-3 mb-0" style="font-size:0.85rem; color:#8b9bb4;"></p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

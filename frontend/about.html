@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>About — Cooture</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/custom.css?v=7">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body { background: #0f1117; color: #e2e8f0; }
+        .page-hero { padding: 5rem 0 3rem; text-align: center; }
+        .page-hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; }
+        .section-card { background: #161b27; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 2rem; }
+        .value-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1rem; }
+        .team-card { background: #1e2436; border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 1.5rem; text-align: center; }
+        .team-avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; display: block; border: 2px solid rgba(91,114,255,0.4); }
+        .badge-role { font-size: 0.72rem; background: rgba(91,114,255,0.15); color: #818cf8; border: 1px solid rgba(91,114,255,0.25); border-radius: 20px; padding: 0.2rem 0.7rem; }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav id="mainNav" class="navbar navbar-expand-lg sticky-top shadow-sm" style="background:#161b27; border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div class="container py-2">
+            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color:#818cf8;">Cooture</a>
+            <div class="d-flex align-items-center gap-3">
+                <a href="index.html" class="btn btn-sm btn-outline-secondary">← Home</a>
+                <a href="login.html" class="btn btn-sm btn-outline-primary">Login</a>
+                <a href="signup.html" class="btn btn-sm btn-primary">Sign Up</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="badge mb-3 px-3 py-2" style="background:rgba(91,114,255,0.15); color:#818cf8; border:1px solid rgba(91,114,255,0.25); border-radius:20px; font-size:0.8rem;">About Us</span>
+            <h1 class="mb-3">Building the future of<br><span style="background:linear-gradient(135deg,#5b72ff,#a78bfa); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">UI generation</span></h1>
+            <p class="lead opacity-75 mx-auto" style="max-width:560px;">Cooture is an AI-powered platform that turns plain English prompts into production-ready website templates in seconds.</p>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section class="py-5">
+        <div class="container">
+            <div class="section-card">
+                <div class="row align-items-center g-4">
+                    <div class="col-12 col-md-6">
+                        <h2 class="fw-bold mb-3">Our Mission</h2>
+                        <p class="opacity-75 mb-3">We believe great design shouldn't be gated behind expensive agencies or months of dev time. Cooture democratizes UI craftsmanship — giving every indie hacker, freelancer, and startup founder access to beautiful, functional templates instantly.</p>
+                        <p class="opacity-75 mb-0">From a SaaS landing page to an enterprise dashboard, Cooture generates structured, SCSS-powered code you can deploy right away.</p>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="section-card text-center">
+                                    <div class="fw-bold mb-1" style="font-size:1.8rem; color:#818cf8;">10k+</div>
+                                    <div class="opacity-50 small">Templates Generated</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="section-card text-center">
+                                    <div class="fw-bold mb-1" style="font-size:1.8rem; color:#a78bfa;">3k+</div>
+                                    <div class="opacity-50 small">Active Users</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="section-card text-center">
+                                    <div class="fw-bold mb-1" style="font-size:1.8rem; color:#22c55e;">99%</div>
+                                    <div class="opacity-50 small">Uptime SLA</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="section-card text-center">
+                                    <div class="fw-bold mb-1" style="font-size:1.8rem; color:#fb923c;">4.9★</div>
+                                    <div class="opacity-50 small">User Rating</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="py-4">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">What we stand for</h2>
+            <div class="row g-3">
+                <div class="col-12 col-md-4">
+                    <div class="section-card h-100">
+                        <div class="value-icon" style="background:rgba(91,114,255,0.15); color:#818cf8;"><i class="bi bi-lightning-charge-fill"></i></div>
+                        <h5 class="fw-semibold mb-2">Speed first</h5>
+                        <p class="opacity-60 mb-0 small">From prompt to deployable template in under 5 seconds. We obsess over performance so you can ship faster.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="section-card h-100">
+                        <div class="value-icon" style="background:rgba(167,139,250,0.15); color:#a78bfa;"><i class="bi bi-code-slash"></i></div>
+                        <h5 class="fw-semibold mb-2">Developer-first</h5>
+                        <p class="opacity-60 mb-0 small">Clean, semantic HTML + SCSS output you can actually read, extend, and maintain. No bloated frameworks.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="section-card h-100">
+                        <div class="value-icon" style="background:rgba(34,197,94,0.12); color:#22c55e;"><i class="bi bi-people-fill"></i></div>
+                        <h5 class="fw-semibold mb-2">Community-driven</h5>
+                        <p class="opacity-60 mb-0 small">Built alongside our users. Every feature shipped is a direct response to real feedback from real builders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="fw-bold text-center mb-4">Meet the team</h2>
+            <div class="row g-3 justify-content-center">
+                <div class="col-6 col-md-3">
+                    <div class="team-card">
+                        <img src="https://api.dicebear.com/6.x/identicon/svg?seed=shirot" alt="Shirot" class="team-avatar">
+                        <div class="fw-semibold mb-1">Shirot Prusty</div>
+                        <div class="badge-role">Founder & CEO</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="team-card">
+                        <img src="https://api.dicebear.com/6.x/identicon/svg?seed=aria" alt="Aria" class="team-avatar">
+                        <div class="fw-semibold mb-1">Aria Chen</div>
+                        <div class="badge-role">Head of Design</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="team-card">
+                        <img src="https://api.dicebear.com/6.x/identicon/svg?seed=marcus" alt="Marcus" class="team-avatar">
+                        <div class="fw-semibold mb-1">Marcus Webb</div>
+                        <div class="badge-role">Lead Engineer</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="team-card">
+                        <img src="https://api.dicebear.com/6.x/identicon/svg?seed=priya" alt="Priya" class="team-avatar">
+                        <div class="fw-semibold mb-1">Priya Nair</div>
+                        <div class="badge-role">AI Research</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-light py-5" style="background:#0d0d12;border-top:1px solid rgba(255,255,255,0.07);">
+        <div class="container">
+            <div class="row g-4 align-items-start mb-5">
+                <div class="col-12 col-md-4">
+                    <span class="fw-bold fs-5 text-white d-block mb-2">Cooture</span>
+                    <p style="color:rgba(255,255,255,0.4);font-size:0.875rem;max-width:260px;line-height:1.7;" class="mb-4">AI-powered website template generator for developers and creators.</p>
+                    <div class="d-flex gap-3">
+                        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-twitter-x"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-github"></i></a>
+                        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="footer-icon"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2 offset-md-2">
+                    <p class="footer-heading">Product</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="index.html#templates">Templates</a></li>
+                        <li><a class="footer-link" href="index.html#features">Features</a></li>
+                        <li><a class="footer-link" href="index.html#pricing">Pricing</a></li>
+                        <li><a class="footer-link" href="blog.html#updates">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Company</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="about.html">About</a></li>
+                        <li><a class="footer-link" href="careers.html">Careers</a></li>
+                        <li><a class="footer-link" href="contact.html">Contact</a></li>
+                        <li><a class="footer-link" href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-4 col-md-2">
+                    <p class="footer-heading">Legal</p>
+                    <ul class="list-unstyled d-flex flex-column gap-2">
+                        <li><a class="footer-link" href="legal.html#privacy">Privacy</a></li>
+                        <li><a class="footer-link" href="legal.html#terms">Terms</a></li>
+                        <li><a class="footer-link" href="legal.html#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,0.07);" class="pt-4 d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+                <span style="color:rgba(255,255,255,0.25);font-size:0.82rem;">© 2026 Cooture. All rights reserved.</span>
+                <div class="d-flex align-items-center gap-2">
+                    <span style="width:7px;height:7px;background:#22c55e;border-radius:50%;box-shadow:0 0 5px #22c55e;display:inline-block;"></span>
+                    <span style="color:rgba(255,255,255,0.25);font-size:0.8rem;">All systems operational</span>
+                </div>
+            </div>
+        </div>
+        <style>
+            .footer-heading { color:rgba(255,255,255,0.25); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:600; margin-bottom:12px; }
+            .footer-link { color:rgba(255,255,255,0.45); font-size:0.875rem; text-decoration:none; transition:color .2s; }
+            .footer-link:hover { color:#c4b5fd; }
+            .footer-icon { color:rgba(255,255,255,0.4); font-size:1.05rem; text-decoration:none; transition:color .2s; }
+            .footer-icon:hover { color:#c4b5fd; }
+        </style>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
