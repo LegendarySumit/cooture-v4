@@ -24,6 +24,9 @@ Thumbs.db
 *.log
 npm-debug.log*
 
+# Firebase client config (contains API key — load via CDN config or env at build time)
+frontend/js/firebase-init.js
+
 # Compiled CSS
 frontend/css/*.css
 frontend/css/*.css.map
