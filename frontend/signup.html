@@ -139,12 +139,19 @@
         });
 
         // Google OAuth
+        let googlePopupOpen = false;
         document.getElementById('googleSignupBtn')?.addEventListener('click', async () => {
+            if (googlePopupOpen) return;  // ignore double-click
             showSignupError('');
             if (!window.__fbAuth) {
                 showSignupError('Firebase not initialized. Please refresh the page.');
                 return;
             }
+            const googleBtn = document.getElementById('googleSignupBtn');
+            googlePopupOpen = true;
+            googleBtn.disabled = true;
+            const originalHTML = googleBtn.innerHTML;
+            googleBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Signing in…';
             try {
                 const result = await window.__fbAuth.signInWithPopup(window.__fbProvider);
                 const idToken = await result.user.getIdToken();
@@ -154,13 +161,23 @@
                     body: JSON.stringify({ idToken })
                 });
                 const data = await res.json();
-                if (!res.ok) return showSignupError(data.message || 'Google auth failed');
+                if (!res.ok) {
+                    googleBtn.disabled = false;
+                    googleBtn.innerHTML = originalHTML;
+                    googlePopupOpen = false;
+                    return showSignupError(data.message || 'Google auth failed');
+                }
                 localStorage.setItem('cooture_token', data.token);
                 if (data.user?.name) localStorage.setItem('cooture_name', data.user.name);
                 if (data.user?.avatar) localStorage.setItem('cooture_avatar', data.user.avatar);
                 window.location.href = 'index.html';
             } catch (err) {
-                showSignupError('Google signup failed: ' + err.message);
+                googleBtn.disabled = false;
+                googleBtn.innerHTML = originalHTML;
+                googlePopupOpen = false;
+                if (err.code !== 'auth/cancelled-popup-request' && err.code !== 'auth/popup-closed-by-user') {
+                    showSignupError('Google signup failed: ' + err.message);
+                }
             }
         });
     </script>
