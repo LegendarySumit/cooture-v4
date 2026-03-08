@@ -11,12 +11,12 @@
 
 const firebaseConfig = {
   apiKey:            "",
-  authDomain:        "cooture-e890c.firebaseapp.com",
-  projectId:         "cooture-e890c",
-  storageBucket:     "cooture-e890c.firebasestorage.app",
-  messagingSenderId: "323784756365",
-  appId:             "1:323784756365:web:e52690b2594e48994866c4",
-  measurementId:     "G-LRE4NH5SPL"
+  authDomain:        "cooture-d8abf.firebaseapp.com",
+  projectId:         "cooture-d8abf",
+  storageBucket:     "cooture-d8abf.firebasestorage.app",
+  messagingSenderId: "602630896119",
+  appId:             "1:602630896119:web:8f90512a0ed2bfd46e16f2",
+  measurementId:     "G-5KLFSXBHLW"
 };
 
 // Initialize Firebase

@@ -89,41 +89,7 @@ const API_BASE =
     }
 
     /* ------------------------------------------------------------
-       4) Scroll-to-top button
-    ------------------------------------------------------------ */
-    let scrollTopBtn = document.getElementById("scrollTopBtn");
-    if (!scrollTopBtn) {
-        scrollTopBtn = document.createElement("button");
-        scrollTopBtn.id = "scrollTopBtn";
-        scrollTopBtn.type = "button";
-        scrollTopBtn.className = "scroll-top-btn";
-        scrollTopBtn.setAttribute("aria-label", "Back to top");
-        scrollTopBtn.innerHTML = '<i class="bi bi-arrow-up-short fs-3"></i>';
-        document.body.appendChild(scrollTopBtn);
-    }
-
-    const updateScrollTopBtn = () => {
-        const viewportTrigger = window.innerHeight * 0.45;
-        const absoluteTrigger = 280;
-        const threshold = Math.min(viewportTrigger, absoluteTrigger);
-        const shouldShow = window.scrollY > threshold;
-        scrollTopBtn.classList.toggle("is-visible", shouldShow);
-    };
-
-    scrollTopBtn.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
-
-    updateScrollTopBtn();
-
-    window.addEventListener(
-        "scroll",
-        () => window.requestAnimationFrame(updateScrollTopBtn),
-        { passive: true }
-    );
-
-    /* ------------------------------------------------------------
-       5) Dashboard Offcanvas (Mobile nav)
+       4) Dashboard Offcanvas (Mobile nav)
     ------------------------------------------------------------ */
     const offcanvasElement = document.getElementById("dashboardOffcanvas");
     const offcanvasTrigger = document.getElementById("offcanvasToggle");
