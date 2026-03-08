@@ -838,8 +838,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const fallbackUser = { email: "unknown@example.com", id: "—", createdAt: new Date().toISOString() };
 
+    const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:5000'
+        : 'https://cooture-v4.onrender.com';
+
+    // Pre-warm Render backend
+    fetch(`${API}/health`, { method: 'GET' }).catch(() => {});
+
     try {
-        const res = await fetch("http://localhost:5000/auth/me", {
+        const res = await fetch(`${API}/auth/me`, {
             headers: { "Authorization": "Bearer " + (typeof getToken === "function" ? getToken() : "") }
         });
         const data = await res.json();
