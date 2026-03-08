@@ -568,18 +568,35 @@ window.logout = function () {
 window.updateNavbar = function () {
     const loggedIn = localStorage.getItem("cooture_token");
 
-    const loginBtn = document.getElementById("navLogin");
-    const signupBtn = document.getElementById("navSignup");
+    // Desktop
+    const loginBtn   = document.getElementById("navLogin");
+    const signupBtn  = document.getElementById("navSignup");
     const profileBtn = document.getElementById("navProfile");
+
+    // Mobile offcanvas
+    const mobileLogin   = document.getElementById("mobileNavLogin");
+    const mobileSignup  = document.getElementById("mobileNavSignup");
+    const mobileProfile = document.getElementById("mobileNavProfile");
+    const mobileLogout  = document.getElementById("mobileNavLogout");
 
     if (loggedIn) {
         loginBtn?.classList.add("d-none");
         signupBtn?.classList.add("d-none");
         profileBtn?.classList.remove("d-none");
+
+        mobileLogin?.classList.add("d-none");
+        mobileSignup?.classList.add("d-none");
+        mobileProfile?.classList.remove("d-none");
+        mobileLogout?.classList.remove("d-none");
     } else {
         loginBtn?.classList.remove("d-none");
         signupBtn?.classList.remove("d-none");
         profileBtn?.classList.add("d-none");
+
+        mobileLogin?.classList.remove("d-none");
+        mobileSignup?.classList.remove("d-none");
+        mobileProfile?.classList.add("d-none");
+        mobileLogout?.classList.add("d-none");
     }
 };
 

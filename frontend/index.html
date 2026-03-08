@@ -71,8 +71,14 @@
             <hr class="my-4">
 
             <div class="d-flex flex-column gap-3">
-                <button class="btn btn-outline-primary w-100" onclick="window.location.href='login.html'">Login</button>
-                <button class="btn btn-primary w-100" onclick="window.location.href='signup.html'">Sign Up</button>
+                <button id="mobileNavLogin" class="btn btn-outline-primary w-100" onclick="window.location.href='login.html'">Login</button>
+                <button id="mobileNavSignup" class="btn btn-primary w-100" onclick="window.location.href='signup.html'">Sign Up</button>
+                <button id="mobileNavProfile" class="btn btn-dark w-100 d-none" onclick="window.location.href='profile.html'">
+                    <i class="bi bi-person-circle me-1"></i> Profile
+                </button>
+                <button id="mobileNavLogout" class="btn btn-outline-danger w-100 d-none" onclick="window.logout()">
+                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                </button>
                 <button id="mobileThemeToggle" class="btn btn-outline-secondary w-100" type="button">
                     <i id="mobileThemeIcon" class="bi bi-moon-fill"></i> Toggle Theme
                 </button>
