@@ -25,6 +25,15 @@
     padding-bottom: 5.5rem;
   }
 
+  /* Mobile: center all left-col content */
+  @include media-breakpoint-down(lg) {
+    .col-lg-6:first-child {
+      text-align: center;
+
+      .hero-sub { margin-left: auto; margin-right: auto; }
+    }
+  }
+
   /* Badge */
   .hero-badge {
     padding: 0.3rem 0.9rem;

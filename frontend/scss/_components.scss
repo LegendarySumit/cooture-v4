@@ -31,6 +31,9 @@ body.has-fixed-nav {
 
 /* Navbar - Light + Dark Mode */
 #mainNav {
+  .navbar-brand {
+    padding-left: .75rem;
+  }
   position: fixed;
   top: 0;
   left: 0;
@@ -61,9 +64,13 @@ body.has-fixed-nav {
       color: #343a40;
 
       &:hover,
-      &:focus,
-      &.active {
+      &:focus {
         color: $primary !important;
+      }
+
+      &.active {
+        color: #ffd86b !important;
+        font-weight: 600;
       }
     }
   }
@@ -77,12 +84,17 @@ body.has-fixed-nav {
       color: rgba(255, 255, 255, .85);
 
       &:hover,
-      &:focus,
+      &:focus {
+        color: #ffd86b !important;
+      }
+
       &.active {
         color: #ffd86b !important;
+        font-weight: 600;
       }
     }
   }
+
 }
 
 /* Scroll-to-top control */
@@ -471,6 +483,25 @@ html[data-bs-theme="dark"] #hero {
         color: #fff;
         border-color: #2d2d2d;
       }
+    }
+  }
+
+  /* Mobile: center buttons row and reduce size */
+  @media (max-width: 575.98px) {
+    .d-flex.flex-wrap.gap-3.align-items-center.justify-content-between {
+      flex-direction: column;
+      align-items: center !important;
+
+      > .d-flex.flex-wrap.gap-3 {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+
+    #generateBtn,
+    #randomTemplateBtn {
+      font-size: .82rem;
+      padding: .45rem 1.1rem;
     }
   }
 

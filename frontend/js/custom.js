@@ -52,14 +52,34 @@ const API_BASE =
         }
     }
     /* ------------------------------------------------------------
-       2) ScrollSpy Initialization
+       2) ScrollSpy — IntersectionObserver (accurate active link)
     ------------------------------------------------------------ */
-    if (window.bootstrap && bootstrap.ScrollSpy) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: "#mainNav",
-            offset: 120,
+    (function () {
+        const sections = document.querySelectorAll('section[id], div[id]');
+        const navLinks = document.querySelectorAll('#mainNav .nav-link[href^="#"], #dashboardOffcanvas .nav-link[href^="#"]');
+        if (!navLinks.length || !sections.length) return;
+
+        const setActive = (id) => {
+            navLinks.forEach(link => {
+                const matches = link.getAttribute('href') === '#' + id;
+                link.classList.toggle('active', matches);
+            });
+        };
+
+        // Default: Home active on load
+        setActive('hero');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) setActive(entry.target.id);
+            });
+        }, {
+            rootMargin: '-40% 0px -55% 0px',
+            threshold: 0
         });
-    }
+
+        sections.forEach(sec => observer.observe(sec));
+    })();
     
 
     /* ------------------------------------------------------------
