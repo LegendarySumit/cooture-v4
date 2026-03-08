@@ -107,6 +107,9 @@
             ? 'http://localhost:5000'
             : 'https://cooture-v4.onrender.com';
 
+        // Pre-warm the Render backend so it's ready before the user clicks
+        fetch(`${API}/health`, { method: 'GET' }).catch(() => {});
+
         document.getElementById('togglePass')?.addEventListener('click', () => {
             const inp = document.getElementById('loginPassword');
             const ico = document.getElementById('loginEyeIcon');
@@ -120,10 +123,24 @@
             el.classList.remove('d-none');
         }
 
+        function setLoading(btnId, loading, originalHTML) {
+            const btn = document.getElementById(btnId);
+            if (!btn) return;
+            btn.disabled = loading;
+            if (loading) {
+                btn.dataset.original = btn.innerHTML;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Signing in…';
+            } else {
+                btn.innerHTML = originalHTML || btn.dataset.original || btn.innerHTML;
+            }
+        }
+
         document.getElementById('loginSubmit').addEventListener('click', async () => {
             const email    = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
             if (!email || !password) return showLoginError('Please fill in all fields.');
+            document.getElementById('loginError').classList.add('d-none');
+            setLoading('loginSubmit', true);
             try {
                 const res  = await fetch(`${API}/auth/login`, {
                     method: 'POST',
@@ -131,12 +148,12 @@
                     body: JSON.stringify({ email, password })
                 });
                 const data = await res.json();
-                if (!res.ok) return showLoginError(data.message || 'Login failed');
+                if (!res.ok) { setLoading('loginSubmit', false); return showLoginError(data.message || 'Login failed'); }
                 localStorage.setItem('cooture_token', data.token);
                 if (data.user?.name)   localStorage.setItem('cooture_name',   data.user.name);
                 if (data.user?.avatar) localStorage.setItem('cooture_avatar', data.user.avatar);
                 window.location.href = 'index.html';
-            } catch { showLoginError('Network error. Please try again.'); }
+            } catch { setLoading('loginSubmit', false); showLoginError('Network error. Please try again.'); }
         });
 
         // Google OAuth
@@ -146,6 +163,10 @@
                 showLoginError('Firebase not initialized. Please refresh the page.');
                 return;
             }
+            const googleBtn = document.getElementById('googleLoginBtn');
+            googleBtn.disabled = true;
+            const originalGoogleHTML = googleBtn.innerHTML;
+            googleBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Signing in…';
             try {
                 const result = await window.__fbAuth.signInWithPopup(window.__fbProvider);
                 const idToken = await result.user.getIdToken();
@@ -155,12 +176,18 @@
                     body: JSON.stringify({ idToken })
                 });
                 const data = await res.json();
-                if (!res.ok) return showLoginError(data.message || 'Google auth failed');
+                if (!res.ok) {
+                    googleBtn.disabled = false;
+                    googleBtn.innerHTML = originalGoogleHTML;
+                    return showLoginError(data.message || 'Google auth failed');
+                }
                 localStorage.setItem('cooture_token', data.token);
                 if (data.user?.name) localStorage.setItem('cooture_name', data.user.name);
                 if (data.user?.avatar) localStorage.setItem('cooture_avatar', data.user.avatar);
                 window.location.href = 'index.html';
             } catch (err) {
+                googleBtn.disabled = false;
+                googleBtn.innerHTML = originalGoogleHTML;
                 showLoginError('Google login failed: ' + err.message);
             }
         });
