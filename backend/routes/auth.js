@@ -48,7 +48,7 @@ function authMiddleware(req, res, next) {
     }
 }
 
-// GOOGLE OAUTH — doc ID = Firebase UID
+// GOOGLE LOGIN — Only for registered users (lookup by email)
 router.post("/google", async (req, res) => {
     const { idToken } = req.body;
     if (!idToken) return res.status(400).json({ message: "ID token required" });
@@ -69,27 +69,28 @@ router.post("/google", async (req, res) => {
     if (!email) return res.status(400).json({ message: "No email in Google account" });
 
     try {
-        const userRef = db().collection("users").doc(uid);
-        const snap = await userRef.get();
-        let userData;
-        if (!snap.exists) {
-            userData = { email, googleId: uid, name, avatar: picture, createdAt: new Date().toISOString() };
-            await userRef.set(userData);
-        } else {
-            userData = snap.data();
-            const updates = {};
-            if (!userData.googleId) updates.googleId = uid;
-            if (!userData.name && name) updates.name = name;
-            if (!userData.avatar && picture) updates.avatar = picture;
-            if (Object.keys(updates).length) await userRef.update(updates);
-            userData = { ...userData, ...updates };
+        // Lookup user by EMAIL (not by Firebase UID)
+        const snap = await db().collection("users").where("email", "==", email).limit(1).get();
+        
+        // ❌ User must be registered first — no auto-signup
+        if (snap.empty) {
+            return res.status(400).json({ message: "User not registered. Please sign up first." });
         }
+        
+        const doc = snap.docs[0];
+        let userData = doc.data();
+        const updates = {};
+        if (!userData.googleId) updates.googleId = uid;
+        if (!userData.name && name) updates.name = name;
+        if (!userData.avatar && picture) updates.avatar = picture;
+        if (Object.keys(updates).length) await doc.ref.update(updates);
+        userData = { ...userData, ...updates };
 
-        const token = jwt.sign({ id: uid }, JWT_SECRET, { expiresIn: "7d" });
+        const token = jwt.sign({ id: doc.id }, JWT_SECRET, { expiresIn: "7d" });
         return res.json({
             message: "Google auth successful",
             token,
-            user: { id: uid, email: userData.email, name: userData.name || name, avatar: userData.avatar || picture }
+            user: { id: doc.id, email: userData.email, name: userData.name || name, avatar: userData.avatar || picture }
         });
     } catch (err) {
         console.error("[Google OAuth] Firestore error:", err.message);
@@ -148,6 +149,66 @@ router.post("/login", async (req, res) => {
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: "Server error", error: err.message });
+    }
+});
+
+// GOOGLE SIGNUP — Create new account OR login if exists (lookup by email)
+router.post("/google/signup", async (req, res) => {
+    const { idToken } = req.body;
+    if (!idToken) return res.status(400).json({ message: "ID token required" });
+
+    if (!admin.apps.length) {
+        return res.status(503).json({ message: "Google auth not configured on server" });
+    }
+
+    let decoded;
+    try {
+        decoded = await admin.auth().verifyIdToken(idToken);
+    } catch (err) {
+        console.error("[Google Signup] Token verification failed:", err.code, err.message);
+        return res.status(401).json({ message: "Invalid Google token", error: err.message, code: err.code });
+    }
+
+    const { uid, email, name = "", picture = "" } = decoded;
+    if (!email) return res.status(400).json({ message: "No email in Google account" });
+
+    try {
+        // Lookup user by EMAIL (not by Firebase UID)
+        const snap = await db().collection("users").where("email", "==", email).limit(1).get();
+        
+        // User already exists — just login and link Google
+        if (!snap.empty) {
+            const doc = snap.docs[0];
+            let userData = doc.data();
+            const updates = {};
+            if (!userData.googleId) updates.googleId = uid;
+            if (!userData.name && name) updates.name = name;
+            if (!userData.avatar && picture) updates.avatar = picture;
+            if (Object.keys(updates).length) await doc.ref.update(updates);
+            userData = { ...userData, ...updates };
+
+            const token = jwt.sign({ id: doc.id }, JWT_SECRET, { expiresIn: "7d" });
+            return res.json({
+                message: "Google auth successful",
+                token,
+                user: { id: doc.id, email: userData.email, name: userData.name || name, avatar: userData.avatar || picture }
+            });
+        }
+        
+        // New user — CREATE account with automatic doc ID
+        const newRef = db().collection("users").doc();
+        const userData = { email, googleId: uid, name, avatar: picture, createdAt: new Date().toISOString() };
+        await newRef.set(userData);
+        
+        const token = jwt.sign({ id: newRef.id }, JWT_SECRET, { expiresIn: "7d" });
+        return res.json({
+            message: "Google signup successful",
+            token,
+            user: { id: newRef.id, email, name, avatar: picture }
+        });
+    } catch (err) {
+        console.error("[Google Signup] Firestore error:", err.message);
+        return res.status(503).json({ message: "Database error. Please try again.", error: err.message });
     }
 });
 

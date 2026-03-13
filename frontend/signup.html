@@ -155,7 +155,7 @@
             try {
                 const result = await window.__fbAuth.signInWithPopup(window.__fbProvider);
                 const idToken = await result.user.getIdToken();
-                const res = await fetch(`${API}/auth/google`, {
+                const res = await fetch(`${API}/auth/google/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ idToken })

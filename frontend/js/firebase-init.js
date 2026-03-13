@@ -10,7 +10,7 @@
 // ============================================================
 
 const firebaseConfig = {
-  apiKey:            "",
+  apiKey:            "AIzaSyA6FzaLlS5jHb96aNgBqot1YQ79VcLmPZY",
   authDomain:        "cooture-d8abf.firebaseapp.com",
   projectId:         "cooture-d8abf",
   storageBucket:     "cooture-d8abf.firebasestorage.app",
