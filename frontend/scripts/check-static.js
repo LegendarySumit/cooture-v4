@@ -2,7 +2,15 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "..");
-const filesToCheck = ["index.html", "login.html", "signup.html", "js/custom.js", "js/firebase-init.js"];
+const filesToCheck = [
+    "index.html",
+    "login.html",
+    "signup.html",
+    "forgot-password.html",
+    "reset-password.html",
+    "js/custom.js",
+    "js/firebase-init.js"
+];
 
 const missing = filesToCheck.filter((rel) => !fs.existsSync(path.join(root, rel)));
 if (missing.length) {

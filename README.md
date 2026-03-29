@@ -18,6 +18,14 @@ Cooture v4 is a full-stack web application that lets users generate ready-to-use
 - CI runs backend lint/tests and frontend static + auth-page smoke checks.
 - Lockfiles are committed for deterministic installs.
 
+## Security Maturity Notes (P2)
+
+- Session auth now supports dual mode for one release cycle: HttpOnly cookie sessions + Bearer token fallback.
+- Added account lifecycle endpoints: forgot/reset password, email verification request/confirm, password change, logout.
+- Password reset and password change revoke old sessions via `passwordVersion` claim checks.
+- Added readiness endpoint `/ready` with dependency-level status checks.
+- Added audit logging for auth events and admin-action attempts.
+
 ## 📁 Project Structure
 
 ```
@@ -108,8 +116,15 @@ Frontend will be accessible at `http://localhost:3000`
 - `POST /auth/google` - Google login (existing users)
 - `POST /auth/google/signup` - Google signup/login
 - `GET /auth/me` - Get user profile (requires Bearer JWT)
+- `POST /auth/forgot-password` - Request password reset token
+- `POST /auth/reset-password` - Reset password with token
+- `POST /auth/password/change` - Change password (revokes session)
+- `POST /auth/verify-email/request` - Request email verification link (optional)
+- `GET /auth/verify-email/confirm?token=...` - Verify email token
+- `POST /auth/logout` - Clear current session cookie
 - `POST /ai/generate` - Protected endpoint that proxies requests to Gemini
 - `GET /health` - Backend liveness endpoint
+- `GET /ready` - Backend readiness + dependency health
 
 ## 🛠️ Technologies
 

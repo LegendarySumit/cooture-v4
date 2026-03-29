@@ -17,3 +17,17 @@ test("signup page renders required controls", async ({ page }) => {
     await expect(page.locator("#signupSubmit")).toBeVisible();
     await expect(page.locator("#googleSignupBtn")).toBeVisible();
 });
+
+test("forgot password page renders controls", async ({ page }) => {
+    await page.goto("/forgot-password.html");
+
+    await expect(page.locator("#forgotEmail")).toBeVisible();
+    await expect(page.locator("#forgotSubmit")).toBeVisible();
+});
+
+test("reset password page renders controls", async ({ page }) => {
+    await page.goto("/reset-password.html?token=fake-token");
+
+    await expect(page.locator("#newPassword")).toBeVisible();
+    await expect(page.locator("#resetSubmit")).toBeVisible();
+});

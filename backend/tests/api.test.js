@@ -1,4 +1,5 @@
 process.env.JWT_SECRET = "test_jwt_secret";
+process.env.SESSION_COOKIE_SAMESITE = "lax";
 
 const request = require("supertest");
 const { createApp } = require("../server");
@@ -105,6 +106,7 @@ describe("API smoke", () => {
         expect(res.statusCode).toBe(200);
         expect(res.body.token).toBeTruthy();
         expect(res.body.user.email).toBe("user@example.com");
+        expect(res.body.user.emailVerified).toBe(true);
     });
 
     test("POST /auth/login happy path", async () => {
@@ -129,6 +131,15 @@ describe("API smoke", () => {
 
         expect(res.statusCode).toBe(400);
         expect(res.body.error.code).toBe("VALIDATION_ERROR");
+    });
+
+    test("POST /auth/forgot-password returns generic success", async () => {
+        const res = await request(app)
+            .post("/auth/forgot-password")
+            .send({ email: "user@example.com" });
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.message).toMatch(/reset link/i);
     });
 
     test("POST /ai/generate rejects without token", async () => {

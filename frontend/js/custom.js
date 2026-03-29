@@ -231,6 +231,7 @@ window.ToastManager = {
         try {
             const res = await fetch(`${API_BASE}/auth/signup`, {
                 method: "POST",
+                credentials: "include",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
@@ -316,6 +317,7 @@ window.ToastManager = {
         try {
             const res = await fetch(`${API_BASE}/auth/login`, {
                 method: "POST",
+                credentials: "include",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password })
             });
@@ -518,6 +520,7 @@ document.getElementById("toggleSignupPass")?.addEventListener("click", () =>
             --------------------------------------------------------- */
             const response = await fetch(`${API_BASE}/ai/generate`, {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${getToken()}`

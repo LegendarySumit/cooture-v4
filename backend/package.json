@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "lint": "node --check server.js && node --check routes/auth.js && node --check routes/ai.js && node --check middleware/authMiddleware.js && node --check utils/requestContext.js && node --check utils/responses.js && node --check utils/validation.js",
+    "lint": "node --check server.js && node --check routes/auth.js && node --check routes/ai.js && node --check middleware/authMiddleware.js && node --check utils/requestContext.js && node --check utils/responses.js && node --check utils/validation.js && node --check utils/authSession.js && node --check utils/auditLogger.js && node --check utils/firebaseAdmin.js",
     "test": "jest --runInBand",
     "start": "node server.js"
   },
@@ -14,6 +14,7 @@
   "dependencies": {
     "axios": "^1.13.2",
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express-rate-limit": "^7.4.1",

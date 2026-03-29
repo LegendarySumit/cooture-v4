@@ -126,6 +126,7 @@
             try {
                 const res  = await fetch(`${API}/auth/signup`, {
                     method: 'POST',
+                    credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
                 });
@@ -157,6 +158,7 @@
                 const idToken = await result.user.getIdToken();
                 const res = await fetch(`${API}/auth/google/signup`, {
                     method: 'POST',
+                    credentials: 'include',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ idToken })
                 });

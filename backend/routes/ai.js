@@ -75,7 +75,7 @@ router.post("/generate", authMiddleware, async (req, res) => {
                     "No output generated."
                 );
 
-                return res.json({ html, modelUsed: candidate });
+                return res.json({ html, modelUsed: candidate, requestId: req.id });
             } catch (error) {
                 const status = error.response?.status || 500;
                 const message =
