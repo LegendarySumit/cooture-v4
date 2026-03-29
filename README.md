@@ -9,6 +9,15 @@ Cooture v4 is a full-stack web application that lets users generate ready-to-use
 - CORS is allowlist-based via `FRONTEND_ORIGINS`.
 - Automated secret scanning runs in GitHub Actions (`.github/workflows/secret-hygiene.yml`).
 
+## Stability Notes (P1)
+
+- Route-level rate limiting is enabled for auth and AI generation endpoints.
+- Input validation is enforced for email/password and generation prompts.
+- API errors use a consistent shape: `{ error: { code, message }, requestId }`.
+- Structured logs include request id, route, status, and latency.
+- CI runs backend lint/tests and frontend static + auth-page smoke checks.
+- Lockfiles are committed for deterministic installs.
+
 ## 📁 Project Structure
 
 ```

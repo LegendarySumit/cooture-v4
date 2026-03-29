@@ -34,6 +34,9 @@ $allowlist = @(
 $filteredHits = @()
 foreach ($hit in $hits) {
     $normalizedPath = $hit.Path.Replace('/', '\\')
+    if ($normalizedPath -match 'scripts\\security\\scan-git-secrets\.ps1$') {
+        continue
+    }
     $entry = "{0}:{1}: {2}" -f $normalizedPath, $hit.LineNumber, $hit.Line.Trim()
     $isAllowed = $false
     foreach ($allowed in $allowlist) {

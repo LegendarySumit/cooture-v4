@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "node --check server.js && node --check routes/auth.js && node --check routes/ai.js && node --check middleware/authMiddleware.js && node --check utils/requestContext.js && node --check utils/responses.js && node --check utils/validation.js",
+    "test": "jest --runInBand",
     "start": "node server.js"
   },
   "keywords": [],
@@ -15,9 +16,14 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "express-rate-limit": "^7.4.1",
     "express": "^5.2.1",
     "firebase-admin": "^13.7.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1"
   }
 }

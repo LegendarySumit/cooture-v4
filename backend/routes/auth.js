@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const admin = require("firebase-admin");
 const path = require("path");
 const authMiddleware = require("../middleware/authMiddleware");
+const { sendError } = require("../utils/responses");
+const { validateEmail, validatePassword } = require("../utils/validation");
 require("dotenv").config();
 
 // ── Firebase Admin init (once) ───────────────────────────────
@@ -38,10 +40,12 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // GOOGLE LOGIN — Only for registered users (lookup by email)
 router.post("/google", async (req, res) => {
     const { idToken } = req.body;
-    if (!idToken) return res.status(400).json({ message: "ID token required" });
+    if (!idToken) {
+        return sendError(res, req, 400, "VALIDATION_ERROR", "idToken is required");
+    }
 
     if (!admin.apps.length) {
-        return res.status(503).json({ message: "Google auth not configured on server" });
+        return sendError(res, req, 503, "GOOGLE_AUTH_DISABLED", "Google auth not configured on server");
     }
 
     let decoded;
@@ -49,11 +53,13 @@ router.post("/google", async (req, res) => {
         decoded = await admin.auth().verifyIdToken(idToken);
     } catch (err) {
         console.error("[Google OAuth] Token verification failed:", err.code, err.message);
-        return res.status(401).json({ message: "Invalid Google token", error: err.message, code: err.code });
+        return sendError(res, req, 401, "INVALID_GOOGLE_TOKEN", "Invalid Google token", { providerCode: err.code });
     }
 
     const { uid, email, name = "", picture = "" } = decoded;
-    if (!email) return res.status(400).json({ message: "No email in Google account" });
+    if (!email) {
+        return sendError(res, req, 400, "VALIDATION_ERROR", "No email in Google account");
+    }
 
     try {
         // Lookup user by EMAIL (not by Firebase UID)
@@ -61,7 +67,7 @@ router.post("/google", async (req, res) => {
         
         // ❌ User must be registered first — no auto-signup
         if (snap.empty) {
-            return res.status(400).json({ message: "User not registered. Please sign up first." });
+            return sendError(res, req, 400, "USER_NOT_REGISTERED", "User not registered. Please sign up first.");
         }
         
         const doc = snap.docs[0];
@@ -81,7 +87,7 @@ router.post("/google", async (req, res) => {
         });
     } catch (err) {
         console.error("[Google OAuth] Firestore error:", err.message);
-        return res.status(503).json({ message: "Database error. Please try again.", error: err.message });
+        return sendError(res, req, 503, "DATABASE_ERROR", "Database error. Please try again.");
     }
 });
 
@@ -89,10 +95,26 @@ router.post("/google", async (req, res) => {
 router.post("/signup", async (req, res) => {
     try {
         const { email, password } = req.body;
-        if (!email || !password) return res.status(400).json({ message: "Email and password required" });
+        if (!email || !password) {
+            return sendError(res, req, 400, "VALIDATION_ERROR", "Email and password required");
+        }
+        if (!validateEmail(email)) {
+            return sendError(res, req, 400, "VALIDATION_ERROR", "Please provide a valid email address");
+        }
+        if (!validatePassword(password)) {
+            return sendError(
+                res,
+                req,
+                400,
+                "VALIDATION_ERROR",
+                "Password must be 8-64 chars with uppercase, lowercase, number, and symbol"
+            );
+        }
 
         const existing = await db().collection("users").where("email", "==", email).limit(1).get();
-        if (!existing.empty) return res.status(400).json({ message: "User already exists" });
+        if (!existing.empty) {
+            return sendError(res, req, 400, "USER_EXISTS", "User already exists");
+        }
 
         const hashed = await bcrypt.hash(password, 10);
         const newRef = db().collection("users").doc();
@@ -107,7 +129,7 @@ router.post("/signup", async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        return res.status(500).json({ message: "Server error", error: err.message });
+        return sendError(res, req, 500, "INTERNAL_SERVER_ERROR", "Server error");
     }
 });
 
@@ -115,17 +137,28 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-        if (!email || !password) return res.status(400).json({ message: "Email and password required" });
+        if (!email || !password) {
+            return sendError(res, req, 400, "VALIDATION_ERROR", "Email and password required");
+        }
+        if (!validateEmail(email)) {
+            return sendError(res, req, 400, "VALIDATION_ERROR", "Please provide a valid email address");
+        }
 
         const snap = await db().collection("users").where("email", "==", email).limit(1).get();
-        if (snap.empty) return res.status(400).json({ message: "Invalid credentials" });
+        if (snap.empty) {
+            return sendError(res, req, 400, "INVALID_CREDENTIALS", "Invalid credentials");
+        }
 
         const doc = snap.docs[0];
         const userData = doc.data();
-        if (!userData.password) return res.status(400).json({ message: "Please sign in with Google" });
+        if (!userData.password) {
+            return sendError(res, req, 400, "GOOGLE_ACCOUNT_ONLY", "Please sign in with Google");
+        }
 
         const valid = await bcrypt.compare(password, userData.password);
-        if (!valid) return res.status(400).json({ message: "Invalid credentials" });
+        if (!valid) {
+            return sendError(res, req, 400, "INVALID_CREDENTIALS", "Invalid credentials");
+        }
 
         const token = jwt.sign({ id: doc.id }, JWT_SECRET, { expiresIn: "7d" });
         return res.json({
@@ -135,17 +168,19 @@ router.post("/login", async (req, res) => {
         });
     } catch (err) {
         console.error(err);
-        return res.status(500).json({ message: "Server error", error: err.message });
+        return sendError(res, req, 500, "INTERNAL_SERVER_ERROR", "Server error");
     }
 });
 
 // GOOGLE SIGNUP — Create new account OR login if exists (lookup by email)
 router.post("/google/signup", async (req, res) => {
     const { idToken } = req.body;
-    if (!idToken) return res.status(400).json({ message: "ID token required" });
+    if (!idToken) {
+        return sendError(res, req, 400, "VALIDATION_ERROR", "idToken is required");
+    }
 
     if (!admin.apps.length) {
-        return res.status(503).json({ message: "Google auth not configured on server" });
+        return sendError(res, req, 503, "GOOGLE_AUTH_DISABLED", "Google auth not configured on server");
     }
 
     let decoded;
@@ -153,11 +188,13 @@ router.post("/google/signup", async (req, res) => {
         decoded = await admin.auth().verifyIdToken(idToken);
     } catch (err) {
         console.error("[Google Signup] Token verification failed:", err.code, err.message);
-        return res.status(401).json({ message: "Invalid Google token", error: err.message, code: err.code });
+        return sendError(res, req, 401, "INVALID_GOOGLE_TOKEN", "Invalid Google token", { providerCode: err.code });
     }
 
     const { uid, email, name = "", picture = "" } = decoded;
-    if (!email) return res.status(400).json({ message: "No email in Google account" });
+    if (!email) {
+        return sendError(res, req, 400, "VALIDATION_ERROR", "No email in Google account");
+    }
 
     try {
         // Lookup user by EMAIL (not by Firebase UID)
@@ -195,7 +232,7 @@ router.post("/google/signup", async (req, res) => {
         });
     } catch (err) {
         console.error("[Google Signup] Firestore error:", err.message);
-        return res.status(503).json({ message: "Database error. Please try again.", error: err.message });
+        return sendError(res, req, 503, "DATABASE_ERROR", "Database error. Please try again.");
     }
 });
 
@@ -203,11 +240,13 @@ router.post("/google/signup", async (req, res) => {
 router.get("/me", authMiddleware, async (req, res) => {
     try {
         const doc = await db().collection("users").doc(req.user.id).get();
-        if (!doc.exists) return res.status(404).json({ message: "User not found" });
+        if (!doc.exists) {
+            return sendError(res, req, 404, "USER_NOT_FOUND", "User not found");
+        }
         const u = doc.data();
-        return res.json({ id: doc.id, email: u.email, name: u.name, avatar: u.avatar, createdAt: u.createdAt });
+        return res.json({ id: doc.id, email: u.email, name: u.name, avatar: u.avatar, createdAt: u.createdAt, requestId: req.id });
     } catch (err) {
-        return res.status(500).json({ message: "Server error", error: err.message });
+        return sendError(res, req, 500, "INTERNAL_SERVER_ERROR", "Server error");
     }
 });
 

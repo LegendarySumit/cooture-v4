@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-package-lock.json
 
 # Environment variables
 .env
@@ -27,3 +26,7 @@ npm-debug.log*
 # Compiled CSS
 frontend/css/*.css
 frontend/css/*.css.map
+
+# Playwright artifacts
+frontend/test-results/
+frontend/playwright-report/

@@ -1,6 +1,8 @@
 const express = require("express");
 const axios = require("axios");
 const authMiddleware = require("../middleware/authMiddleware");
+const { sendError } = require("../utils/responses");
+const { validatePrompt } = require("../utils/validation");
 
 const router = express.Router();
 
@@ -26,14 +28,20 @@ const buildModelFallbackChain = (requestedModel = "") => {
 router.post("/generate", authMiddleware, async (req, res) => {
     const { prompt } = req.body;
 
-    if (!prompt || !prompt.trim()) {
-        return res.status(400).json({ message: "Prompt is required." });
+    if (!validatePrompt(prompt)) {
+        return sendError(
+            res,
+            req,
+            400,
+            "VALIDATION_ERROR",
+            "Prompt must be between 10 and 4000 characters"
+        );
     }
 
     const apiKey = process.env.GEMINI_API_KEY || process.env.AI_API_KEY;
 
     if (!apiKey) {
-        return res.status(500).json({ message: "Gemini API key is not configured." });
+        return sendError(res, req, 500, "MISSING_GEMINI_KEY", "Gemini API key is not configured.");
     }
 
     const modelPreference = process.env.GEMINI_MODEL || "gemini-1.5-flash";
@@ -79,7 +87,7 @@ router.post("/generate", authMiddleware, async (req, res) => {
                     status === 404 || /not found/i.test(message) || /not supported/i.test(message);
 
                 if (!missingModel || candidate === modelsToTry[modelsToTry.length - 1]) {
-                    return res.status(status).json({ message });
+                    return sendError(res, req, status, "GENERATION_ERROR", message);
                 }
                 // Try the next candidate when the selected model isn't available for this API version.
             }
@@ -91,7 +99,7 @@ router.post("/generate", authMiddleware, async (req, res) => {
             error.message ||
             "Unable to generate template.";
 
-        return res.status(status).json({ message });
+        return sendError(res, req, status, "GENERATION_ERROR", message);
     }
 });
 

@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "sass scss/custom.scss css/custom.css --style=compressed --no-source-map --quiet && npx http-server -p 3000",
     "dev:sass": "sass --watch scss/custom.scss css/custom.css",
-    "build": "sass scss/custom.scss css/custom.css --style=compressed"
+    "build": "sass scss/custom.scss css/custom.css --style=compressed",
+    "check:static": "node scripts/check-static.js",
+    "test:smoke": "playwright test"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +18,7 @@
     "sass": "^1.94.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.53.2",
     "http-server": "^14.1.1"
   }
 }
