@@ -2,16 +2,23 @@
 
 Cooture v4 is a full-stack web application that lets users generate ready-to-use website templates powered by AI. It combines a clean fashion-inspired interface with modern authentication so users can explore templates, save their profile, and build faster.
 
+## Security Notes (P0)
+
+- Never commit secrets. Keep `backend/.env` and Firebase service-account credentials out of git.
+- Backend startup now fails if `JWT_SECRET` is missing.
+- CORS is allowlist-based via `FRONTEND_ORIGINS`.
+- Automated secret scanning runs in GitHub Actions (`.github/workflows/secret-hygiene.yml`).
+
 ## 📁 Project Structure
 
 ```
 Cooture v4/
 ├── backend/              # Node.js + Express backend
-│   ├── .env             # Environment variables (JWT_SECRET, MONGO_URI, PORT)
+│   ├── .env             # Environment variables (JWT_SECRET, GEMINI_*, FIREBASE_*, PORT)
 │   ├── package.json     # Backend dependencies
 │   ├── server.js        # Express server entry point
 │   ├── middleware/      # Authentication middleware
-│   ├── models/          # MongoDB models (User, etc.)
+│   ├── models/          # Data models (if used)
 │   └── routes/          # API routes (auth, etc.)
 │
 ├── frontend/            # Static frontend files
@@ -44,11 +51,20 @@ npm install
 3. Create `.env` file with:
 ```
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
+NODE_ENV=development
 JWT_SECRET=your_secret_key
+FRONTEND_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
 GEMINI_API_KEY=your_gemini_or_other_supported_ai_key
 GEMINI_MODEL=gemini-2.5-flash
 GEMINI_API_URL=https://generativelanguage.googleapis.com/v1beta
+FIREBASE_SERVICE_ACCOUNT_PATH=./firebase-service-account.json
+```
+
+You can also copy `backend/.env.example` and edit values.
+
+Optional local secret scan before commit:
+```bash
+powershell -ExecutionPolicy Bypass -File scripts/security/scan-git-secrets.ps1
 ```
 
 4. Start the server:
@@ -78,19 +94,23 @@ Frontend will be accessible at `http://localhost:3000`
 
 ## 📝 API Endpoints
 
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/auth/profile` - Get user profile (requires JWT token)
+- `POST /auth/signup` - Email signup
+- `POST /auth/login` - Email login
+- `POST /auth/google` - Google login (existing users)
+- `POST /auth/google/signup` - Google signup/login
+- `GET /auth/me` - Get user profile (requires Bearer JWT)
 - `POST /ai/generate` - Protected endpoint that proxies requests to Gemini
+- `GET /health` - Backend liveness endpoint
 
 ## 🛠️ Technologies
 
 **Backend:**
 - Node.js
 - Express.js
-- MongoDB + Mongoose
+- Firebase Admin + Firestore
 - JWT Authentication
 - bcrypt
+- Helmet + CORS
 
 **Frontend:**
 - HTML5

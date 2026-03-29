@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const admin = require("firebase-admin");
 const path = require("path");
+const authMiddleware = require("../middleware/authMiddleware");
 require("dotenv").config();
 
 // ── Firebase Admin init (once) ───────────────────────────────
@@ -32,21 +33,7 @@ if (!admin.apps.length) {
 
 const router = express.Router();
 const db = () => admin.firestore();
-const JWT_SECRET = process.env.JWT_SECRET || "dev_secret";
-
-// helper: verify token middleware (used by /me)
-function authMiddleware(req, res, next) {
-    try {
-        const header = req.headers.authorization || "";
-        const token = header.split(" ")[1];
-        if (!token) return res.status(401).json({ message: "No token provided" });
-        const decoded = jwt.verify(token, JWT_SECRET);
-        req.user = { id: decoded.id };
-        return next();
-    } catch (err) {
-        return res.status(401).json({ message: "Invalid token" });
-    }
-}
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // GOOGLE LOGIN — Only for registered users (lookup by email)
 router.post("/google", async (req, res) => {
