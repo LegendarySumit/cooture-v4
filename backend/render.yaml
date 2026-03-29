@@ -6,13 +6,21 @@ services:
     buildCommand: ""
     startCommand: "node server.js"
     envVars:
-      - key: MONGO_URI
-        sync: false
       - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_ORIGINS
         sync: false
       - key: GEMINI_API_KEY
         sync: false
       - key: GEMINI_MODEL
         sync: false
       - key: GEMINI_API_URL
+        sync: false
+      - key: FIREBASE_SERVICE_ACCOUNT
+        sync: false
+      - key: EMAIL_VERIFICATION_REQUIRED
+        sync: false
+      - key: SESSION_COOKIE_SECURE
+        sync: false
+      - key: SESSION_COOKIE_SAMESITE
         sync: false

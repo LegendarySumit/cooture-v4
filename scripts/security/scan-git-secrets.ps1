@@ -18,13 +18,14 @@ $patterns = @(
 
 $regex = ($patterns -join "|")
 $tracked = git ls-files
+$trackedExisting = $tracked | Where-Object { Test-Path $_ }
 
-if (-not $tracked) {
+if (-not $trackedExisting) {
     Write-Host "[secret-scan] No tracked files found."
     exit 0
 }
 
-$hits = Select-String -Path $tracked -Pattern $regex -CaseSensitive:$false -ErrorAction SilentlyContinue
+$hits = Select-String -Path $trackedExisting -Pattern $regex -CaseSensitive:$false -ErrorAction SilentlyContinue
 
 $allowlist = @(
     'README.md:.*GEMINI_API_KEY=your_',
