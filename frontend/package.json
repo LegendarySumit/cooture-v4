@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "sass scss/custom.scss css/custom.css --style=compressed --no-source-map --quiet && npx http-server -p 3000",
+    "dev": "sass scss/custom.scss css/custom.css --style=compressed --no-source-map --quiet && npx http-server -p 3000 -a 127.0.0.1",
     "dev:sass": "sass --watch scss/custom.scss css/custom.css",
     "build": "sass scss/custom.scss css/custom.css --style=compressed",
     "check:static": "node scripts/check-static.js",

@@ -83,6 +83,13 @@ router.post("/generate", authMiddleware, async (req, res) => {
                     error.message ||
                     "Unable to generate template.";
 
+                console.error("[AI Generate Error - Inner Loop]", {
+                    candidate,
+                    status,
+                    message,
+                    fullError: error.response?.data || error.message
+                });
+
                 const missingModel =
                     status === 404 || /not found/i.test(message) || /not supported/i.test(message);
 
@@ -98,6 +105,12 @@ router.post("/generate", authMiddleware, async (req, res) => {
             error.response?.data?.error?.message ||
             error.message ||
             "Unable to generate template.";
+
+        console.error("[AI Generate Error - Outer Catch]", {
+            status,
+            message,
+            fullError: error.response?.data || error.message
+        });
 
         return sendError(res, req, status, "GENERATION_ERROR", message);
     }
